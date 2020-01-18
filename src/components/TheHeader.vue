@@ -28,6 +28,7 @@ export default {
 
 <style scoped lang="scss">
 .logo {
+  color: $accent;
   font-size: 18px;
   font-weight: 600;
 }

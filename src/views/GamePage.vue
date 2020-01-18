@@ -8,19 +8,19 @@
 </template>
 
 <script>
-import { axios } from "axios";
+// import { axios } from "axios";
 
 export default {
   data() {
     return {
       game: ""
     };
-  },
-  created() {
-    this.game = axios.get(
-      `https://bgg-json.azurewebsites.net/thing/${params.game}`
-    );
   }
+  // created() {
+  //   this.game = axios.get(
+  //     `https://bgg-json.azurewebsites.net/thing/${params.game}`
+  //   );
+  // }
 };
 </script>
 
