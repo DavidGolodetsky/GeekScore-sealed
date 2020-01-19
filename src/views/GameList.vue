@@ -9,7 +9,7 @@
             </div>
           </v-img>
           <v-card-actions>
-            <router-link class="mx-auto" :to="`/${game.id}`">
+            <router-link class="mx-auto" :to="`/game/${game.id}`">
               <v-btn color="primary">Details</v-btn>
             </router-link>
           </v-card-actions>

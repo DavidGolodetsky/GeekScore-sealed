@@ -11,9 +11,9 @@ const routes = [
     component: GameList
   },
   {
-    path: '/game',
+    path: '/game/:id',
     name: 'game',
-    component: () => import(/* webpackChunkName: "game" */ '../views/GamePage.vue')
+    component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails.vue')
   }
 ]
 

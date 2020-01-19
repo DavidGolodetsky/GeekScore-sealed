@@ -8,7 +8,7 @@ export default new Vuex.Store({
     games: [
       {
         name: "7 Wonders Duel",
-        id: 1,
+        id: "1",
         rating: "8.1",
         rank: "16",
         year: "2015",
@@ -17,7 +17,7 @@ export default new Vuex.Store({
       },
       {
         name: "Star Realms",
-        id: 2,
+        id: "2",
         rating: "7.6",
         rank: "99",
         year: "2014",
@@ -26,7 +26,7 @@ export default new Vuex.Store({
       },
       {
         name: "Pathfinder Adventure Card Game: Rise of the Runelords",
-        id: 3,
+        id: "3",
         rating: "7.2",
         rank: "365",
         year: "2013",
@@ -38,6 +38,9 @@ export default new Vuex.Store({
   getters: {
     games(state) {
       return state.games
+    },
+    game: (state) => (id) => {
+      return state.games.find(game => game.id === id)
     }
   },
   mutations: {
