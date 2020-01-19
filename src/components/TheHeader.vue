@@ -2,7 +2,7 @@
   <div>
     <v-app-bar color="primary" dense dark>
       <router-link class="logo" to="/">GeekStat</router-link>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-menu bottom>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">

@@ -18,7 +18,7 @@
         </v-col>
       </v-row>
     </div>
-    <game-add></game-add>
+    <game-add />
   </div>
 </template>
 

@@ -19,7 +19,7 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn color="blue darken-1" text @click="close">Close</v-btn>
           <v-btn color="blue darken-1" text @click="onSave">Save</v-btn>
         </v-card-actions>
@@ -29,8 +29,6 @@
 </template>
 
 <script>
-// import db from "@/fb";
-
 export default {
   data() {
     return {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import GameList from '../views/GameList.vue'
+import GameList from '@/views/GameList.vue'
 
 Vue.use(VueRouter)
 
