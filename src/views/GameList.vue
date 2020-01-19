@@ -24,33 +24,19 @@
 
 <script>
 import GameAdd from "@/components/GameAdd";
-import db from "@/fb";
+import store from "@/store/index";
 
 export default {
   components: {
     GameAdd
   },
   data() {
-    return {
-      games: null
-    };
+    return {};
   },
-  created() {
-    db.database()
-      .ref("games")
-      .once("value")
-      .then(data => {
-        const games = [];
-        const obj = data.val();
-        for (let key in obj) {
-          games.push({
-            id: key,
-            name: obj[key].name,
-            image: obj[key].image
-          });
-        }
-        this.games = games;
-      });
+  computed: {
+    games() {
+      return store.getters.games;
+    }
   }
 };
 </script>

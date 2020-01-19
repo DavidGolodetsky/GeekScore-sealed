@@ -1,53 +1,74 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import db from "@/fb";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    games: [
-      {
-        name: "7 Wonders Duel",
-        id: "1",
-        rating: "8.1",
-        rank: "16",
-        year: "2015",
-        img:
-          "https://cf.geekdo-images.com/imagepage/img/K29SesN_KgIUDX0O5y71nGX_GsQ=/fit-in/900x600/filters:no_upscale()/pic3376065.jpg"
-      },
-      {
-        name: "Star Realms",
-        id: "2",
-        rating: "7.6",
-        rank: "99",
-        year: "2014",
-        img:
-          "https://cf.geekdo-images.com/imagepage/img/izgzrVEpcwRH19gkna9oIb4xS_c=/fit-in/900x600/filters:no_upscale()/pic1903816.jpg"
-      },
-      {
-        name: "Pathfinder Adventure Card Game: Rise of the Runelords",
-        id: "3",
-        rating: "7.2",
-        rank: "365",
-        year: "2013",
-        img:
-          "https://cf.geekdo-images.com/imagepage/img/vFvF6lGpK289o9IRtpQ0fLJ9THE=/fit-in/900x600/filters:no_upscale()/pic1775517.jpg"
+    games: []
+  },
+  mutations: {
+    SET_LOADED_GAMES(state, payload) {
+      state.games = payload
+    },
+    CREATE_GAME(state, payload) {
+      state.games.push(payload)
+    },
+    SET_LOADING(state, payload) {
+      state.loading = payload
+    },
+  },
+  actions: {
+    loadGames({ commit }) {
+      commit('SET_LOADING', true)
+      db.database().ref('games').once('value')
+        .then((data) => {
+          const games = []
+          const obj = data.val()
+          for (let key in obj) {
+            games.push({
+              id: key,
+              name: obj[key].name,
+              image: obj[key].image
+            })
+          }
+          commit('SET_LOADED_GAMES', games)
+          commit('SET_LOADING', false)
+        })
+        .catch((e) => {
+          commit('SET_LOADING', false)
+          console.log(e)
+        })
+    },
+    createGame({ commit }, payload) {
+      const game = {
+        name: payload.name,
+        image: payload.image
       }
-    ]
+      db.database().ref('games').push(game)
+        .then((data) => {
+          const key = data.key;
+          commit("CREATE_GAME", { ...game, id: key })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    },
   },
   getters: {
     games(state) {
       return state.games
     },
-    game: (state) => (id) => {
-      return state.games.find(game => game.id === id)
+    game(state) {
+      return (gameId) => {
+        return state.games.find((game) => {
+          return game.id === gameId
+        })
+      }
     },
-
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    loading(state) {
+      return state.loading
+    },
   }
 })

@@ -11,11 +11,7 @@
         <v-card-text>
           <v-container>
             <v-text-field required label="Name" v-model="name"></v-text-field>
-            <v-text-field
-              required
-              label="Image URL"
-              v-model="image"
-            ></v-text-field>
+            <v-text-field required label="Image URL" v-model="image"></v-text-field>
             <p class="app-error" v-if="error">{{ error }}</p>
           </v-container>
         </v-card-text>
@@ -30,7 +26,7 @@
 </template>
 
 <script>
-import db from "@/fb";
+import store from "@/store/index";
 
 export default {
   data() {
@@ -48,9 +44,7 @@ export default {
           name: this.name,
           image: this.image
         };
-        db.database()
-          .ref("games")
-          .push(game);
+        store.dispatch("createGame", game);
         this.close();
       } else {
         this.error = "Please provide a winner";

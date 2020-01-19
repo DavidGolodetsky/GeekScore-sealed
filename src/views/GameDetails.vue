@@ -1,10 +1,7 @@
 <template>
   <div v-if="game">
-    <v-img class="mx-auto mb-8" :src="game.img" width="400" />
-    <h1 class="title">{{ game.name }}</h1>
-    <p>Rating: {{ game.rating }}</p>
-    <p>Rank: {{ game.rank }}</p>
-    <p>Release year: {{ game.year }}</p>
+    <h1 class="title d-flex justify-center mb-4">{{ game.name }}</h1>
+    <v-img class="mx-auto mb-8" :src="game.image" width="400" />
     <match-add></match-add>
     <!-- <matches-table></matches-table> -->
   </div>

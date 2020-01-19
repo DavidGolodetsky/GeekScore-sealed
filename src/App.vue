@@ -13,6 +13,7 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
+import store from "@/store/index";
 
 export default {
   name: "App",
@@ -21,6 +22,9 @@ export default {
     TheFooter
   },
 
-  data: () => ({})
+  data: () => ({}),
+  created() {
+    store.dispatch("loadGames");
+  }
 };
 </script>
