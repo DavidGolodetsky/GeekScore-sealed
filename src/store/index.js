@@ -41,7 +41,8 @@ export default new Vuex.Store({
     },
     game: (state) => (id) => {
       return state.games.find(game => game.id === id)
-    }
+    },
+
   },
   mutations: {
   },

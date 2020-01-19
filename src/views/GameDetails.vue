@@ -5,18 +5,21 @@
     <p>Rating: {{ game.rating }}</p>
     <p>Rank: {{ game.rank }}</p>
     <p>Release year: {{ game.year }}</p>
-    <matches-table></matches-table>
+    <match-add></match-add>
+    <!-- <matches-table></matches-table> -->
   </div>
 </template>
 
 <script>
 import store from "@/store/index";
-import MatchesTable from "../components/MatchesTable";
+// import MatchesTable from "../components/MatchesTable";
+import MatchAdd from "../components/MatchAdd";
 
 export default {
   name: "GmeDetails",
   components: {
-    MatchesTable
+    MatchAdd
+    // MatchesTable
   },
   data() {
     return {
