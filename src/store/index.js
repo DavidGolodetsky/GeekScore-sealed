@@ -6,7 +6,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    games: []
+    games: [],
+    teams: [],
+    loading: true,
   },
   mutations: {
     SET_LOADED_GAMES(state, payload) {
@@ -14,6 +16,9 @@ export default new Vuex.Store({
     },
     CREATE_GAME(state, payload) {
       state.games.push(payload)
+    },
+    CREATE_TEAM(state, payload) {
+      state.teams.push(payload)
     },
     SET_LOADING(state, payload) {
       state.loading = payload
@@ -42,16 +47,33 @@ export default new Vuex.Store({
         })
     },
     createGame({ commit }, payload) {
-      const game = {
-        name: payload.name,
-        image: payload.image
-      }
-      db.database().ref('games').push(game)
+      commit('SET_LOADING', true)
+      db.database().ref('games').push(payload)
         .then((data) => {
           const key = data.key;
-          commit("CREATE_GAME", { ...game, id: key })
+          commit("CREATE_GAME", { ...payload, id: key })
+          commit('SET_LOADING', false)
         })
         .catch((e) => {
+          commit('SET_LOADING', false)
+          console.log(e)
+        })
+    },
+    createTeam({ commit }, payload) {
+      commit('SET_LOADING', true)
+      const team = {
+        name: payload.name,
+        players: payload.players
+      }
+      console.log(payload.gameId)
+      db.database().ref(`games/${payload.gameId}/teams/`).push(team)
+        .then((data) => {
+          const key = data.key;
+          commit("CREATE_TEAM", { ...team, id: key })
+          commit('SET_LOADING', false)
+        })
+        .catch((e) => {
+          commit('SET_LOADING', false)
           console.log(e)
         })
     },
@@ -66,6 +88,9 @@ export default new Vuex.Store({
           return game.id === gameId
         })
       }
+    },
+    teams(state) {
+      return state.teams
     },
     loading(state) {
       return state.loading
