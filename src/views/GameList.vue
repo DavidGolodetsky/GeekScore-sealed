@@ -24,7 +24,6 @@
 
 <script>
 import GameAdd from "@/components/GameAdd";
-import store from "@/store/index";
 
 export default {
   components: {
@@ -35,7 +34,7 @@ export default {
   },
   computed: {
     games() {
-      return store.getters.games;
+      return this.$store.getters.games;
     }
   }
 };

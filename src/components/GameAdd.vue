@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import store from "@/store/index";
-
 export default {
   data() {
     return {
@@ -44,7 +42,7 @@ export default {
           name: this.name,
           image: this.image
         };
-        store.dispatch("createGame", game);
+        this.$store.dispatch("createGame", game);
         this.close();
       } else {
         this.error = "Please provide a winner";

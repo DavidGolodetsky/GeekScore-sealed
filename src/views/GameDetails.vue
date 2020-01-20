@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import store from "@/store/index";
 import MatchesTable from "@/components/MatchesTable";
 import MatchesTableAdd from "@/components/MatchesTableAdd";
 
@@ -28,7 +27,7 @@ export default {
   },
   computed: {
     game() {
-      return store.getters.game(this.gameId);
+      return this.$store.getters.game(this.gameId);
     }
   }
 };
