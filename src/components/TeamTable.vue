@@ -1,8 +1,22 @@
 <template>
-  <div>
-    <v-data-table :headers="headers" :items="desserts" :items-per-page="5" class="elevation-1"></v-data-table>
-    <match-add />
-  </div>
+  <v-card raised class="team-teable" v-if="team">
+    <v-container>
+      <v-card-title>
+        <h3 class="headline">{{ team.name }}</h3>
+      </v-card-title>
+      <v-data-table
+        v-if="team.matches"
+        :headers="headers"
+        fixed-header
+        dark
+        height="400"
+        hide-default-footer
+        :items="team.matches"
+        class="elevation-1 mb-6"
+      ></v-data-table>
+      <match-add :players="team.players" />
+    </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -12,14 +26,30 @@ export default {
   components: {
     MatchAdd
   },
+  props: {
+    team: {
+      required: true,
+      type: Object
+    }
+  },
   data() {
-    return {
-      headers: [
-        { text: "David", value: "david" },
-        { text: "Lyuba", value: "lyuba" },
-        { text: "Date", value: "date" }
-      ]
-    };
+    return {};
+  },
+  computed: {
+    headers() {
+      const headers = this.team.players.map(player => ({
+        text: player.name,
+        value: player.name.toLowerCase()
+      }));
+      headers.push({ text: "Date", value: "date" });
+      return headers;
+    }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.team-teable {
+  margin: 40px 0;
+}
+</style>

@@ -11,10 +11,14 @@
         <v-card-text>
           <v-container>
             <v-radio-group row v-model="winner">
-              <v-radio label="David" value="david"></v-radio>
-              <v-radio label="Lyuba" value="lyuba"></v-radio>
+              <v-radio
+                v-for="(player, i) in players"
+                :key="i"
+                :label="player.name"
+                :value="player.name"
+              ></v-radio>
             </v-radio-group>
-            <v-date-picker v-model="picker"></v-date-picker>
+            <v-date-picker v-model="date"></v-date-picker>
             <small class="error" v-if="error">{{ error }}</small>
           </v-container>
         </v-card-text>
@@ -30,25 +34,24 @@
 
 <script>
 export default {
+  props: {
+    players: {
+      required: true,
+      type: Array
+    }
+  },
   data() {
     return {
       dialog: false,
-      winner: "radio-1",
-      picker: new Date().toISOString().substr(0, 10),
+      winner: "",
+      date: new Date().toISOString().substr(0, 10),
       error: ""
     };
   },
   methods: {
     onSave() {
       if (this.winner) {
-        // const match = {
-        //   david: this.winner === "david" ? true : false,
-        //   lyuba: this.winner === "lyuba" ? true : false,
-        //   date: this.picker
-        // };
-        // db.collection("games")
-        //   .add(match)
-        //   .then(() => console.log("added"));
+        this.cookMatch();
         this.close();
       } else {
         this.error = "Please provide a winner";
@@ -56,6 +59,27 @@ export default {
     },
     close() {
       this.dialog = false;
+    },
+    cookMatch() {
+      // TODO: please refactor this shit
+      const loosers = this.players.filter(
+        player => player.name !== this.winner
+      );
+      console.log(loosers);
+      const winner = this.players.find(player => player.name === this.winner);
+      const arrWinner = Object.values(winner);
+      const resLoosers = loosers.map(looser => ({
+        [looser.name]: false
+      }));
+      console.log(resLoosers);
+      const resWinner = arrWinner.map(winner => ({
+        [winner]: true
+      }));
+      // const match = {
+      //   winner: this.winner,
+      //   date: this.date
+      // };
+      // console.log(match);
     }
   }
 };

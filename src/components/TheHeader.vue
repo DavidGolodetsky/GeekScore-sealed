@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar color="primary" dense dark>
-      <router-link class="logo" to="/">GeekStat</router-link>
+      <router-link class="logo" :to="{name: 'home'}">GeekStat</router-link>
       <v-spacer />
       <!-- TODO: if menu is needed? -->
       <!-- <v-menu bottom>
