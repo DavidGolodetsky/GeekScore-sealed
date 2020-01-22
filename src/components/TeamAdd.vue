@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     gameId: {
@@ -51,6 +53,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      createTeam: "createTeam"
+    }),
     setPlayers(event) {
       this.players = [];
       for (let i = 0; i < event; i++) {
@@ -66,7 +71,7 @@ export default {
           name: this.name,
           players: this.players
         };
-        this.$store.dispatch("createTeam", team);
+        this.createTeam(team);
         this.close();
       } else {
         this.error = "Please provide a winner";

@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -36,13 +38,16 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      createGame: "createGame"
+    }),
     onSave() {
       if (this.name && this.image) {
         const game = {
           name: this.name,
           image: this.image
         };
-        this.$store.dispatch("createGame", game);
+        this.createGame(game);
         this.close();
       } else {
         this.error = "Please provide a winner";

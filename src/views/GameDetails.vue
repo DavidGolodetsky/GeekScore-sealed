@@ -1,7 +1,7 @@
 <template>
-  <div v-if="game">
-    <h1 class="d-flex justify-center mb-4">{{ game.name }}</h1>
-    <v-img class="mx-auto mb-8" :src="game.image" width="400" />
+  <div v-if="getGame">
+    <h1 class="d-flex justify-center mb-4">{{ getGame.name }}</h1>
+    <v-img class="mx-auto mb-8" :src="getGame.image" width="400" />
     <team-add :game-id="gameId" />
     <template v-if="teams">
       <div v-for="(team, i) in teams" :key="i">
@@ -14,6 +14,7 @@
 <script>
 import TeamTable from "@/components/TeamTable";
 import TeamAdd from "@/components/TeamAdd";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "GmeDetails",
@@ -26,16 +27,22 @@ export default {
       gameId: this.$route.params.id
     };
   },
-  created() {
-    this.$store.dispatch("loadTeams", this.gameId);
-  },
   computed: {
-    game() {
-      return this.$store.getters.game(this.gameId);
+    ...mapGetters(["game", "teamsPerGame"]),
+    myGame() {
+      return this.game(this.gameId);
     },
     teams() {
-      return this.$store.getters.teamsPerGame(this.gameId);
+      return this.teamsPerGame(this.gameId);
     }
+  },
+  mounted() {
+    this.loadTeams(this.gameId);
+  },
+  methods: {
+    ...mapActions({
+      loadTeams: "loadTeams"
+    })
   }
 };
 </script>

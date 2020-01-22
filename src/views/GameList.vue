@@ -24,6 +24,7 @@
 
 <script>
 import GameAdd from "@/components/GameAdd";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -33,9 +34,9 @@ export default {
     return {};
   },
   computed: {
-    games() {
-      return this.$store.getters.games;
-    }
+    ...mapGetters({
+      games: "games"
+    })
   }
 };
 </script>
