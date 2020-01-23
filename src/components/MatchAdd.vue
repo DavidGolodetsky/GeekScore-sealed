@@ -51,7 +51,7 @@ export default {
   methods: {
     onSave() {
       if (this.winner) {
-        // this.cookMatch();
+        this.cookMatch();
         this.close();
       } else {
         this.error = "Please provide a winner";
@@ -60,27 +60,13 @@ export default {
     close() {
       this.dialog = false;
     },
-    // cookMatch() {
-    //   // TODO: please refactor this shit
-    //   const loosers = this.players.filter(
-    //     player => player.name !== this.winner
-    //   );
-    //   console.log(loosers);
-    //   const winner = this.players.find(player => player.name === this.winner);
-    //   const arrWinner = Object.values(winner);
-    //   const resLoosers = loosers.map(looser => ({
-    //     [looser.name]: false
-    //   }));
-    //   console.log(resLoosers);
-    //   const resWinner = arrWinner.map(winner => ({
-    //     [winner]: true
-    //   }));
-      // const match = {
-      //   winner: this.winner,
-      //   date: this.date
-      // };
-      // console.log(match);
-    // }
+    cookMatch() {
+      const match = {
+        [this.winner.toLowerCase()]: true,
+        date: this.date
+      };
+      console.log(match);
+    }
   }
 };
 </script>
