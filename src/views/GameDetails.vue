@@ -1,7 +1,7 @@
 <template>
-  <div v-if="getGame">
-    <h1 class="d-flex justify-center mb-4">{{ getGame.name }}</h1>
-    <v-img class="mx-auto mb-8" :src="getGame.image" width="400" />
+  <div v-if="myGame">
+    <h1 class="d-flex justify-center mb-4">{{ myGame.name }}</h1>
+    <v-img class="mx-auto mb-8" :src="myGame.image" width="400" />
     <team-add :game-id="gameId" />
     <template v-if="teams">
       <div v-for="(team, i) in teams" :key="i">
@@ -22,9 +22,14 @@ export default {
     TeamTable,
     TeamAdd
   },
+  props: {
+    gameId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      gameId: this.$route.params.id
     };
   },
   computed: {
