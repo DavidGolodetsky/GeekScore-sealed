@@ -6,11 +6,11 @@ export default {
         items: [],
     },
     mutations: {
-        SET_LOADED_GAMES(state, items) {
-            state.items = items
+        SET_LOADED_GAMES(state, payload) {
+            state.items = payload
         },
-        CREATE_GAME(state, items) {
-            state.items.push(items)
+        CREATE_GAME(state, payload) {
+            state.items.push(payload)
         }
     },
     actions: {

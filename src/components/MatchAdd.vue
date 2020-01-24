@@ -33,11 +33,20 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   props: {
     players: {
-      required: true,
-      type: Array
+      type: Array,
+      required: true
+    },
+    teamId: {
+      type: String,
+      required: true
+    },
+    gameId: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -49,6 +58,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      createMatch: "createMatch"
+    }),
     onSave() {
       if (this.winner) {
         this.cookMatch();
@@ -63,9 +75,11 @@ export default {
     cookMatch() {
       const match = {
         [this.winner.toLowerCase()]: true,
-        date: this.date
+        date: this.date,
+        gameId: this.gameId,
+        teamId: this.teamId
       };
-      console.log(match);
+      this.createMatch(match);
     }
   }
 };

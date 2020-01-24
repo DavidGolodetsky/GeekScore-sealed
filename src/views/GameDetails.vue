@@ -5,7 +5,7 @@
     <team-add :game-id="gameId" />
     <template v-if="teams">
       <div v-for="(team, i) in teams" :key="i">
-        <team-table :team="team" />
+        <team-table :team-id="team.id" />
       </div>
     </template>
   </div>
@@ -29,8 +29,7 @@ export default {
     }
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters(["game", "teamsPerGame"]),
