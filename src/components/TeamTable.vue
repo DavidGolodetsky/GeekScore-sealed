@@ -5,7 +5,7 @@
         <h3 class="headline">{{ myTeam.name }}</h3>
       </v-card-title>
       <v-data-table
-        v-if="myTeam.matches"
+        v-if="myTeam.matches.length"
         :headers="headers"
         fixed-header
         dark

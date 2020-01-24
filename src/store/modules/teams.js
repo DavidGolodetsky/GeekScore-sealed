@@ -13,11 +13,7 @@ export default {
         },
         CREATE_MATCH(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId)
-            const match = {
-                [payload.winner]: true,
-                date: payload.date,
-            }
-            team.push(match)
+            team.matches.push(payload)
         },
     },
     actions: {
@@ -48,7 +44,7 @@ export default {
             db.database().ref(`games/${payload.gameId}/teams/`).push(payload)
                 .then((data) => {
                     const key = data.key;
-                    commit("CREATE_TEAM", { ...payload, id: key })
+                    commit("CREATE_TEAM", { ...payload, id: key, matches: [] })
                     commit('SET_LOADING', false)
                 })
                 .catch((e) => {
@@ -58,14 +54,10 @@ export default {
         },
         createMatch({ commit }, payload) {
             commit('SET_LOADING', true)
-            const match = {
-                [payload.winner]: true,
-                date: payload.date
-            }
-            db.database().ref(`games/${payload.gameId}/teams/${payload.teamId}/matches/`).push(match)
+            db.database().ref(`games/${payload.gameId}/teams/${payload.teamId}/matches/`).push(payload)
                 .then((data) => {
                     const key = data.key;
-                    commit("CREATE_MATCH", { ...match, id: key, teamId: payload.teamId })
+                    commit("CREATE_MATCH", { ...payload, id: key })
                     commit('SET_LOADING', false)
                 })
                 .catch((e) => {
