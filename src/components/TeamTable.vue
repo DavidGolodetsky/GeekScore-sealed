@@ -5,13 +5,13 @@
         <h3 class="headline">{{ myTeam.name }}</h3>
       </v-card-title>
       <v-data-table
-        v-if="myTeam.matches.length"
+        v-if="myMatches"
         :headers="headers"
         fixed-header
         dark
         height="400"
         hide-default-footer
-        :items="myTeam.matches"
+        :items="myMatches"
         class="elevation-1 mb-6"
       ></v-data-table>
       <match-add v-bind="propsToPass" />
@@ -37,9 +37,18 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["team"]),
+    ...mapGetters(["team", "matches"]),
     myTeam() {
       return this.team(this.teamId);
+    },
+    myMatches() {
+      const matches = this.matches(this.teamId);
+      if (matches) {
+        return Object.keys(matches).map(key => {
+          return matches[key];
+        });
+      }
+      return null;
     },
     propsToPass() {
       if (this.myTeam) {

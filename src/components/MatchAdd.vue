@@ -6,19 +6,23 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">And the winner is...?</span>
+          <span class="headline">Select Winner &#9876;</span>
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-radio-group row v-model="winner">
-              <v-radio
-                v-for="(player, i) in players"
-                :key="i"
-                :label="player.name"
-                :value="player.name"
-              ></v-radio>
-            </v-radio-group>
-            <v-date-picker v-model="date"></v-date-picker>
+            <v-row justify="center">
+              <v-radio-group row v-model="winner">
+                <v-radio
+                  v-for="(player, i) in players"
+                  :key="i"
+                  :label="player.name"
+                  :value="player.name"
+                ></v-radio>
+              </v-radio-group>
+            </v-row>
+            <v-row justify="center">
+              <v-date-picker v-model="date"></v-date-picker>
+            </v-row>
             <small class="error" v-if="error">{{ error }}</small>
           </v-container>
         </v-card-text>
@@ -74,7 +78,7 @@ export default {
     },
     cookMatch() {
       const match = {
-        [this.winner.toLowerCase()]: true,
+        [this.winner.toLowerCase()]: "VICTORY",
         date: this.date,
         gameId: this.gameId,
         teamId: this.teamId

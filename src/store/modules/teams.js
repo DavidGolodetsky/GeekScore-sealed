@@ -12,8 +12,11 @@ export default {
             state.items.push(payload)
         },
         CREATE_MATCH(state, payload) {
-            const team = state.items.find((item) => item.id === payload.teamId)
-            team.matches.push(payload)
+            const team = state.items.find((item) => item.id === payload.teamId);
+            const match = {
+                [payload.id]: payload
+            }
+            team.matches = { ...team.matches, ...match }
         },
     },
     actions: {
@@ -28,6 +31,7 @@ export default {
                             id: key,
                             gameId: obj[key].gameId,
                             players: obj[key].players,
+                            matches: obj[key].matches,
                             name: obj[key].name,
                         })
                     }
@@ -44,7 +48,7 @@ export default {
             db.database().ref(`games/${payload.gameId}/teams/`).push(payload)
                 .then((data) => {
                     const key = data.key;
-                    commit("CREATE_TEAM", { ...payload, id: key, matches: [] })
+                    commit("CREATE_TEAM", { ...payload, id: key, matches: {} })
                     commit('SET_LOADING', false)
                 })
                 .catch((e) => {
@@ -79,6 +83,12 @@ export default {
                 return state.items.find((item) => {
                     return item.id === teamId
                 })
+            }
+        },
+        matches(state) {
+            return (teamId) => {
+                const team = state.items.find((item) => item.id === teamId)
+                return team.matches ? team.matches : null
             }
         }
     }
