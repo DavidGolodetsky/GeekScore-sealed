@@ -7,10 +7,7 @@
       <v-data-table
         v-if="myMatches"
         :headers="headers"
-        fixed-header
         dark
-        height="400"
-        hide-default-footer
         :items="myMatches"
         class="elevation-1 mb-6"
       ></v-data-table>
