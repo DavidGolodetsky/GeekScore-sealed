@@ -2,7 +2,7 @@
   <div>
     <div v-if="games">
       <v-row>
-        <v-col cols="4" v-for="(game, i) in games" :key="i" class="mb-6">
+        <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">
           <v-card>
             <v-img class="white--text align-end" height="350" :src="game.image">
               <div class="title-wrapp">

@@ -78,7 +78,7 @@ export default {
     },
     cookMatch() {
       const match = {
-        [this.winner.toLowerCase()]: "VICTORY",
+        [this.winner.toLowerCase()]: "WON",
         date: this.date,
         gameId: this.gameId,
         teamId: this.teamId
