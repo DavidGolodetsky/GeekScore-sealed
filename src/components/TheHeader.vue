@@ -8,9 +8,7 @@
 </template>
 
 <script>
-export default {
-  name: "TheHeader"
-};
+export default {};
 </script>
 
 <style scoped lang="scss">

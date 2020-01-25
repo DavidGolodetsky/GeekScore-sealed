@@ -12,3 +12,12 @@ a {
   font-size: 12px;
   color: $danger;
 }
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: 0.3s;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+}

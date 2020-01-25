@@ -3,7 +3,9 @@
     <the-header />
     <v-content>
       <v-container>
-        <router-view class="page"></router-view>
+        <transition name="slide" mode="out-in">
+          <router-view class="page"></router-view>
+        </transition>
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>
         </div>
