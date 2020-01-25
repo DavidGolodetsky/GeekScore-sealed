@@ -38,9 +38,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      createGame: "createGame"
-    }),
+    ...mapActions("games", ["createGame"]),
     onSave() {
       if (this.name && this.image) {
         const game = {

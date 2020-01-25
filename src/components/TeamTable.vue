@@ -1,14 +1,14 @@
 <template>
-  <v-card raised class="team-teable" v-if="myTeam">
+  <v-card raised class="team-teable" v-if="team">
     <v-container>
       <v-card-title>
-        <h3 class="headline">{{ myTeam.name }}</h3>
+        <h3 class="headline">{{ team.name }}</h3>
       </v-card-title>
       <v-data-table
-        v-if="myMatches"
+        v-if="matches"
         :headers="headers"
         dark
-        :items="myMatches"
+        :items="matches"
         class="elevation-1 mb-6"
       ></v-data-table>
       <match-add v-bind="propsToPass" />
@@ -34,12 +34,15 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["team", "matches"]),
-    myTeam() {
-      return this.team(this.teamId);
+    ...mapGetters("teams", {
+      getTeam: "team",
+      getMatches: "matches"
+    }),
+    team() {
+      return this.getTeam(this.teamId);
     },
-    myMatches() {
-      const matches = this.matches(this.teamId);
+    matches() {
+      const matches = this.getMatches(this.teamId);
       if (matches) {
         return Object.keys(matches).map(key => {
           return matches[key];
@@ -48,18 +51,18 @@ export default {
       return null;
     },
     propsToPass() {
-      if (this.myTeam) {
+      if (this.team) {
         return {
-          players: this.myTeam.players,
-          teamId: this.myTeam.id,
-          gameId: this.myTeam.gameId
+          players: this.team.players,
+          teamId: this.team.id,
+          gameId: this.team.gameId
         };
       }
       return false;
     },
     headers() {
-      if (this.myTeam) {
-        const headers = this.myTeam.players.map(player => ({
+      if (this.team) {
+        const headers = this.team.players.map(player => ({
           text: player.name,
           value: player.name.toLowerCase()
         }));

@@ -34,9 +34,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters({
-      games: "games"
-    })
+    ...mapGetters("games", ["games"])
   }
 };
 </script>

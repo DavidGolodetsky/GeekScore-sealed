@@ -1,7 +1,7 @@
 <template>
-  <div v-if="myGame">
-    <h1 class="d-flex justify-center mb-4">{{ myGame.name }}</h1>
-    <v-img class="mx-auto mb-8" :src="myGame.image" width="400" />
+  <div v-if="game">
+    <h1 class="d-flex justify-center mb-4">{{ game.name }}</h1>
+    <v-img class="mx-auto mb-8" :src="game.image" width="400" />
     <team-add :game-id="gameId" />
     <template v-if="teams">
       <div v-for="(team, i) in teams" :key="i">
@@ -32,21 +32,20 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["game", "teamsPerGame"]),
-    myGame() {
-      return this.game(this.gameId);
+    ...mapGetters("games", { getGame: "game" }),
+    ...mapGetters("teams", { getTeams: "teamsPerGame" }),
+    game() {
+      return this.getGame(this.gameId);
     },
     teams() {
-      return this.teamsPerGame(this.gameId);
+      return this.getTeams(this.gameId);
     }
   },
   mounted() {
     this.loadTeams(this.gameId);
   },
   methods: {
-    ...mapActions({
-      loadTeams: "loadTeams"
-    })
+    ...mapActions("teams", ["loadTeams"])
   }
 };
 </script>

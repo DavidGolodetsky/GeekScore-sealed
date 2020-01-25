@@ -1,6 +1,7 @@
 import db from "@/fb";
 
 export default {
+    namespaced: true,
     state: {
         items: []
     },
@@ -21,7 +22,7 @@ export default {
     },
     actions: {
         loadTeams({ commit }, payload) {
-            commit('SET_LOADING', true)
+            commit('SET_LOADING', true, { root: true })
             db.database().ref(`games/${payload}/teams/`).once('value')
                 .then((data) => {
                     const items = []
@@ -36,36 +37,36 @@ export default {
                         })
                     }
                     commit('SET_LOADED_TEAMS', items)
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
         },
         createTeam({ commit }, payload) {
-            commit('SET_LOADING', true)
+            commit('SET_LOADING', true, { root: true })
             db.database().ref(`games/${payload.gameId}/teams/`).push(payload)
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_TEAM", { ...payload, id: key, matches: {} })
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
         },
         createMatch({ commit }, payload) {
-            commit('SET_LOADING', true)
+            commit('SET_LOADING', true, { root: true })
             db.database().ref(`games/${payload.gameId}/teams/${payload.teamId}/matches/`).push(payload)
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_MATCH", { ...payload, id: key })
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
         },

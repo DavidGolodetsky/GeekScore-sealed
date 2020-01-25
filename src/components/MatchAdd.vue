@@ -62,9 +62,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      createMatch: "createMatch"
-    }),
+    ...mapActions("teams", ["createMatch"]),
     onSave() {
       if (this.winner) {
         this.cookMatch();

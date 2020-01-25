@@ -2,6 +2,7 @@
 import db from "@/fb";
 
 export default {
+    namespaced: true,
     state: {
         items: [],
     },
@@ -15,7 +16,7 @@ export default {
     },
     actions: {
         loadGames({ commit }) {
-            commit('SET_LOADING', true)
+            commit('SET_LOADING', true, { root: true })
             db.database().ref('games').once('value')
                 .then((data) => {
                     const items = []
@@ -28,23 +29,23 @@ export default {
                         })
                     }
                     commit('SET_LOADED_GAMES', items)
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
         },
         createGame({ commit }, payload) {
-            commit('SET_LOADING', true)
+            commit('SET_LOADING', true, { root: true })
             db.database().ref('games').push(payload)
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_GAME", { ...payload, id: key })
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
-                    commit('SET_LOADING', false)
+                    commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
         }

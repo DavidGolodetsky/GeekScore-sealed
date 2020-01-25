@@ -53,9 +53,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      createTeam: "createTeam"
-    }),
+    ...mapActions("teams", ["createTeam"]),
     setPlayers(event) {
       this.players = [];
       for (let i = 0; i < event; i++) {
