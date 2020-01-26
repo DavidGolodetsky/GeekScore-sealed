@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import GameList from '@/views/GameList.vue';
+import HomePage from '@/views/HomePage.vue';
 import store from '@/store';
 
 Vue.use(Router)
@@ -9,6 +10,11 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    component: HomePage
+  },
+  {
+    path: '/games',
+    name: 'games',
     component: GameList
   },
   {
@@ -17,13 +23,18 @@ const routes = [
     props: true,
     component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails.vue'),
     beforeEnter: (to, from, next) => {
+      if (store.getters['user/user']) {
+        next()
+      } else {
+        next({ name: "signIn" })
+      }
       const isGame = store.getters['games/games'].find(game => game.id === to.params.gameId);
       if (isGame) {
         next()
       } else {
         next({ name: "NotFound" })
       }
-    }
+    },
   },
   {
     path: "/signin",
