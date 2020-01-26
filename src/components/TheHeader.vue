@@ -35,12 +35,12 @@ export default {
         {
           text: "Sign up",
           icon: "account-circle ",
-          link: "/user/signup"
+          link: "/signup"
         },
         {
           text: "Sign in",
           icon: "login",
-          link: "/user/signin"
+          link: "/signin"
         }
       ];
       if (this.user) {

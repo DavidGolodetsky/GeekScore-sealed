@@ -60,6 +60,9 @@ export default {
                     }
                 )
         },
+        autoSignIn({ commit }, payload) {
+            commit('SET_USER', { id: payload.uid })
+        }
     },
     getters: {
         user(state) {

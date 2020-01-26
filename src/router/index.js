@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import GameList from '@/views/GameList.vue';
 import HomePage from '@/views/HomePage.vue';
 import store from '@/store';
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -15,7 +16,8 @@ const routes = [
   {
     path: '/games',
     name: 'games',
-    component: GameList
+    component: GameList,
+    beforeEnter: AuthGuard
   },
   {
     path: '/game/:gameId',

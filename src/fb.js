@@ -1,4 +1,5 @@
 import firebase from "firebase"
+import store from '@/store';
 
 
 var firebaseConfig = {
@@ -12,5 +13,10 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        store.dispatch('user/autoSignIn', user)
+    }
+})
 
 export default firebase;
