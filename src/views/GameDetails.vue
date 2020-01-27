@@ -39,6 +39,7 @@ export default {
   computed: {
     ...mapGetters("games", { getGame: "game" }),
     ...mapGetters("teams", { getTeams: "teamsPerGame" }),
+    ...mapGetters("user", ["user"]),
     game() {
       return this.getGame(this.gameId);
     },
@@ -51,6 +52,13 @@ export default {
   },
   methods: {
     ...mapActions("teams", ["loadTeams"])
+  },
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/");
+      }
+    }
   }
 };
 </script>

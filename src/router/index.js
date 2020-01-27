@@ -3,7 +3,6 @@ import Router from 'vue-router';
 import GameList from '@/views/GameList.vue';
 import HomePage from '@/views/HomePage.vue';
 import store from '@/store';
-import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -17,7 +16,7 @@ const routes = [
     path: '/games',
     name: 'games',
     component: GameList,
-    beforeEnter: AuthGuard
+    meta: { requiresAuth: true },
   },
   {
     path: '/game/:gameId',
@@ -25,11 +24,6 @@ const routes = [
     props: true,
     component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails.vue'),
     beforeEnter: (to, from, next) => {
-      if (store.getters['user/user']) {
-        next()
-      } else {
-        next({ name: "signIn" })
-      }
       const isGame = store.getters['games/games'].find(game => game.id === to.params.gameId);
       if (isGame) {
         next()
@@ -37,6 +31,7 @@ const routes = [
         next({ name: "NotFound" })
       }
     },
+    meta: { requiresAuth: true },
   },
   {
     path: "/signin",
@@ -73,4 +68,17 @@ const router = new Router({
   }
 })
 
-export default router
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters['user/user']) {
+      next()
+    } else {
+      next({ name: "signIn" })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router;

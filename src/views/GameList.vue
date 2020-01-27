@@ -34,7 +34,15 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("games", ["games"])
+    ...mapGetters("games", ["games"]),
+    ...mapGetters("user", ["user"])
+  },
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/");
+      }
+    }
   }
 };
 </script>
