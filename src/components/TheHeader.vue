@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar color="primary" dense dark>
-      <router-link class="logo" :to="{name: 'home'}">GeekStat</router-link>
+      <router-link class="logo" :to="{name: 'home'}">GeekScore</router-link>
       <v-spacer />
       <v-btn
         v-for="(item, index) in getNavItems"
@@ -31,28 +31,28 @@ export default {
   computed: {
     ...mapGetters("user", ["user"]),
     getNavItems() {
-      let navItems = [
-        {
-          text: "Sign up",
-          icon: "account-circle ",
-          link: "/signup"
-        },
-        {
-          text: "Sign in",
-          icon: "login",
-          link: "/signin"
-        }
-      ];
       if (this.user) {
-        navItems = [
+        return [
           {
             text: "Games",
             icon: "cards",
             link: "/games"
           }
         ];
+      } else {
+        return [
+          {
+            text: "Sign up",
+            icon: "account-circle ",
+            link: "/signup"
+          },
+          {
+            text: "Sign in",
+            icon: "login",
+            link: "/signin"
+          }
+        ];
       }
-      return navItems;
     }
   },
   methods: {

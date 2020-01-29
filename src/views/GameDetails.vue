@@ -21,7 +21,6 @@ import GoBack from "@/components/GoBack";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "GmeDetails",
   components: {
     TeamTable,
     TeamAdd,
