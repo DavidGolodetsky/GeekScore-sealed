@@ -2,7 +2,7 @@
   <div>
     <div v-if="game">
       <h1 class="d-flex justify-center mb-4">{{ game.name }}</h1>
-      <v-img class="mx-auto mb-8" :src="game.image" width="400" />
+      <v-img class="mx-auto mb-8" :src="game.imageUrl" width="400" />
       <team-add :game-id="gameId" />
       <template v-if="teams">
         <div v-for="(team, i) in teams" :key="i">

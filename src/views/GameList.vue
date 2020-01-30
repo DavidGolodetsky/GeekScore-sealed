@@ -4,7 +4,7 @@
       <v-row>
         <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">
           <v-card>
-            <v-img class="white--text align-end" height="350" :src="game.image">
+            <v-img class="white--text align-end" height="350" :src="game.imageUrl">
               <div class="title-wrapp">
                 <v-card-title>{{ game.name }}</v-card-title>
               </div>

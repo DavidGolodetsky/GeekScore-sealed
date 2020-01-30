@@ -1,5 +1,5 @@
 
-import db from "@/fb";
+import fb from "@/fb";
 
 export default {
     namespaced: true,
@@ -17,7 +17,7 @@ export default {
     actions: {
         loadGames({ commit }) {
             commit('SET_LOADING', true, { root: true })
-            db.database().ref('games').once('value')
+            fb.database().ref('games').once('value')
                 .then((data) => {
                     const items = []
                     const obj = data.val()
@@ -25,7 +25,7 @@ export default {
                         items.push({
                             id: key,
                             name: obj[key].name,
-                            image: obj[key].image
+                            imageUrl: obj[key].imageUrl
                         })
                     }
                     commit('SET_LOADED_GAMES', items)
@@ -37,11 +37,33 @@ export default {
                 })
         },
         createGame({ commit }, payload) {
+            let imageUrl;
+            let key;
+            let ext;
             commit('SET_LOADING', true, { root: true })
-            db.database().ref('games').push(payload)
+
+            fb.database().ref('games').push(payload)
                 .then((data) => {
-                    const key = data.key;
-                    commit("CREATE_GAME", { ...payload, id: key })
+                    key = data.key;
+                    return key
+
+                })
+                .then(key => {
+                    const filename = payload.image.name
+                    ext = filename.slice(filename.lastIndexOf('.'))
+                    return fb.storage().ref(`games/${key}.${ext}`).put(payload.image)
+                })
+                .then(() => {
+                    return fb.storage().ref(`games/${key}.${ext}`).getDownloadURL()
+                })
+                .then((url) => {
+                    imageUrl = url
+                    return fb.database().ref('games').child(key).update({ imageUrl: imageUrl })
+                })
+                .then(() => {
+                    commit("CREATE_GAME", { ...payload, imageUrl: imageUrl, id: key })
+                })
+                .then(() => {
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

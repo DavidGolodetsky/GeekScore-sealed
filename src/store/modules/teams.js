@@ -1,4 +1,4 @@
-import db from "@/fb";
+import fb from "@/fb";
 
 export default {
     namespaced: true,
@@ -23,7 +23,7 @@ export default {
     actions: {
         loadTeams({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            db.database().ref(`games/${payload}/teams/`).once('value')
+            fb.database().ref(`games/${payload}/teams/`).once('value')
                 .then((data) => {
                     const items = []
                     const obj = data.val()
@@ -46,7 +46,7 @@ export default {
         },
         createTeam({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            db.database().ref(`games/${payload.gameId}/teams/`).push(payload)
+            fb.database().ref(`games/${payload.gameId}/teams/`).push(payload)
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_TEAM", { ...payload, id: key, matches: {} })
@@ -59,7 +59,7 @@ export default {
         },
         createMatch({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            db.database().ref(`games/${payload.gameId}/teams/${payload.teamId}/matches/`).push(payload)
+            fb.database().ref(`games/${payload.gameId}/teams/${payload.teamId}/matches/`).push(payload)
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_MATCH", { ...payload, id: key })
