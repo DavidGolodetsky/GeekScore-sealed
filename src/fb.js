@@ -2,7 +2,7 @@ import firebase from "firebase"
 import store from '@/store';
 
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyAscgoXoqL2LOk84LfNxq1BCu-JnFwyNug",
     authDomain: "geekstat-v.firebaseapp.com",
     databaseURL: "https://geekstat-v.firebaseio.com",
