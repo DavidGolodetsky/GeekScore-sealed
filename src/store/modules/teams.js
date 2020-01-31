@@ -21,9 +21,10 @@ export default {
         },
     },
     actions: {
-        loadTeams({ commit }, payload) {
+        loadTeams({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
-            fb.database().ref('games')
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games')
                 .child(payload)
                 .child('teams')
                 .once('value')
@@ -47,9 +48,10 @@ export default {
                     console.log(e)
                 })
         },
-        createTeam({ commit }, payload) {
+        createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
-            fb.database().ref('games')
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games')
                 .child(payload.gameId)
                 .child('teams')
                 .push(payload)
@@ -63,9 +65,10 @@ export default {
                     console.log(e)
                 })
         },
-        createMatch({ commit }, payload) {
+        createMatch({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
-            fb.database().ref('games')
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games')
                 .child(payload.gameId)
                 .child('teams')
                 .child(payload.teamId)

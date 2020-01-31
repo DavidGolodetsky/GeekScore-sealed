@@ -18,7 +18,7 @@
 <script>
 import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -28,12 +28,6 @@ export default {
   },
 
   data: () => ({}),
-  created() {
-    this.loadGames();
-  },
-  methods: {
-    ...mapActions("games", ["loadGames"])
-  },
   computed: {
     ...mapGetters(["loading"])
   }

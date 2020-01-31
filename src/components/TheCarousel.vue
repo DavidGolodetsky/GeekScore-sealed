@@ -1,7 +1,6 @@
 <template>
   <v-carousel v-if="items">
     <v-carousel-item
-      class="item"
       v-for="(item, i) in items"
       :key="i"
       :src="require(`@/assets/img/${item.img}.jpg`)"
@@ -25,9 +24,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.item {
-  cursor: pointer;
-}
 .title {
   position: absolute;
   bottom: 50px;

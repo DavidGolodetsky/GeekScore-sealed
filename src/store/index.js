@@ -14,7 +14,7 @@ export default new Vuex.Store({
     user
   },
   state: {
-    loading: true,
+    loading: false,
     error: null,
   },
   mutations: {

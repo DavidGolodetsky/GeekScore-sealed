@@ -15,34 +15,37 @@ export default {
         }
     },
     actions: {
-        loadGames({ commit }) {
+        loadGames({ commit, rootState }) {
             commit('SET_LOADING', true, { root: true })
-            fb.database().ref('games').once('value')
-                .then((data) => {
-                    const items = []
-                    const obj = data.val()
-                    for (let key in obj) {
-                        items.push({
-                            id: key,
-                            name: obj[key].name,
-                            imageUrl: obj[key].imageUrl
-                        })
-                    }
-                    commit('SET_LOADED_GAMES', items)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+            const user = rootState.user.user.id
+            if (user) {
+                fb.database().ref('users').child(user).child('games').once('value')
+                    .then((data) => {
+                        const items = []
+                        const obj = data.val()
+                        for (let key in obj) {
+                            items.push({
+                                id: key,
+                                name: obj[key].name,
+                                imageUrl: obj[key].imageUrl
+                            })
+                        }
+                        commit('SET_LOADED_GAMES', items)
+                        commit('SET_LOADING', false, { root: true })
+                    })
+                    .catch((e) => {
+                        commit('SET_LOADING', false, { root: true })
+                        console.log(e)
+                    })
+            }
         },
-        createGame({ commit }, payload) {
+        createGame({ commit, rootState }, payload) {
             let imageUrl;
             let key;
             let ext;
             commit('SET_LOADING', true, { root: true })
-
-            fb.database().ref('games').push(payload)
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games').push(payload)
                 .then((data) => {
                     key = data.key;
                     return key
@@ -58,7 +61,7 @@ export default {
                 })
                 .then((url) => {
                     imageUrl = url
-                    return fb.database().ref('games').child(key).update({ imageUrl: imageUrl })
+                    return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl: imageUrl })
                 })
                 .then(() => {
                     commit("CREATE_GAME", { ...payload, imageUrl: imageUrl, id: key })

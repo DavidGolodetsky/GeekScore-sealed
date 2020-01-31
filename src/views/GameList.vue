@@ -24,7 +24,7 @@
 
 <script>
 import GameAddDialog from "@/components/GameAddDialog";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -36,6 +36,12 @@ export default {
   computed: {
     ...mapGetters("games", ["games"]),
     ...mapGetters("user", ["user"])
+  },
+    created() {
+    this.loadGames();
+  },
+  methods: {
+    ...mapActions("games", ["loadGames"])
   },
   watch: {
     user(value) {
