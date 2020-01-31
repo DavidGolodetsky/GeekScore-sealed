@@ -11,18 +11,18 @@
         :items="matches"
         class="elevation-1 mb-6"
       ></v-data-table>
-      <match-add v-bind="propsToPass" />
+      <match-add-dialog v-bind="propsToPass" />
     </v-container>
   </v-card>
 </template>
 
 <script>
-import MatchAdd from "@/components/MatchAdd";
+import MatchAddDialog from "@/components/MatchAddDialog";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    MatchAdd
+    MatchAddDialog
   },
   props: {
     teamId: {

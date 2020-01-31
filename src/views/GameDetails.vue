@@ -3,7 +3,7 @@
     <div v-if="game">
       <h1 class="d-flex justify-center mb-4">{{ game.name }}</h1>
       <v-img class="mx-auto mb-8" :src="game.imageUrl" width="400" />
-      <team-add :game-id="gameId" />
+      <team-add-dialog :game-id="gameId" />
       <template v-if="teams">
         <div v-for="(team, i) in teams" :key="i">
           <team-table :team-id="team.id" />
@@ -16,14 +16,14 @@
 
 <script>
 import TeamTable from "@/components/TeamTable";
-import TeamAdd from "@/components/TeamAdd";
+import TeamAddDialog from "@/components/TeamAddDialog";
 import GoBack from "@/components/GoBack";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     TeamTable,
-    TeamAdd,
+    TeamAddDialog,
     GoBack
   },
   props: {

@@ -18,17 +18,17 @@
         </v-col>
       </v-row>
     </div>
-    <game-add />
+    <game-add-dialog />
   </div>
 </template>
 
 <script>
-import GameAdd from "@/components/GameAdd";
+import GameAddDialog from "@/components/GameAddDialog";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    GameAdd
+    GameAddDialog
   },
   data() {
     return {};
