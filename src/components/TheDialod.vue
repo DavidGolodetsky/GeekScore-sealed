@@ -40,6 +40,7 @@
 import { mapActions } from "vuex";
 
 export default {
+  propps: {},
   data() {
     return {
       dialog: false,
