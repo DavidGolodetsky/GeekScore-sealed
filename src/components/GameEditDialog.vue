@@ -1,5 +1,5 @@
 <template>
-  <the-dialog :activator="'plus'" :header="'Add new game'" :submitLogic="onSubmit">
+  <the-dialog :activator="'pencil'" :header="'Edit game info'" :submitLogic="onSubmit">
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-file-input
       class="mb-2"
@@ -52,7 +52,8 @@ export default {
         name: this.name,
         image: this.imageFile
       };
-      this.createGame(game);
+      console.log(game);
+      //   this.createGame(game);
     }
   }
 };
