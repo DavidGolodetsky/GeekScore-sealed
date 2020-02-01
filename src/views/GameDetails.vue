@@ -6,7 +6,12 @@
       </v-col>
     </v-row>
     <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
-    <v-img class="mx-auto mb-8" :src="game.imageUrl" width="400" />
+    <v-img
+      class="mx-auto mb-8"
+      lazy-src="https://picsum.photos/id/11/100/60"
+      :src="game.imageUrl"
+      width="400"
+    />
     <template v-if="teams">
       <div v-for="(team, i) in teams" :key="i">
         <v-lazy

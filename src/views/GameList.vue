@@ -17,7 +17,12 @@
           >
             <transition-group appear name="fade-down">
               <v-card :key="game.id">
-                <v-img class="white--text align-end" height="350" :src="game.imageUrl">
+                <v-img
+                  class="white--text align-end"
+                  lazy-src="https://picsum.photos/id/307/5760/3840"
+                  height="350"
+                  :src="game.imageUrl"
+                >
                   <div class="title-wrapp">
                     <v-card-title>{{ game.name }}</v-card-title>
                   </div>

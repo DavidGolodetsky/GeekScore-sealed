@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <div>
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on }">
         <v-btn class="mx-2" outlined fab dark v-on="on" color="primary">
@@ -24,7 +24,7 @@
         </v-form>
       </v-card>
     </v-dialog>
-  </v-row>
+  </div>
 </template>
 
 <script>
