@@ -1,10 +1,14 @@
 <template>
   <div>
-    <div v-if="game">
-      <h1 class="d-flex justify-center mb-4">{{ game.name }}</h1>
-      <v-img class="mx-auto mb-8" :src="game.imageUrl" width="400" />
-      <team-add-dialog :game-id="gameId" />
-      <template v-if="teams">
+    <v-row justify="end">
+      <v-col cols="1">
+        <team-add-dialog :game-id="gameId" />
+      </v-col>
+    </v-row>
+    <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
+    <v-img class="mx-auto mb-8" :src="game.imageUrl" width="400" />
+    <template v-if="teams">
+      <div v-for="(team, i) in teams" :key="i">
         <v-lazy
           :options="{
           threshold: .5
@@ -13,11 +17,11 @@
           transition="fade-transition"
         >
           <transition-group appear name="fade-down">
-            <team-table v-for="(team, i) in teams" :key="i" :team-id="team.id" />
+            <team-table :key="team.id" :team-id="team.id" />
           </transition-group>
         </v-lazy>
-      </template>
-    </div>
+      </div>
+    </template>
     <go-back />
   </div>
 </template>
@@ -69,3 +73,10 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss">
+.game-title {
+  color: $primary;
+}
+</style>

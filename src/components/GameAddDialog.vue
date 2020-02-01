@@ -1,5 +1,5 @@
 <template>
-  <the-dialog :activator="'Add game'" :header="'Game description'" :submitLogic="onSubmit">
+  <the-dialog :activator="'plus'" :header="'Game description'" :submitLogic="onSubmit">
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-file-input
       class="mb-2"

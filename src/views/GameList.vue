@@ -1,6 +1,10 @@
 <template>
   <div>
-    <game-add-dialog />
+    <v-row justify="end">
+      <v-col cols="1">
+        <game-add-dialog />
+      </v-col>
+    </v-row>
     <div v-if="games">
       <v-row>
         <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">
@@ -12,15 +16,21 @@
             transition="fade-transition"
           >
             <transition-group appear name="fade-down">
-              <v-card :key="i">
+              <v-card :key="game.id">
                 <v-img class="white--text align-end" height="350" :src="game.imageUrl">
                   <div class="title-wrapp">
                     <v-card-title>{{ game.name }}</v-card-title>
                   </div>
                 </v-img>
                 <v-card-actions>
+                  <v-btn class="mx-2" outlined fab dark color="primary">
+                    <v-icon dark>mdi-pencil</v-icon>
+                  </v-btn>
+                  <v-spacer />
                   <router-link class="mx-auto" :to="{name: 'game', params: {gameId: game.id}}">
-                    <v-btn color="primary">Details</v-btn>
+                    <v-btn outlined fab class="mx-2" dark color="primary">
+                      <v-icon dark>mdi-information-variant</v-icon>
+                    </v-btn>
                   </router-link>
                 </v-card-actions>
               </v-card>

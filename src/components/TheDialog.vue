@@ -2,7 +2,9 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">{{ activator }}</v-btn>
+        <v-btn class="mx-2" outlined fab dark v-on="on" color="primary">
+          <v-icon dark>mdi-{{ activator }}</v-icon>
+        </v-btn>
       </template>
       <v-card>
         <v-card-title>

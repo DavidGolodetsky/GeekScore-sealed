@@ -1,5 +1,5 @@
 <template>
-  <the-dialog :activator="'Add match'" :header="'Select Winner'" :submitLogic="onSubmit">
+  <the-dialog :activator="'plus'" :header="'Select Winner'" :submitLogic="onSubmit">
     <v-row justify="center" class="mb-4">
       <v-radio-group :rules="fieldRules" row v-model="winner">
         <v-radio v-for="(player, i) in players" :key="i" :label="player.name" :value="player.name" />
