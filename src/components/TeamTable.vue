@@ -4,7 +4,10 @@
       <v-card-title>
         <h3 class="headline">{{ team.name }}</h3>
         <v-spacer />
-        <router-link class="mx-auto" :to="{name: 'statistic', params: {teamId: teamId}}">
+        <router-link
+          class="mx-auto"
+          :to="{ name: 'statistic', params: { team: team } }"
+        >
           <v-btn outlined fab class="mx-2" dark color="primary">
             <v-icon dark>mdi-chart-bar</v-icon>
           </v-btn>

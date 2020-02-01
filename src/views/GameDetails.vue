@@ -1,10 +1,10 @@
 <template>
   <div>
-    <team-add-dialog class="d-flex justify-end" :game-id="gameId" />
+    <team-add-dialog class="d-flex justify-end" :game="game" />
     <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
     <v-img
       class="mx-auto mb-8"
-      lazy-src="https://picsum.photos/id/11/100/60"
+      lazy-src="https://picsum.photos/id/307/5760/3840"
       :src="game.imageUrl"
       width="400"
     />
@@ -12,8 +12,8 @@
       <div v-for="(team, i) in teams" :key="i">
         <v-lazy
           :options="{
-          threshold: .5
-        }"
+            threshold: 0.5
+          }"
           min-height="200"
           transition="fade-transition"
         >
@@ -72,7 +72,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss">
 .game-title {

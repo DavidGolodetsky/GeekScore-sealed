@@ -1,6 +1,14 @@
 <template>
-  <the-dialog :activator="'plus'" :header="'Add new team'" :submitLogic="onSubmit">
-    <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+  <the-dialog
+    :activator="'plus'"
+    :header="'Add new team'"
+    :submitLogic="onSubmit"
+  >
+    <v-text-field
+      :rules="fieldRules"
+      label="Name"
+      v-model="name"
+    ></v-text-field>
     <v-select
       :rules="selectRules"
       :items="numberOfPlayers"
@@ -13,7 +21,7 @@
         v-model="player.name"
         :rules="fieldRules"
         :key="i"
-        :label="`Player #${i+1}`"
+        :label="`Player #${i + 1}`"
       ></v-text-field>
     </template>
   </the-dialog>
@@ -24,8 +32,8 @@ import { mapActions } from "vuex";
 
 export default {
   props: {
-    gameId: {
-      type: String,
+    game: {
+      type: Object,
       required: true
     }
   },
@@ -52,7 +60,8 @@ export default {
     },
     onSubmit() {
       const team = {
-        gameId: this.gameId,
+        gameName: this.game.name,
+        gameId: this.game.id,
         name: this.name,
         players: this.players
       };

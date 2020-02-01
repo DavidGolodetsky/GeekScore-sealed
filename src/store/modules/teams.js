@@ -35,6 +35,7 @@ export default {
                         items.push({
                             id: key,
                             gameId: obj[key].gameId,
+                            gameName: obj[key].gameName,
                             players: obj[key].players,
                             matches: obj[key].matches,
                             name: obj[key].name,
