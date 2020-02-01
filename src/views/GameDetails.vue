@@ -5,9 +5,17 @@
       <v-img class="mx-auto mb-8" :src="game.imageUrl" width="400" />
       <team-add-dialog :game-id="gameId" />
       <template v-if="teams">
-        <div v-for="(team, i) in teams" :key="i">
-          <team-table :team-id="team.id" />
-        </div>
+        <v-lazy
+          :options="{
+          threshold: .5
+        }"
+          min-height="200"
+          transition="fade-transition"
+        >
+          <transition-group appear name="fade-down">
+            <team-table v-for="(team, i) in teams" :key="i" :team-id="team.id" />
+          </transition-group>
+        </v-lazy>
       </template>
     </div>
     <go-back />

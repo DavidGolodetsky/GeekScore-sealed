@@ -13,6 +13,8 @@ a {
   color: $danger;
 }
 
+// animations
+
 .slide-enter-active,
 .slide-leave-active {
   transition: 0.3s;
@@ -21,3 +23,15 @@ a {
 .slide-leave-to {
   opacity: 0;
 }
+
+.fade-down-enter-active,
+.fade-down-leave-active {
+  transition: 1s ease;
+}
+.fade-down-enter,
+.fade-down-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+// animations END
