@@ -17,11 +17,16 @@
 import { mapActions } from "vuex";
 
 export default {
+  props: {
+    game: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      name: "",
-      error: "",
-      imageUrl: "",
+      name: this.game.name,
+      imageUrl: this.game.imageUrl,
       imageFile: null,
       fieldRules: [
         v => !!v || "Field is required",

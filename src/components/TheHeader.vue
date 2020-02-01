@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar app color="primary" dense dark>
-      <v-container class="d-flex">
+      <v-container class="d-flex align-center">
         <router-link class="logo" :to="{name: 'home'}">GeekScore</router-link>
         <v-spacer />
         <div class="d-none d-sm-flex">

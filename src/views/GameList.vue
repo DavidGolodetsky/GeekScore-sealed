@@ -1,10 +1,6 @@
 <template>
   <div v-if="games">
-    <v-row justify="end">
-      <v-col cols="1">
-        <game-add-dialog />
-      </v-col>
-    </v-row>
+    <game-add-dialog class="d-flex justify-end" />
     <div>
       <v-row>
         <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">
@@ -28,7 +24,7 @@
                   </div>
                 </v-img>
                 <v-card-actions>
-                  <game-edit-dialog />
+                  <game-edit-dialog :game="game" />
                   <v-spacer />
                   <router-link class="mx-auto" :to="{name: 'game', params: {gameId: game.id}}">
                     <v-btn outlined fab class="mx-2" dark color="primary">

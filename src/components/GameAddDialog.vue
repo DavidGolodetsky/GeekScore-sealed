@@ -20,7 +20,6 @@ export default {
   data() {
     return {
       name: "",
-      error: "",
       imageUrl: "",
       imageFile: null,
       fieldRules: [

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-row justify="end">
-      <v-col cols="1">
-        <team-add-dialog :game-id="gameId" />
-      </v-col>
-    </v-row>
+    <team-add-dialog class="d-flex justify-end" :game-id="gameId" />
     <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
     <v-img
       class="mx-auto mb-8"
