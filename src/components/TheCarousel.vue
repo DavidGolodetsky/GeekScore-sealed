@@ -1,13 +1,11 @@
 <template>
-  <v-carousel v-if="items">
+  <v-carousel cycle show-arrows-on-hover v-if="items">
     <v-carousel-item
       v-for="(item, i) in items"
       :key="i"
       :src="require(`@/assets/img/${item.img}.jpg`)"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
     >
-      <div class="title display-3">{{ item.name }}</div>
+      <div class="title display-3">{{ item.text }}</div>
     </v-carousel-item>
   </v-carousel>
 </template>

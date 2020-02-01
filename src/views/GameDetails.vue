@@ -27,21 +27,19 @@
         </v-lazy>
       </div>
     </template>
-    <go-back />
+    <the-go-back />
   </div>
 </template>
 
 <script>
 import TeamTable from "@/components/TeamTable";
 import TeamAddDialog from "@/components/TeamAddDialog";
-import GoBack from "@/components/GoBack";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     TeamTable,
-    TeamAddDialog,
-    GoBack
+    TeamAddDialog
   },
   props: {
     gameId: {

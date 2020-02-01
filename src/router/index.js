@@ -34,6 +34,12 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/statistic",
+    name: "statistic",
+    props: true,
+    component: () => import(/* webpackChunkName: "statistic" */ '../views/TeamStatistic.vue')
+  },
+  {
     path: "/signin",
     name: "signIn",
     component: () => import(/* webpackChunkName: "signIn" */ '../views/SignIn.vue')

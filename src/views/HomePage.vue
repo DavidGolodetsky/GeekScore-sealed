@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <the-carousel :items="games" />
   </div>
 </template>
@@ -15,15 +15,15 @@ export default {
     return {
       games: [
         {
-          name: "7 Wonders Duel",
+          text: "Add your amazing games",
           img: "7wonders"
         },
         {
-          name: "Star Realms",
+          text: "Store your matches",
           img: "star-realms"
         },
         {
-          name: "Hive",
+          text: "See the statistics",
           img: "hive"
         }
       ]
@@ -31,5 +31,11 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.page {
+  padding-top: 80px;
+}
+</style>
 
 

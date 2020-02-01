@@ -3,6 +3,13 @@
     <v-container>
       <v-card-title>
         <h3 class="headline">{{ team.name }}</h3>
+        <v-spacer />
+        <router-link class="mx-auto" :to="{name: 'statistic', params: {teamId: teamId}}">
+          <v-btn outlined fab class="mx-2" dark color="primary">
+            <v-icon dark>mdi-chart-bar</v-icon>
+          </v-btn>
+        </router-link>
+        <team-edit-dialog :team-id="teamId" />
       </v-card-title>
       <v-data-table
         v-if="matches"
@@ -11,18 +18,24 @@
         :items="matches"
         class="elevation-1 mb-6"
       ></v-data-table>
-      <match-add-dialog v-bind="propsToPass" />
+      <v-row justify="center">
+        <v-col cols="1">
+          <match-add-dialog v-bind="propsToPass" />
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>
 
 <script>
 import MatchAddDialog from "@/components/MatchAddDialog";
+import TeamEditDialog from "@/components/TeamEditDialog";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    MatchAddDialog
+    MatchAddDialog,
+    TeamEditDialog
   },
   props: {
     teamId: {

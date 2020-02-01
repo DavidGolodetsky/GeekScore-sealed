@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div v-if="games">
     <v-row justify="end">
       <v-col cols="1">
         <game-add-dialog />
       </v-col>
     </v-row>
-    <div v-if="games">
+    <div>
       <v-row>
         <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">
           <v-lazy

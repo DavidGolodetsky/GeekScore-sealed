@@ -1,25 +1,27 @@
 <template>
   <div>
-    <v-app-bar color="primary" dense dark>
-      <router-link class="logo" :to="{name: 'home'}">GeekScore</router-link>
-      <v-spacer />
-      <div class="d-none d-sm-flex">
-        <v-btn
-          v-for="(item, index) in navItems"
-          :key="index"
-          :small="$vuetify.breakpoint.smOnly"
-          :to="item.link"
-          text
-          rounded
-        >
-          <v-icon left>mdi-{{item.icon}}</v-icon>
-          {{item.text}}
-        </v-btn>
-        <v-btn :small="$vuetify.breakpoint.smOnly" text rounded v-if="user" @click="onLogout">
-          <v-icon>mdi-logout</v-icon>Log out
-        </v-btn>
-      </div>
-      <v-app-bar-nav-icon class="d-sm-none" @click.stop="sideNav = !sideNav"></v-app-bar-nav-icon>
+    <v-app-bar app color="primary" dense dark>
+      <v-container class="d-flex">
+        <router-link class="logo" :to="{name: 'home'}">GeekScore</router-link>
+        <v-spacer />
+        <div class="d-none d-sm-flex">
+          <v-btn
+            v-for="(item, index) in navItems"
+            :key="index"
+            :small="$vuetify.breakpoint.smOnly"
+            :to="item.link"
+            text
+            rounded
+          >
+            <v-icon left>mdi-{{item.icon}}</v-icon>
+            {{item.text}}
+          </v-btn>
+          <v-btn :small="$vuetify.breakpoint.smOnly" text rounded v-if="user" @click="onLogout">
+            <v-icon>mdi-logout</v-icon>Log out
+          </v-btn>
+        </div>
+        <v-app-bar-nav-icon class="d-sm-none" @click.stop="sideNav = !sideNav"></v-app-bar-nav-icon>
+      </v-container>
     </v-app-bar>
     <v-navigation-drawer app right dark fixed temporary v-model="sideNav">
       <v-list>
@@ -88,7 +90,8 @@ export default {
 <style scoped lang="scss">
 .logo {
   color: $accent;
-  font-size: 18px;
+  font-size: 26px;
   font-weight: 600;
+  text-shadow: 1px -1px 0px #fff;
 }
 </style>

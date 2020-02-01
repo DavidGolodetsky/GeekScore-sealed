@@ -11,7 +11,7 @@
         class="my-2"
       >{{ item.text }}</v-btn>
       <v-flex primary lighten-2 py-4 text-center white--text xs12>
-        {{ new Date().getFullYear() }} —
+        &copy; {{ new Date().getFullYear() }} —
         <strong>GeekScore</strong>
       </v-flex>
     </v-layout>
