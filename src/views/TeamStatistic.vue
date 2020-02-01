@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="mb-4">{{ team.name }} Statistic for game {{ team.gameName }}</h1>
+    <h1 class="mb-6 app-title">
+      {{ team.name }} Statistic for game {{ team.gameName }}
+    </h1>
     <chart-bars class="mb-6" :team="team" />
     <the-go-back />
   </div>
@@ -24,3 +26,12 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.page {
+  padding-top: 40px;
+}
+.app-title {
+  color: $primary;
+}
+</style>
