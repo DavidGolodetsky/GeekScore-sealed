@@ -12,6 +12,12 @@ export default {
         CREATE_TEAM(state, payload) {
             state.items.push(payload)
         },
+        UPDATE_TEAM(state, payload) {
+            const team = state.items.find(team => team.id === payload.teamId)
+            if (payload.name) {
+                team.name = payload.name
+            }
+        },
         CREATE_MATCH(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId);
             const match = {
@@ -59,6 +65,22 @@ export default {
                 .then((data) => {
                     const key = data.key;
                     commit("CREATE_TEAM", { ...payload, id: key, matches: {} })
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+        },
+        updateTeam({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const updatedTeam = {
+                name: payload.name
+            }
+            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).update(updatedTeam)
+                .then(() => {
+                    commit("UPDATE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

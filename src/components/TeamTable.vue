@@ -4,15 +4,12 @@
       <v-card-title>
         <h3 class="headline">{{ team.name }}</h3>
         <v-spacer />
-        <router-link
-          class="mx-auto"
-          :to="{ name: 'statistic', params: { team: team } }"
-        >
+        <router-link class="mx-auto" :to="{ name: 'statistic', params: { team: team } }">
           <v-btn outlined fab class="mx-2" dark color="primary">
             <v-icon dark>mdi-chart-bar</v-icon>
           </v-btn>
         </router-link>
-        <team-edit-dialog :team-id="teamId" />
+        <team-edit-dialog v-bind="propsToTeam" />
       </v-card-title>
       <v-data-table
         v-if="matches"
@@ -23,7 +20,7 @@
       ></v-data-table>
       <v-row justify="center">
         <v-col cols="1">
-          <match-add-dialog v-bind="propsToPass" />
+          <match-add-dialog v-bind="propsToMatch" />
         </v-col>
       </v-row>
     </v-container>
@@ -66,10 +63,20 @@ export default {
       }
       return null;
     },
-    propsToPass() {
+    propsToMatch() {
       if (this.team) {
         return {
           players: this.team.players,
+          teamId: this.team.id,
+          gameId: this.team.gameId
+        };
+      }
+      return false;
+    },
+    propsToTeam() {
+      if (this.team) {
+        return {
+          teamName: this.team.name,
           teamId: this.team.id,
           gameId: this.team.gameId
         };
