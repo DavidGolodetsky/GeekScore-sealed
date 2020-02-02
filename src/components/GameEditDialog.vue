@@ -3,7 +3,7 @@
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-file-input
       class="mb-2"
-      :rules="imageRules"
+      :rules="imageFile ? imageRules : []"
       accept="image/png, image/jpeg, image/bmp"
       prepend-icon="mdi-image"
       label="Image"
@@ -28,18 +28,14 @@ export default {
       name: this.game.name,
       imageUrl: this.game.imageUrl,
       imageFile: null,
-      fieldRules: [
-        v => !!v || "Field is required",
-        v => v.length <= 40 || "Field must be less than 20 characters"
-      ],
+      fieldRules: [v => v.length <= 60 || "Field is too long"],
       imageRules: [
-        v => !!v || "Field is required",
-        v => (v && v.size < 2000000) || "Image size should be less than 2 MB!"
+        v => (v && v.size < 2000000) || "Image size should be less than 2 MB"
       ]
     };
   },
   methods: {
-    ...mapActions("games", ["createGame"]),
+    ...mapActions("games", ["updateGame"]),
     onFileUpload(file) {
       if (file) {
         const fileReader = new FileReader();
@@ -53,12 +49,14 @@ export default {
       }
     },
     onSubmit() {
-      const game = {
-        name: this.name,
-        image: this.imageFile
-      };
-      console.log(game);
-      //   this.createGame(game);
+      if (this.name || this.imageFile) {
+        const game = {
+          name: this.name,
+          image: this.imageFile,
+          id: this.game.id
+        };
+        this.updateGame(game);
+      }
     }
   }
 };

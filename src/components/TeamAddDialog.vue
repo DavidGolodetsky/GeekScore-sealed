@@ -1,14 +1,6 @@
 <template>
-  <the-dialog
-    :activator="'plus'"
-    :header="'Add new team'"
-    :submitLogic="onSubmit"
-  >
-    <v-text-field
-      :rules="fieldRules"
-      label="Name"
-      v-model="name"
-    ></v-text-field>
+  <the-dialog :activator="'plus'" :header="'Add new team'" :submitLogic="onSubmit">
+    <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-select
       :rules="selectRules"
       :items="numberOfPlayers"
@@ -44,7 +36,7 @@ export default {
       players: [],
       fieldRules: [
         v => !!v || "Field is required",
-        v => v.length <= 40 || "Field must be less than 20 characters"
+        v => v.length <= 40 || "Field is too long"
       ],
       selectRules: [v => !!v || "Field is required"]
     };

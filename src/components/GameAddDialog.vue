@@ -24,11 +24,11 @@ export default {
       imageFile: null,
       fieldRules: [
         v => !!v || "Field is required",
-        v => v.length <= 40 || "Field must be less than 20 characters"
+        v => v.length <= 40 || "Field is too long"
       ],
       imageRules: [
         v => !!v || "Field is required",
-        v => (v && v.size < 2000000) || "Image size should be less than 2 MB!"
+        v => (v && v.size < 2000000) || "Image size should be less than 2 MB"
       ]
     };
   },

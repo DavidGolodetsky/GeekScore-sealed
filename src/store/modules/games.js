@@ -12,6 +12,12 @@ export default {
         },
         CREATE_GAME(state, payload) {
             state.items.push(payload)
+        },
+        UPDATE_GAME(state, payload) {
+            const game = state.items.find(game => game.id === payload.id)
+            if (payload.name) {
+                game.name = payload.name
+            }
         }
     },
     actions: {
@@ -40,10 +46,10 @@ export default {
             }
         },
         createGame({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
             let imageUrl;
             let key;
             let ext;
-            commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             fb.database().ref('users').child(user).child('games').push(payload)
                 .then((data) => {
@@ -67,6 +73,27 @@ export default {
                     commit("CREATE_GAME", { ...payload, imageUrl: imageUrl, id: key })
                 })
                 .then(() => {
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+        },
+        updateGame({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const updatedGame = {}
+            if (payload.name) {
+                updatedGame.name = payload.name
+            }
+            // TODO: update image letter
+            // if (payload.image) {
+            //     updatedGame.image = payload.image
+            // }
+            fb.database().ref('users').child(user).child('games').child(payload.id).update(updatedGame)
+                .then(() => {
+                    commit("UPDATE_GAME", payload)
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

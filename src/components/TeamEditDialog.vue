@@ -36,7 +36,7 @@ export default {
       players: [],
       fieldRules: [
         v => !!v || "Field is required",
-        v => v.length <= 40 || "Field must be less than 20 characters"
+        v => v.length <= 40 || "Field is too long"
       ],
       selectRules: [v => !!v || "Field is required"]
     };
