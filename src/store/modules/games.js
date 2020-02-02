@@ -83,42 +83,45 @@ export default {
                     console.log(e)
                 })
         },
-        updateGame({ commit, rootState }, payload) {
+        updateGameInfo({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            if (payload.name) {
-                fb.database().ref('users').child(user).child('games').child(payload.id).update({ name: payload.name })
-                    .then(() => {
-                        commit("UPDATE_GAME", payload)
-                        commit('SET_LOADING', false, { root: true })
-                    })
-                    .catch((e) => {
-                        commit('SET_LOADING', false, { root: true })
-                        console.log(e)
-                    })
+            const info = {
+                name: payload.name
             }
-            if (payload.image) {
-                const filename = payload.image.name
-                const ext = filename.slice(filename.lastIndexOf('.'))
-                const pictureName = payload.id + 1;
-                let imageUrl
-                fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).put(payload.image)
-                    .then(() => {
-                        return fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).getDownloadURL()
-                    })
-                    .then((url) => {
-                        imageUrl = url
-                        return fb.database().ref('users').child(user).child('games').child(payload.id).update({ imageUrl })
-                    })
-                    .then(() => {
-                        commit("UPDATE_GAME", { ...payload, imageUrl })
-                        commit('SET_LOADING', false, { root: true })
-                    })
-                    .catch((e) => {
-                        commit('SET_LOADING', false, { root: true })
-                        console.log(e)
-                    })
-            }
+            fb.database().ref('users').child(user).child('games').child(payload.id).update(info)
+                .then(() => {
+                    commit("UPDATE_GAME", payload)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+        },
+        updateGameImage({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const filename = payload.image.name
+            const ext = filename.slice(filename.lastIndexOf('.'))
+            const pictureName = payload.id + 1;
+            let imageUrl
+            fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).put(payload.image)
+                .then(() => {
+                    return fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).getDownloadURL()
+                })
+                .then((url) => {
+                    imageUrl = url
+                    return fb.database().ref('users').child(user).child('games').child(payload.id).update({ imageUrl })
+                })
+                .then(() => {
+                    commit("UPDATE_GAME", { ...payload, imageUrl })
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
         }
     },
     getters: {

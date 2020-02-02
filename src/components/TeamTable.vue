@@ -64,35 +64,26 @@ export default {
       return null;
     },
     propsToMatch() {
-      if (this.team) {
-        return {
-          players: this.team.players,
-          teamId: this.team.id,
-          gameId: this.team.gameId
-        };
-      }
-      return false;
+      return {
+        players: this.team.players,
+        teamId: this.team.id,
+        gameId: this.team.gameId
+      };
     },
     propsToTeam() {
-      if (this.team) {
-        return {
-          teamName: this.team.name,
-          teamId: this.team.id,
-          gameId: this.team.gameId
-        };
-      }
-      return false;
+      return {
+        teamName: this.team.name,
+        teamId: this.team.id,
+        gameId: this.team.gameId
+      };
     },
     headers() {
-      if (this.team) {
-        const headers = this.team.players.map(player => ({
-          text: player.name,
-          value: player.name.toLowerCase()
-        }));
-        headers.push({ text: "Date", value: "date" });
-        return headers;
-      }
-      return false;
+      const headers = this.team.players.map(player => ({
+        text: player.name,
+        value: player.name.toLowerCase()
+      }));
+      headers.push({ text: "Date", value: "date" });
+      return headers;
     }
   }
 };

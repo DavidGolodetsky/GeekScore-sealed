@@ -35,7 +35,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("games", ["updateGame"]),
+    ...mapActions("games", ["updateGameImage", "updateGameInfo"]),
     onFileUpload(file) {
       if (file) {
         const fileReader = new FileReader();
@@ -49,13 +49,16 @@ export default {
       }
     },
     onSubmit() {
-      if (this.name || this.imageFile) {
-        const game = {
-          name: this.name,
-          image: this.imageFile,
-          id: this.game.id
-        };
-        this.updateGame(game);
+      const game = {
+        name: this.name,
+        image: this.imageFile,
+        id: this.game.id
+      };
+      if (game.name) {
+        this.updateGameInfo(game);
+      }
+      if (game.image) {
+        this.updateGameImage(game);
       }
     }
   }
