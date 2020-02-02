@@ -4,7 +4,7 @@
     <v-content>
       <v-container>
         <transition name="slide" mode="out-in">
-          <router-view class="page"></router-view>
+          <router-view class="pt-4 pb-4"></router-view>
         </transition>
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>

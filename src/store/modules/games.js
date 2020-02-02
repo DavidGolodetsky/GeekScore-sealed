@@ -18,6 +18,9 @@ export default {
             if (payload.name) {
                 game.name = payload.name
             }
+            if (payload.imageUrl) {
+                game.imageUrl = payload.imageUrl
+            }
         }
     },
     actions: {
@@ -60,17 +63,17 @@ export default {
                 .then(key => {
                     const filename = payload.image.name
                     ext = filename.slice(filename.lastIndexOf('.'))
-                    return fb.storage().ref(`games/${key}.${ext}`).put(payload.image)
+                    return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).put(payload.image)
                 })
                 .then(() => {
-                    return fb.storage().ref(`games/${key}.${ext}`).getDownloadURL()
+                    return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).getDownloadURL()
                 })
                 .then((url) => {
                     imageUrl = url
-                    return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl: imageUrl })
+                    return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl })
                 })
                 .then(() => {
-                    commit("CREATE_GAME", { ...payload, imageUrl: imageUrl, id: key })
+                    commit("CREATE_GAME", { ...payload, imageUrl, id: key })
                 })
                 .then(() => {
                     commit('SET_LOADING', false, { root: true })
@@ -83,23 +86,39 @@ export default {
         updateGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            const updatedGame = {}
             if (payload.name) {
-                updatedGame.name = payload.name
+                fb.database().ref('users').child(user).child('games').child(payload.id).update({ name: payload.name })
+                    .then(() => {
+                        commit("UPDATE_GAME", payload)
+                        commit('SET_LOADING', false, { root: true })
+                    })
+                    .catch((e) => {
+                        commit('SET_LOADING', false, { root: true })
+                        console.log(e)
+                    })
             }
-            // TODO: update image letter
-            // if (payload.image) {
-            //     updatedGame.image = payload.image
-            // }
-            fb.database().ref('users').child(user).child('games').child(payload.id).update(updatedGame)
-                .then(() => {
-                    commit("UPDATE_GAME", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+            if (payload.image) {
+                const filename = payload.image.name
+                const ext = filename.slice(filename.lastIndexOf('.'))
+                const pictureName = payload.id + 1;
+                let imageUrl
+                fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).put(payload.image)
+                    .then(() => {
+                        return fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).getDownloadURL()
+                    })
+                    .then((url) => {
+                        imageUrl = url
+                        return fb.database().ref('users').child(user).child('games').child(payload.id).update({ imageUrl })
+                    })
+                    .then(() => {
+                        commit("UPDATE_GAME", { ...payload, imageUrl })
+                        commit('SET_LOADING', false, { root: true })
+                    })
+                    .catch((e) => {
+                        commit('SET_LOADING', false, { root: true })
+                        console.log(e)
+                    })
+            }
         }
     },
     getters: {

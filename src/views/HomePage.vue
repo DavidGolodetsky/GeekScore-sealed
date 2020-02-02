@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div>
     <the-carousel :items="games" />
   </div>
 </template>
@@ -31,11 +31,5 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-.page {
-  padding-top: 80px;
-}
-</style>
 
 
