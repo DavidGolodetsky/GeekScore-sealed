@@ -1,7 +1,7 @@
 <template>
   <the-dialog :activator="'pencil'" :header="'Edit team info'" :submitLogic="onSubmit">
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
-    <v-switch v-model="isDelete" label="Delete game" color="red" value="delete" hide-details></v-switch>
+    <v-switch v-model="isDelete" label="Delete team" color="red" value="delete" hide-details></v-switch>
   </the-dialog>
 </template>
 
@@ -43,10 +43,6 @@ export default {
       };
       if (this.isDelete) {
         this.deleteTeam(team);
-        this.$router.push({
-          name: "game",
-          params: { gameId: this.gameId }
-        });
       } else {
         this.updateTeam(team);
       }

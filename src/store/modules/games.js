@@ -23,7 +23,7 @@ export default {
             }
         },
         DELETE_GAME(state, payload) {
-            state = state.items.filter(game => game.id !== payload)
+            state.items = state.items.filter(game => game.id !== payload)
         }
     },
     actions: {

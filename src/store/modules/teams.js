@@ -19,7 +19,7 @@ export default {
             }
         },
         DELETE_TEAM(state, payload) {
-            state = state.items.filter(team => team.id !== payload.teamId)
+            state.items = state.items.filter(team => team.id !== payload.teamId)
         },
         CREATE_MATCH(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId);
