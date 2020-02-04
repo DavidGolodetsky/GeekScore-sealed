@@ -1,5 +1,5 @@
 <template>
-  <the-dialog :activator="'plus'" :header="'Add new team'" :submitLogic="onSubmit">
+  <the-dialog activator="plus" header="Add new team" button-text="New team" :submitLogic="onSubmit">
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-select
       :rules="selectRules"

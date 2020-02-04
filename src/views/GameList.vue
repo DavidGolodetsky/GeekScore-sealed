@@ -24,8 +24,6 @@
                   </div>
                 </v-img>
                 <v-card-actions>
-                  <game-edit-dialog :game="game" />
-                  <v-spacer />
                   <router-link class="mx-auto" :to="{name: 'game', params: {gameId: game.id}}">
                     <v-btn outlined fab class="mx-2" dark color="primary">
                       <v-icon dark>mdi-information-variant</v-icon>
@@ -43,13 +41,11 @@
 
 <script>
 import GameAddDialog from "@/components/GameAddDialog";
-import GameEditDialog from "@/components/GameEditDialog";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    GameAddDialog,
-    GameEditDialog
+    GameAddDialog
   },
   data() {
     return {};

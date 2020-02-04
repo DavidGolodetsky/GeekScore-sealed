@@ -1,5 +1,10 @@
 <template>
-  <the-dialog :activator="'pencil'" :header="'Edit game info'" :submitLogic="onSubmit">
+  <the-dialog
+    activator="pencil"
+    header="Edit game info"
+    buttonText="Edit game"
+    :submitLogic="onSubmit"
+  >
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-file-input
       class="mb-2"
@@ -9,6 +14,7 @@
       label="Image"
       @change="onFileUpload($event)"
     ></v-file-input>
+    <v-switch v-model="isDelete" label="Delete game" color="red" value="delete" hide-details></v-switch>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
   </the-dialog>
 </template>
@@ -26,6 +32,7 @@ export default {
   data() {
     return {
       name: this.game.name,
+      isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,
       fieldRules: [v => v.length <= 60 || "Field is too long"],
@@ -35,7 +42,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("games", ["updateGameImage", "updateGameInfo"]),
+    ...mapActions("games", ["updateGameImage", "updateGameInfo", "deleteGame"]),
     onFileUpload(file) {
       if (file) {
         const fileReader = new FileReader();
@@ -54,6 +61,10 @@ export default {
         image: this.imageFile,
         id: this.game.id
       };
+      if (this.delete) {
+        this.deleteGame(this.game.id);
+        return;
+      }
       if (game.name) {
         this.updateGameInfo(game);
       }

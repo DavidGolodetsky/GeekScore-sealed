@@ -2,9 +2,12 @@
   <div>
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn class="mx-2" outlined fab dark v-on="on" color="primary">
-          <v-icon dark>mdi-{{ activator }}</v-icon>
-        </v-btn>
+        <div>
+          <span class="button-text" v-if="buttonText">{{ buttonText }}</span>
+          <v-btn class="mx-2" outlined fab dark v-on="on" color="primary">
+            <v-icon dark>mdi-{{ activator }}</v-icon>
+          </v-btn>
+        </div>
       </template>
       <v-card>
         <v-card-title>
@@ -41,6 +44,9 @@ export default {
     submitLogic: {
       type: Function,
       required: true
+    },
+    buttonText: {
+      type: String
     }
   },
   data() {
@@ -68,3 +74,12 @@ export default {
   }
 };
 </script>
+
+
+<style scoped lang="scss">
+.button-text {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: $primary;
+}
+</style>

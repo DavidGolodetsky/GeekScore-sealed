@@ -21,6 +21,10 @@ export default {
             if (payload.imageUrl) {
                 game.imageUrl = payload.imageUrl
             }
+        },
+        DELETE_GAME(state, payload) {
+            state;
+            payload
         }
     },
     actions: {
@@ -122,6 +126,11 @@ export default {
                     commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
+        },
+        deleteGame({ commit }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            commit("DELETE_GAME", payload)
+            commit('SET_LOADING', false, { root: true })
         }
     },
     getters: {

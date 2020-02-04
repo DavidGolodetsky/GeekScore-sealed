@@ -1,6 +1,6 @@
 <template>
   <div>
-    <team-add-dialog class="d-flex justify-end" :game="game" />
+    <game-edit-dialog class="d-flex justify-end" :game="game" />
     <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
     <v-img
       class="mx-auto mb-8"
@@ -8,34 +8,35 @@
       :src="game.imageUrl"
       width="400"
     />
-    <template v-if="teams">
-      <div v-for="(team, i) in teams" :key="i">
-        <v-lazy
-          :options="{
+    <team-add-dialog class="d-flex justify-end" :game="game" />
+    <div v-for="(team, i) in teams" :key="i">
+      <v-lazy
+        :options="{
             threshold: 0.5
           }"
-          min-height="200"
-          transition="fade-transition"
-        >
-          <transition-group appear name="fade-down">
-            <team-table :key="team.id" :team-id="team.id" />
-          </transition-group>
-        </v-lazy>
-      </div>
-    </template>
-    <the-go-back />
+        min-height="200"
+        transition="fade-transition"
+      >
+        <transition-group appear name="fade-down">
+          <team-table :key="team.id" :team-id="team.id" />
+        </transition-group>
+      </v-lazy>
+    </div>
+    <the-go-back v-if="teams.length" />
   </div>
 </template>
 
 <script>
 import TeamTable from "@/components/TeamTable";
 import TeamAddDialog from "@/components/TeamAddDialog";
+import GameEditDialog from "@/components/GameEditDialog";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     TeamTable,
-    TeamAddDialog
+    TeamAddDialog,
+    GameEditDialog
   },
   props: {
     gameId: {
