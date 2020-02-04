@@ -18,11 +18,7 @@
         :items="matches"
         class="elevation-1 mb-6"
       ></v-data-table>
-      <v-row justify="center">
-        <v-col cols="1">
-          <match-add-dialog v-bind="propsToMatch" />
-        </v-col>
-      </v-row>
+      <match-add-dialog class="d-flex justify-center" v-bind="propsToMatch" />
     </v-container>
   </v-card>
 </template>
