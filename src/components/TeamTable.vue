@@ -11,11 +11,11 @@
           v-if="showTable"
           :headers="headers"
           dark
-          :items="matches"
+          :items="rounds"
           class="elevation-1 mb-6"
         >
           <template v-slot:item.action="{ item }">
-            <match-edit-dialog :item="item" v-bind="propsToMatch" />
+            <round-edit-dialog :item="item" v-bind="propsToRound" />
           </template>
         </v-data-table>
         <v-card-actions>
@@ -26,7 +26,7 @@
             <span class="button-text">Statistics</span>
           </router-link>
           <v-spacer></v-spacer>
-          <match-add-dialog v-bind="propsToMatch" />
+          <round-add-dialog v-bind="propsToRound" />
         </v-card-actions>
       </v-container>
     </v-card>
@@ -34,16 +34,16 @@
 </template>
 
 <script>
-import MatchAddDialog from "@/components/MatchAddDialog";
+import RoundAddDialog from "@/components/RoundAddDialog";
 import TeamEditDialog from "@/components/TeamEditDialog";
-import MatchEditDialog from "@/components/MatchEditDialog";
+import RoundEditDialog from "@/components/RoundEditDialog";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    MatchAddDialog,
+    RoundAddDialog,
     TeamEditDialog,
-    MatchEditDialog
+    RoundEditDialog
   },
   props: {
     teamId: {
@@ -57,27 +57,27 @@ export default {
   computed: {
     ...mapGetters("teams", {
       getTeam: "team",
-      getMatches: "matches"
+      getRounds: "rounds"
     }),
     team() {
       return this.getTeam(this.teamId);
     },
     showTable() {
-      if (this.matches && this.matches.length) {
+      if (this.rounds && this.rounds.length) {
         return true;
       }
       return false;
     },
-    matches() {
-      const matches = this.getMatches(this.teamId);
-      if (matches) {
-        return Object.keys(matches).map(key => {
-          return matches[key];
+    rounds() {
+      const rounds = this.getRounds(this.teamId);
+      if (rounds) {
+        return Object.keys(rounds).map(key => {
+          return rounds[key];
         });
       }
       return null;
     },
-    propsToMatch() {
+    propsToRound() {
       return {
         players: this.team.players,
         teamId: this.team.id,

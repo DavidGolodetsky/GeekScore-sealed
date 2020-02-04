@@ -1,5 +1,5 @@
 <template>
-  <the-dialog activator="pencil" header="Edit match info" simple :submitLogic="onSubmit">
+  <the-dialog activator="pencil" header="Edit round info" simple :submitLogic="onSubmit">
     <v-row justify="center" class="mb-4">
       <v-radio-group :rules="fieldRules" row v-model="winner">
         <v-radio v-for="(player, i) in players" :key="i" :label="player.name" :value="player.name" />
@@ -42,15 +42,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions("teams", ["createMatch"]),
+    ...mapActions("teams", ["createRound"]),
     onSubmit() {
-      const match = {
+      const round = {
         [this.winner.toLowerCase()]: "VICTORY",
         date: this.date,
         gameId: this.gameId,
         teamId: this.teamId
       };
-      this.createMatch(match);
+      this.createRound(round);
     }
   }
 };

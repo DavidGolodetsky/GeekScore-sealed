@@ -19,7 +19,7 @@ export default {
           img: "7wonders"
         },
         {
-          text: "Store your matches",
+          text: "Store your rounds",
           img: "star-realms"
         },
         {

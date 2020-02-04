@@ -23,10 +23,10 @@ export default {
         },
         CREATE_MATCH(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId);
-            const match = {
+            const round = {
                 [payload.id]: payload
             }
-            team.matches = { ...team.matches, ...match }
+            team.rounds = { ...team.rounds, ...round }
         },
     },
     actions: {
@@ -46,7 +46,7 @@ export default {
                             gameId: obj[key].gameId,
                             gameName: obj[key].gameName,
                             players: obj[key].players,
-                            matches: obj[key].matches,
+                            rounds: obj[key].rounds,
                             name: obj[key].name,
                         })
                     }
@@ -67,7 +67,7 @@ export default {
                 .push(payload)
                 .then((data) => {
                     const key = data.key;
-                    commit("CREATE_TEAM", { ...payload, id: key, matches: {} })
+                    commit("CREATE_TEAM", { ...payload, id: key, rounds: {} })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -105,14 +105,14 @@ export default {
                 })
 
         },
-        createMatch({ commit, rootState }, payload) {
+        createRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             fb.database().ref('users').child(user).child('games')
                 .child(payload.gameId)
                 .child('teams')
                 .child(payload.teamId)
-                .child('matches')
+                .child('rounds')
                 .push(payload)
                 .then((data) => {
                     const key = data.key;
@@ -140,10 +140,10 @@ export default {
                 })
             }
         },
-        matches(state) {
+        rounds(state) {
             return (teamId) => {
                 const team = state.items.find((item) => item.id === teamId)
-                return team.matches ? team.matches : null
+                return team.rounds ? team.rounds : null
             }
         }
     }

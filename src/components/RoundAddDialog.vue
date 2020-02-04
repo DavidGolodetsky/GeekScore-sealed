@@ -1,8 +1,8 @@
 <template>
   <the-dialog
     activator="plus"
-    header="Add new match"
-    buttonText="New match"
+    header="Add new round"
+    buttonText="New round"
     :submitLogic="onSubmit"
   >
     <v-row justify="center" class="mb-4">
@@ -41,15 +41,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions("teams", ["createMatch"]),
+    ...mapActions("teams", ["createRound"]),
     onSubmit() {
-      const match = {
+      const round = {
         [this.winner.toLowerCase()]: "VICTORY",
         date: this.date,
         gameId: this.gameId,
         teamId: this.teamId
       };
-      this.createMatch(match);
+      this.createRound(round);
     }
   }
 };
