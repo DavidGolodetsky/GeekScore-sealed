@@ -4,7 +4,7 @@
     <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
     <v-img
       class="mx-auto mb-8"
-      lazy-src="https://picsum.photos/id/307/5760/3840"
+      lazy-src="https://picsum.photos/id/1041/600/400"
       :src="game.imageUrl"
       width="400"
     />

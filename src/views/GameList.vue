@@ -20,7 +20,7 @@
                 <v-card>
                   <v-img
                     class="white--text align-end game-card"
-                    lazy-src="https://picsum.photos/id/307/5760/3840"
+                    lazy-src="https://picsum.photos/id/1041/500/350"
                     height="350"
                     :src="game.imageUrl"
                   >

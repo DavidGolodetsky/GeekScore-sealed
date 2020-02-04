@@ -130,8 +130,14 @@ export default {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             fb.database().ref('users').child(user).child('games').child(payload).remove()
-            commit("DELETE_GAME", payload)
-            commit('SET_LOADING', false, { root: true })
+                .then(() => {
+                    commit("DELETE_GAME", payload)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
         }
     },
     getters: {

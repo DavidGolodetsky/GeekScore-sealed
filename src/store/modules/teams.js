@@ -18,6 +18,9 @@ export default {
                 team.name = payload.name
             }
         },
+        DELETE_TEAM(state, payload) {
+            state = state.items.filter(team => team.id !== payload.teamId)
+        },
         CREATE_MATCH(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId);
             const match = {
@@ -87,6 +90,20 @@ export default {
                     commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
+        },
+        deleteTeam({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).remove()
+                .then(() => {
+                    commit("DELETE_TEAM", payload)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+
         },
         createMatch({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })

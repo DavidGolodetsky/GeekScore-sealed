@@ -1,6 +1,7 @@
 <template>
   <the-dialog :activator="'pencil'" :header="'Edit team info'" :submitLogic="onSubmit">
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+    <v-switch v-model="isDelete" label="Delete game" color="red" value="delete" hide-details></v-switch>
   </the-dialog>
 </template>
 
@@ -25,6 +26,7 @@ export default {
   data() {
     return {
       name: this.teamName,
+      isDelete: false,
       fieldRules: [
         v => !!v || "Field is required",
         v => v.length <= 60 || "Field is too long"
@@ -32,14 +34,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions("teams", ["updateTeam"]),
+    ...mapActions("teams", ["updateTeam", "deleteTeam"]),
     onSubmit() {
       const team = {
         teamId: this.teamId,
         gameId: this.gameId,
         name: this.name
       };
-      this.updateTeam(team);
+      if (this.isDelete) {
+        this.deleteTeam(team);
+        this.$router.push({
+          name: "game",
+          params: { gameId: this.gameId }
+        });
+      } else {
+        this.updateTeam(team);
+      }
     }
   }
 };
