@@ -1,24 +1,28 @@
 <template>
   <v-card raised class="team-teable" v-if="team">
     <v-container>
-      <v-card-title>
+      <v-card-actions class="upper-row">
         <h3 class="headline">{{ team.name }}</h3>
         <v-spacer />
-        <router-link class="mx-auto" :to="{ name: 'statistic', params: { team: team } }">
-          <v-btn outlined fab class="mx-2" dark color="primary">
-            <v-icon dark>mdi-chart-bar</v-icon>
-          </v-btn>
-        </router-link>
         <team-edit-dialog v-bind="propsToTeam" />
-      </v-card-title>
+      </v-card-actions>
       <v-data-table
-        v-if="matches"
+        v-if="showTable"
         :headers="headers"
         dark
         :items="matches"
         class="elevation-1 mb-6"
       ></v-data-table>
-      <match-add-dialog class="d-flex justify-center" v-bind="propsToMatch" />
+      <v-card-actions>
+        <router-link v-if="showTable" :to="{ name: 'statistic', params: { team: team } }">
+          <v-btn outlined fab class="mx-2" dark color="primary">
+            <v-icon dark>mdi-chart-bar</v-icon>
+          </v-btn>
+          <span class="button-text">Statistics</span>
+        </router-link>
+        <v-spacer></v-spacer>
+        <match-add-dialog v-bind="propsToMatch" />
+      </v-card-actions>
     </v-container>
   </v-card>
 </template>
@@ -49,6 +53,12 @@ export default {
     }),
     team() {
       return this.getTeam(this.teamId);
+    },
+    showTable() {
+      if (this.matches && this.matches.length) {
+        return true;
+      }
+      return false;
     },
     matches() {
       const matches = this.getMatches(this.teamId);
@@ -88,5 +98,16 @@ export default {
 <style lang="scss" scoped>
 .team-teable {
   margin: 40px 0;
+}
+.headline {
+  color: $primary;
+}
+.button-text {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: $primary;
+}
+.upper-row {
+  margin-bottom: 40px;
 }
 </style>

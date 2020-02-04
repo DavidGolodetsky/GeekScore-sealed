@@ -1,5 +1,10 @@
 <template>
-  <the-dialog activator="pencil" header="Edit team info" :submitLogic="onSubmit">
+  <the-dialog
+    activator="pencil"
+    header="Edit team info"
+    buttonText="Edit team"
+    :submitLogic="onSubmit"
+  >
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-switch v-model="isDelete" label="Delete team" color="red" value="delete" hide-details></v-switch>
   </the-dialog>
