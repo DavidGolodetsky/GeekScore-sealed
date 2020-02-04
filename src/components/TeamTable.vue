@@ -1,41 +1,49 @@
 <template>
-  <v-card raised class="team-teable" v-if="team">
-    <v-container>
-      <v-card-actions class="upper-row">
-        <h3 class="headline">{{ team.name }}</h3>
-        <v-spacer />
-        <team-edit-dialog v-bind="propsToTeam" />
-      </v-card-actions>
-      <v-data-table
-        v-if="showTable"
-        :headers="headers"
-        dark
-        :items="matches"
-        class="elevation-1 mb-6"
-      ></v-data-table>
-      <v-card-actions>
-        <router-link v-if="showTable" :to="{ name: 'statistic', params: { team: team } }">
-          <v-btn outlined fab class="mx-2" dark color="primary">
-            <v-icon dark>mdi-chart-bar</v-icon>
-          </v-btn>
-          <span class="button-text">Statistics</span>
-        </router-link>
-        <v-spacer></v-spacer>
-        <match-add-dialog v-bind="propsToMatch" />
-      </v-card-actions>
-    </v-container>
-  </v-card>
+  <div>
+    <v-card raised class="team-teable" v-if="team">
+      <v-container>
+        <v-card-actions class="upper-row">
+          <h3 class="headline">{{ team.name }}</h3>
+          <v-spacer />
+          <team-edit-dialog v-bind="propsToTeam" />
+        </v-card-actions>
+        <v-data-table
+          v-if="showTable"
+          :headers="headers"
+          dark
+          :items="matches"
+          class="elevation-1 mb-6"
+        >
+          <template v-slot:item.action="{ item }">
+            <match-edit-dialog :item="item" v-bind="propsToMatch" />
+          </template>
+        </v-data-table>
+        <v-card-actions>
+          <router-link v-if="showTable" :to="{ name: 'statistic', params: { team: team } }">
+            <v-btn fab class="mx-2" dark color="primary">
+              <v-icon dark>mdi-chart-bar</v-icon>
+            </v-btn>
+            <span class="button-text">Statistics</span>
+          </router-link>
+          <v-spacer></v-spacer>
+          <match-add-dialog v-bind="propsToMatch" />
+        </v-card-actions>
+      </v-container>
+    </v-card>
+  </div>
 </template>
 
 <script>
 import MatchAddDialog from "@/components/MatchAddDialog";
 import TeamEditDialog from "@/components/TeamEditDialog";
+import MatchEditDialog from "@/components/MatchEditDialog";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
     MatchAddDialog,
-    TeamEditDialog
+    TeamEditDialog,
+    MatchEditDialog
   },
   props: {
     teamId: {
@@ -88,7 +96,11 @@ export default {
         text: player.name,
         value: player.name.toLowerCase()
       }));
-      headers.push({ text: "Date", value: "date" });
+      const fields = [
+        { text: "Date", value: "date" },
+        { text: "Actions", value: "action", sortable: false }
+      ];
+      headers.push(...fields);
       return headers;
     }
   }

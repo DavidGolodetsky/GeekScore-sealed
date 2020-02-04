@@ -1,6 +1,6 @@
 <template>
   <div class="go-back">
-    <v-btn @click="goBack" outlined fab class="mx-2" dark color="#ec8506">
+    <v-btn @click="goBack" fab class="mx-2" dark color="#ec8506">
       <v-icon dark>mdi-keyboard-backspace</v-icon>
     </v-btn>
     <span>Back</span>

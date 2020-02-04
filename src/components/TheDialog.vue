@@ -4,8 +4,8 @@
       <template v-slot:activator="{ on }">
         <div>
           <span class="button-text" v-if="buttonText">{{ buttonText }}</span>
-          <v-btn class="mx-2" outlined fab dark v-on="on" color="primary">
-            <v-icon dark>mdi-{{ activator }}</v-icon>
+          <v-btn class="mx-2" fab :text="simple" dark v-on="on" color="primary">
+            <v-icon :small="simple" dark>mdi-{{ activator }}</v-icon>
           </v-btn>
         </div>
       </template>
@@ -47,6 +47,9 @@ export default {
     },
     buttonText: {
       type: String
+    },
+    simple: {
+      type: Boolean
     }
   },
   data() {
