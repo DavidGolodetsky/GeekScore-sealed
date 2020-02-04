@@ -14,8 +14,8 @@
       label="Image"
       @change="onFileUpload($event)"
     ></v-file-input>
-    <v-switch v-model="isDelete" label="Delete game" color="red" value="delete" hide-details></v-switch>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
+    <v-switch v-model="isDelete" label="Delete game" color="red" value="delete" hide-details></v-switch>
   </the-dialog>
 </template>
 
@@ -61,8 +61,9 @@ export default {
         image: this.imageFile,
         id: this.game.id
       };
-      if (this.delete) {
+      if (this.isDelete) {
         this.deleteGame(this.game.id);
+        this.$router.push({ name: "games" });
         return;
       }
       if (game.name) {

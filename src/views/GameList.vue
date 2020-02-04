@@ -12,25 +12,24 @@
             transition="fade-transition"
           >
             <transition-group appear name="fade-down">
-              <v-card :key="game.id">
-                <v-img
-                  class="white--text align-end"
-                  lazy-src="https://picsum.photos/id/307/5760/3840"
-                  height="350"
-                  :src="game.imageUrl"
-                >
-                  <div class="title-wrapp">
-                    <v-card-title>{{ game.name }}</v-card-title>
-                  </div>
-                </v-img>
-                <v-card-actions>
-                  <router-link class="mx-auto" :to="{name: 'game', params: {gameId: game.id}}">
-                    <v-btn outlined fab class="mx-2" dark color="primary">
-                      <v-icon dark>mdi-information-variant</v-icon>
-                    </v-btn>
-                  </router-link>
-                </v-card-actions>
-              </v-card>
+              <router-link
+                :key="game.id"
+                class="mx-auto"
+                :to="{name: 'game', params: {gameId: game.id}}"
+              >
+                <v-card>
+                  <v-img
+                    class="white--text align-end game-card"
+                    lazy-src="https://picsum.photos/id/307/5760/3840"
+                    height="350"
+                    :src="game.imageUrl"
+                  >
+                    <div class="title-wrapp">
+                      <v-card-title>{{ game.name }}</v-card-title>
+                    </div>
+                  </v-img>
+                </v-card>
+              </router-link>
             </transition-group>
           </v-lazy>
         </v-col>
@@ -73,5 +72,13 @@ export default {
 <style scoped lang="scss">
 .title-wrapp {
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+.game-card {
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+    box-shadow: 11px 10px 23px -12px rgba(0, 0, 0, 0.75);
+  }
 }
 </style>
