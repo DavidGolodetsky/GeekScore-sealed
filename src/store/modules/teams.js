@@ -21,7 +21,13 @@ export default {
         DELETE_TEAM(state, payload) {
             state.items = state.items.filter(team => team.id !== payload.teamId)
         },
-        CREATE_MATCH(state, payload) {
+        DELETE_ROUND(state, payload) {
+            const team = state.items.find(team => team.id === payload.teamId)
+            delete team.rounds[payload.roundId]
+            state.items = state.items.filter(team => team.id !== payload.teamId)
+            state.items.push(team)
+        },
+        CREATE_ROUND(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId);
             const round = {
                 [payload.id]: payload
@@ -105,6 +111,20 @@ export default {
                 })
 
         },
+        deleteRound({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
+                .then(() => {
+                    commit("DELETE_ROUND", payload)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+
+        },
         createRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
@@ -116,7 +136,7 @@ export default {
                 .push(payload)
                 .then((data) => {
                     const key = data.key;
-                    commit("CREATE_MATCH", { ...payload, id: key })
+                    commit("CREATE_ROUND", { ...payload, id: key })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
