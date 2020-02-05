@@ -5,11 +5,15 @@ export default {
     namespaced: true,
     state: {
         user: null,
+        resettedPassword: false
     },
     mutations: {
         SET_USER(state, payload) {
             state.user = payload
         },
+        RESET_PASSWORD(state) {
+            state.resettedPassword = true
+        }
     },
     actions: {
         logout({ commit }) {
@@ -62,11 +66,28 @@ export default {
         },
         autoSignIn({ commit }, payload) {
             commit('SET_USER', { id: payload.uid })
+        },
+        resetPassword({ commit }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            firebase.auth().sendPasswordResetEmail(payload)
+                .then(() => {
+                    commit('RESET_PASSWORD');
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch(
+                    error => {
+                        commit('SET_ERROR', error, { root: true })
+                        commit('SET_LOADING', false, { root: true })
+                    }
+                )
         }
     },
     getters: {
         user(state) {
             return state.user
+        },
+        resettedPassword(state) {
+            return state.resettedPassword
         },
     }
 }
