@@ -76,6 +76,6 @@ export default {
 
 <style lang="scss">
 .game-title {
-  color: $primary;
+  color: $secondary;
 }
 </style>

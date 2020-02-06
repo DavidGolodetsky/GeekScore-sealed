@@ -27,6 +27,6 @@ export default {
 
 <style scoped lang="scss">
 .app-title {
-  color: $primary;
+  color: $secondary;
 }
 </style>

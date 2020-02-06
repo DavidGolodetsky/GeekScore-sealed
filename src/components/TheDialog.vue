@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on }">
         <div>
           <span class="button-text" v-if="buttonText">{{ buttonText }}</span>
-          <v-btn class="mx-2" fab :text="simple" dark v-on="on" color="primary">
+          <v-btn class="mx-2" fab :text="simple" dark v-on="on" color="secondary">
             <v-icon :small="simple" dark>mdi-{{ activator }}</v-icon>
           </v-btn>
         </div>
@@ -83,6 +83,6 @@ export default {
 .button-text {
   text-transform: uppercase;
   font-size: 12px;
-  color: $primary;
+  color: $secondary;
 }
 </style>

@@ -89,7 +89,7 @@ export default {
 
 <style scoped lang="scss">
 .logo {
-  color: $accent;
+  color: $secondary;
   font-size: 26px;
   font-weight: 600;
   text-shadow: 1px -1px 0px #fff;

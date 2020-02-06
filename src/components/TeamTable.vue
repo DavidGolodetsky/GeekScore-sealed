@@ -20,7 +20,7 @@
         </v-data-table>
         <v-card-actions>
           <router-link v-if="showTable" :to="{ name: 'statistic', params: { team: team } }">
-            <v-btn fab class="mx-2" dark color="primary">
+            <v-btn fab class="mx-2" dark color="secondary">
               <v-icon dark>mdi-chart-bar</v-icon>
             </v-btn>
             <span class="button-text">Statistics</span>
@@ -112,12 +112,12 @@ export default {
   margin: 40px 0;
 }
 .headline {
-  color: $primary;
+  color: $secondary;
 }
 .button-text {
   text-transform: uppercase;
   font-size: 12px;
-  color: $primary;
+  color: $secondary;
 }
 .upper-row {
   margin-bottom: 40px;
