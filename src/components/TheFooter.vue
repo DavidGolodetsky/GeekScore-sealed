@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="mt-4" color="primary lighten-1" padless>
+  <v-footer color="primary lighten-1" padless>
     <v-layout justify-center wrap>
       <v-btn
         v-for="(item, index) in navItems"

@@ -1,5 +1,11 @@
 <template>
-  <v-carousel cycle show-arrows-on-hover v-if="items">
+  <v-carousel
+    class="app-carousel"
+    cycle
+    :show-arrows="isArrows"
+    :height="carouselHeight"
+    v-if="items"
+  >
     <v-carousel-item
       v-for="(item, i) in items"
       :key="i"
@@ -16,6 +22,17 @@ export default {
     items: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    carouselHeight() {
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return 550;
+      }
+      return 400;
+    },
+    isArrows() {
+      return this.$vuetify.breakpoint.mdAndUp;
     }
   }
 };
