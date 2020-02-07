@@ -1,6 +1,6 @@
 <template>
   <the-dialog activator="plus" header="Add new game" :submitLogic="onSubmit">
-    <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+    <v-text-field :rules="fieldRules" prepend-icon="mdi-cards-diamond" label="Name" v-model="name"></v-text-field>
     <v-file-input
       class="mb-2"
       :rules="imageRules"
@@ -27,7 +27,6 @@ export default {
         v => v.length <= 40 || "Field is too long"
       ],
       imageRules: [
-        v => !!v || "Field is required",
         v => (v && v.size < 2000000) || "Image size should be less than 2 MB"
       ]
     };
@@ -48,9 +47,11 @@ export default {
     },
     onSubmit() {
       const game = {
-        name: this.name,
-        image: this.imageFile
+        name: this.name
       };
+      if (this.imageFile) {
+        game.image = this.imageFile;
+      }
       this.createGame(game);
     }
   }

@@ -3,8 +3,16 @@
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on }">
         <div>
-          <v-btn class="mx-2" fab :text="simple" dark v-on="on" color="secondary">
-            <v-icon :small="simple" dark>mdi-{{ activator }}</v-icon>
+          <v-btn
+            class="mx-2 px-0"
+            :small="simple"
+            fab
+            :text="simple"
+            dark
+            v-on="on"
+            color="secondary"
+          >
+            <v-icon dark>mdi-{{ activator }}</v-icon>
           </v-btn>
         </div>
       </template>

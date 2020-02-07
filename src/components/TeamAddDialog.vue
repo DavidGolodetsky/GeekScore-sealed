@@ -1,7 +1,8 @@
 <template>
   <the-dialog activator="plus" header="Add new team" button-text="New team" :submitLogic="onSubmit">
-    <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+    <v-text-field :rules="fieldRules" prepend-icon="mdi-account-group" label="Name" v-model="name"></v-text-field>
     <v-select
+      prepend-icon="mdi-account-multiple-plus"
       :rules="selectRules"
       :items="numberOfPlayers"
       @change="setPlayers"
@@ -11,6 +12,7 @@
       <v-text-field
         v-for="(player, i) in players"
         v-model="player.name"
+        prepend-icon="mdi-account"
         :rules="fieldRules"
         :key="i"
         :label="`Player #${i + 1}`"

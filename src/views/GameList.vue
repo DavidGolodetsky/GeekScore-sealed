@@ -1,7 +1,10 @@
 <template>
   <div v-if="games">
     <div class="d-flex justify-space-between align-center mb-6">
-      <h1 class="app-headline">Games</h1>
+      <div class="d-flex">
+        <v-icon color="secondary" class="mr-2">mdi-cards</v-icon>
+        <h1 class="app-headline">Games</h1>
+      </div>
       <game-add-dialog class="d-flex justify-end my-2" />
     </div>
     <div>

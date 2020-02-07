@@ -1,17 +1,20 @@
 <template>
   <div>
     <v-card class="mb-10">
-      <v-img class="white--text align-end game-card" height="400" :src="game.imageUrl">
+      <v-img class="white--text align-end game-card" height="300" :src="game.imageUrl">
         <div class="title-wrap">
           <v-card-title class="d-flex align-center justify-space-between">
-            <p>{{ game.name }}</p>
+            <div>{{ game.name }}</div>
             <game-edit-dialog :game="game" />
           </v-card-title>
         </div>
       </v-img>
     </v-card>
     <div class="d-flex align-center justify-space-between">
-      <h1 class="app-headline">Teams</h1>
+      <div class="d-flex">
+        <v-icon color="secondary" class="mr-2">mdi-account-group</v-icon>
+        <h1 class="app-headline">Teams</h1>
+      </div>
       <team-add-dialog class="d-flex justify-end my-2" :game="game" />
     </div>
     <div v-for="(team, i) in teams" :key="i">

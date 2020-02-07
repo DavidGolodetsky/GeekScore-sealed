@@ -19,12 +19,6 @@
           </template>
         </v-data-table>
         <v-card-actions>
-          <router-link v-if="showTable" :to="{ name: 'statistic', params: { team: team } }">
-            <v-btn fab class="mx-2" dark color="secondary">
-              <v-icon dark>mdi-chart-bar</v-icon>
-            </v-btn>
-          </router-link>
-          <v-spacer></v-spacer>
           <round-add-dialog v-bind="propsToRound" />
         </v-card-actions>
       </v-container>
