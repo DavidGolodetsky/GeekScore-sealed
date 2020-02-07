@@ -1,13 +1,17 @@
 <template>
-  <div class="go-back">
-    <v-btn @click="goBack" fab class="mx-2" dark color="#ec8506">
-      <v-icon dark>mdi-keyboard-backspace</v-icon>
-    </v-btn>
+  <div @click="goBack" class="d-flex align-center go-back">
+    <v-icon class="mr-2" color="secondary" dark>mdi-arrow-left</v-icon>
+    <span v-if="backTitle" class="back-title">{{ backTitle }}</span>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  computed: {
+    ...mapGetters(["backTitle"])
+  },
   methods: {
     goBack() {
       return this.$router.go(-1);
@@ -18,8 +22,11 @@ export default {
 
 <style scoped lang="scss">
 .go-back {
-  color: $accent;
-  text-transform: uppercase;
-  font-size: 12px;
+  cursor: pointer;
+}
+.back-title {
+  color: $secondary;
+  font-size: 22px;
+  font-weight: 600;
 }
 </style>

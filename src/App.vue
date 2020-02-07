@@ -29,7 +29,15 @@ export default {
 
   data: () => ({}),
   computed: {
-    ...mapGetters(["loading"])
+    ...mapGetters(["loading"]),
+    ...mapGetters("user", ["user"])
+  },
+  watch: {
+    user(value) {
+      if (!value) {
+        this.$router.push("/");
+      }
+    }
   }
 };
 </script>

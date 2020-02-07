@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-head title="Teams" icon="account-group" component="team-add-dialog" />
+    <the-head title="Teams" icon="account-group" :props="{game}" component="team-add-dialog" />
     <div v-for="(team, i) in teams" :key="i">
       <v-lazy
         :options="{
@@ -50,15 +50,12 @@ export default {
   mounted() {
     this.loadTeams(this.gameId);
   },
-  methods: {
-    ...mapActions("teams", ["loadTeams"])
+  beforeUpdate() {
+    this.backTitle(this.game.name);
   },
-  watch: {
-    user(value) {
-      if (value !== null && value !== undefined) {
-        this.$router.push("/");
-      }
-    }
+  methods: {
+    ...mapActions("teams", ["loadTeams"]),
+    ...mapActions(["backTitle"])
   }
 };
 </script>

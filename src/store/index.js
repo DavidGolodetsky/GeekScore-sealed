@@ -14,8 +14,9 @@ export default new Vuex.Store({
     user
   },
   state: {
-    loading: false,
     error: null,
+    backTitle: null,
+    loading: false,
   },
   mutations: {
     SET_LOADING(state, payload) {
@@ -26,11 +27,23 @@ export default new Vuex.Store({
     },
     CLEAR_ERROR(state) {
       state.error = null
-    }
+    },
+    CLEAR_BACK_TITLE(state) {
+      state.backTitle = null
+    },
+    BACK_TITLE(state, payload) {
+      state.backTitle = payload
+    },
   },
   actions: {
     clearError({ commit }) {
       commit('CLEAR_ERROR')
+    },
+    backTitle({ commit }, payload) {
+      commit('BACK_TITLE', payload)
+    },
+    clearBackTitle({ commit }) {
+      commit('CLEAR_BACK_TITLE')
     }
   },
   getters: {
@@ -39,6 +52,9 @@ export default new Vuex.Store({
     },
     error(state) {
       return state.error
+    },
+    backTitle(state) {
+      return state.backTitle
     }
   }
 })

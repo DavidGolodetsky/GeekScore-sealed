@@ -2,7 +2,8 @@
   <div>
     <v-app-bar app color="primary" dense dark>
       <v-container class="d-flex align-center px-0 space-between">
-        <router-link class="d-flex align-center" :to="{name: 'home'}">
+        <the-go-back v-if="backTitle" />
+        <router-link v-else class="d-flex align-center" :to="{name: 'home'}">
           <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
           <span class="logo">GeekScore</span>
         </router-link>
@@ -56,6 +57,7 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user"]),
+    ...mapGetters(["backTitle"]),
     navItems() {
       if (this.user) {
         return [

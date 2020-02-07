@@ -23,7 +23,7 @@ export default {
       if (this.$vuetify.breakpoint.mdAndUp) {
         return 550;
       }
-      return 400;
+      return 450;
     },
     isArrows() {
       return this.$vuetify.breakpoint.mdAndUp;

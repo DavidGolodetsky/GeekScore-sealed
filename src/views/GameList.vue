@@ -15,7 +15,7 @@
               <v-card :key="game.id" raised class="mx-auto">
                 <v-img
                   class="white--text align-end game-card"
-                  lazy-src="https://picsum.photos/id/1041/500/350"
+                  lazy-src="#939123"
                   height="350"
                   :src="game.imageUrl"
                 >
@@ -57,16 +57,11 @@ export default {
   },
   created() {
     this.loadGames();
+    this.clearBackTitle();
   },
   methods: {
-    ...mapActions("games", ["loadGames"])
-  },
-  watch: {
-    user(value) {
-      if (value !== null && value !== undefined) {
-        this.$router.push("/");
-      }
-    }
+    ...mapActions("games", ["loadGames"]),
+    ...mapActions(["clearBackTitle"])
   }
 };
 </script>
