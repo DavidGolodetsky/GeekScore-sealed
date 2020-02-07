@@ -1,6 +1,9 @@
 <template>
   <div v-if="games">
-    <game-add-dialog class="d-flex justify-end my-2" />
+    <div class="d-flex justify-space-between align-center mb-6">
+      <h1 class="app-headline">Games</h1>
+      <game-add-dialog class="d-flex justify-end my-2" />
+    </div>
     <div>
       <v-row>
         <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">
@@ -17,14 +20,14 @@
                 class="mx-auto"
                 :to="{name: 'game', params: {gameId: game.id}}"
               >
-                <v-card>
+                <v-card raised>
                   <v-img
                     class="white--text align-end game-card"
                     lazy-src="https://picsum.photos/id/1041/500/350"
                     height="350"
                     :src="game.imageUrl"
                   >
-                    <div class="title-wrapp">
+                    <div class="title-wrap">
                       <v-card-title>{{ game.name }}</v-card-title>
                     </div>
                   </v-img>
@@ -70,7 +73,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.title-wrapp {
+.title-wrap {
   background-color: rgba(0, 0, 0, 0.7);
 }
 

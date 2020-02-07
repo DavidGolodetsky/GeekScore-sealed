@@ -3,7 +3,7 @@
     <v-card raised class="team-teable" v-if="team">
       <v-container>
         <v-card-actions class="upper-row">
-          <h3 class="headline">{{ team.name }}</h3>
+          <h3 class="app-headline">{{ team.name }}</h3>
           <v-spacer />
           <team-edit-dialog v-bind="propsToTeam" />
         </v-card-actions>
@@ -109,9 +109,6 @@ export default {
 <style lang="scss" scoped>
 .team-teable {
   margin: 40px 0;
-}
-.headline {
-  color: $secondary;
 }
 .button-text {
   text-transform: uppercase;

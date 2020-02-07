@@ -1,14 +1,19 @@
 <template>
   <div>
-    <game-edit-dialog class="d-flex justify-end" :game="game" />
-    <h1 class="d-flex justify-center mb-4 game-title">{{ game.name }}</h1>
-    <v-img
-      class="mx-auto mb-8"
-      lazy-src="https://picsum.photos/id/1041/600/400"
-      :src="game.imageUrl"
-      width="400"
-    />
-    <team-add-dialog class="d-flex justify-end my-2" :game="game" />
+    <v-card class="mb-10">
+      <v-img class="white--text align-end game-card" height="400" :src="game.imageUrl">
+        <div class="title-wrap">
+          <v-card-title class="d-flex justify-space-between">
+            <p>{{ game.name }}</p>
+            <game-edit-dialog :game="game" />
+          </v-card-title>
+        </div>
+      </v-img>
+    </v-card>
+    <div class="d-flex align-center justify-space-between">
+      <h1 class="app-headline">Teams</h1>
+      <team-add-dialog class="d-flex justify-end my-2" :game="game" />
+    </div>
     <div v-for="(team, i) in teams" :key="i">
       <v-lazy
         :options="{
@@ -74,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss">
-.game-title {
-  color: $secondary;
+.title-wrap {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 </style>

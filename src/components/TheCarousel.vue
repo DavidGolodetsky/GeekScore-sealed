@@ -1,11 +1,5 @@
 <template>
-  <v-carousel
-    class="app-carousel"
-    cycle
-    :show-arrows="isArrows"
-    :height="carouselHeight"
-    v-if="items"
-  >
+  <v-carousel cycle :show-arrows="isArrows" :height="carouselHeight" v-if="items">
     <v-carousel-item
       v-for="(item, i) in items"
       :key="i"

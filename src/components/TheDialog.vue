@@ -10,7 +10,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">{{ header }}</span>
+          <h3 class="app-headline">{{ header }}</h3>
         </v-card-title>
         <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
           <v-card-text>
