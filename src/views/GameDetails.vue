@@ -3,7 +3,7 @@
     <v-card class="mb-10">
       <v-img class="white--text align-end game-card" height="400" :src="game.imageUrl">
         <div class="title-wrap">
-          <v-card-title class="d-flex justify-space-between">
+          <v-card-title class="d-flex align-center justify-space-between">
             <p>{{ game.name }}</p>
             <game-edit-dialog :game="game" />
           </v-card-title>
