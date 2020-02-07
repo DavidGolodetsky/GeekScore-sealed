@@ -3,7 +3,6 @@
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on }">
         <div>
-          <span class="button-text" v-if="buttonText">{{ buttonText }}</span>
           <v-btn class="mx-2" fab :text="simple" dark v-on="on" color="secondary">
             <v-icon :small="simple" dark>mdi-{{ activator }}</v-icon>
           </v-btn>
@@ -44,9 +43,6 @@ export default {
     submitLogic: {
       type: Function,
       required: true
-    },
-    buttonText: {
-      type: String
     },
     simple: {
       type: Boolean
