@@ -1,12 +1,12 @@
 <template>
   <div>
-    <the-title title="Teams" icon="account-group" :props="{game}" component="team-add-dialog" />
+    <the-title title="Teams" icon="account-group" :props="{gameId}" component="team-add-dialog" />
     <cards-list v-if="teams.length" :items="teams">
       <template #title="{ item }">
-        <!-- <router-link
-          :to="{name: 'game', params: {gameId: item.id}}"
+        <router-link
+          :to="{name: 'team', params: {teamId: item.id}}"
           class="card-list-name"
-        >{{ item.name }}</router-link>-->
+        >{{ item.name }}</router-link>
         <team-edit-dialog :team="item" />
       </template>
     </cards-list>
@@ -35,13 +35,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("games", { getGame: "game" }),
-    ...mapGetters("teams", ["teams"]),
-    ...mapGetters("user", ["user"]),
-    // TODO: do I need game?
-    game() {
-      return this.getGame(this.gameId);
-    }
+    ...mapGetters("teams", ["teams"])
   },
   created() {
     this.setTeams(this.gameId);

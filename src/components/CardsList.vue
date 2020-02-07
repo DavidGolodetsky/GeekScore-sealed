@@ -9,7 +9,7 @@
         transition="fade-transition"
       >
         <transition-group appear name="fade-down">
-          <v-card :key="item.name" raised class="mx-auto">
+          <v-card :key="item.id" raised class="mx-auto">
             <v-img class="white--text align-end item-card" height="350" :src="item.imageUrl">
               <div class="title-wrap">
                 <v-card-title class="d-flex align-center justify-space-between">

@@ -10,16 +10,8 @@ import { mapActions } from "vuex";
 
 export default {
   props: {
-    teamId: {
-      type: String,
-      required: true
-    },
-    gameId: {
-      type: String,
-      required: true
-    },
-    teamName: {
-      type: String,
+    team: {
+      type: Object,
       required: true
     }
   },
@@ -37,9 +29,9 @@ export default {
     ...mapActions("teams", ["updateTeam", "deleteTeam"]),
     onSubmit() {
       const team = {
-        teamId: this.teamId,
-        gameId: this.gameId,
-        name: this.name
+        teamId: this.team.id,
+        gameId: this.team.gameId,
+        name: this.team.name
       };
       if (this.isDelete) {
         this.deleteTeam(team);

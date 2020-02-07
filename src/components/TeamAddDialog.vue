@@ -26,8 +26,8 @@ import { mapActions } from "vuex";
 
 export default {
   props: {
-    game: {
-      type: Object,
+    gameId: {
+      type: String,
       required: true
     }
   },
@@ -54,8 +54,7 @@ export default {
     },
     onSubmit() {
       const team = {
-        gameName: this.game.name,
-        gameId: this.game.id,
+        gameId: this.gameId,
         name: this.name,
         players: this.players
       };

@@ -24,6 +24,7 @@ const routes = [
     props: true,
     component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails.vue'),
     beforeEnter: (to, from, next) => {
+      // TODO:rewrite with game getter, same for team
       const isGame = store.getters['games/games'].find(game => game.id === to.params.gameId);
       if (isGame) {
         next()
@@ -31,6 +32,13 @@ const routes = [
         next({ name: "NotFound" })
       }
     },
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/team/:teamId',
+    name: 'team',
+    props: true,
+    component: () => import(/* webpackChunkName: "team" */ '../views/TeamDetails.vue'),
     meta: { requiresAuth: true },
   },
   {

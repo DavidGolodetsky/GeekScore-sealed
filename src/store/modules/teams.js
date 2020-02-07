@@ -7,7 +7,7 @@ export default {
     },
     mutations: {
         SET_TEAMS(state, payload) {
-            state.teams.push(payload)
+            state.teams = payload
         },
         CREATE_TEAM(state, payload) {
             state.teams.push(payload)
@@ -39,7 +39,13 @@ export default {
     actions: {
         setTeams({ commit, rootGetters }, payload) {
             const game = rootGetters['games/game'](payload)
-            if (game.teams) commit("SET_TEAMS", game.teams)
+            if (game.teams) {
+                const teams = game.teams
+                const filteredTeams = Object.keys(teams).map(key => {
+                    return { ...teams[key], id: key }
+                })
+                commit("SET_TEAMS", filteredTeams)
+            }
         },
         createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
