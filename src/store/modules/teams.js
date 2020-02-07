@@ -22,10 +22,11 @@ export default {
             state.items = state.items.filter(team => team.id !== payload.teamId)
         },
         DELETE_ROUND(state, payload) {
-            const team = state.items.find(team => team.id === payload.teamId)
-            delete team.rounds[payload.roundId]
-            state.items = state.items.filter(team => team.id !== payload.teamId)
-            state.items.push(team)
+            state.items = state.items.map(team => {
+                const round = team.rounds[payload.roundId];
+                if (round) delete team.rounds[payload.roundId];
+                return { ...team }
+            })
         },
         CREATE_ROUND(state, payload) {
             const team = state.items.find((item) => item.id === payload.teamId);
