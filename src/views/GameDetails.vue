@@ -22,7 +22,6 @@
         </transition-group>
       </v-lazy>
     </div>
-    <the-go-back v-if="teams.length" />
   </div>
 </template>
 

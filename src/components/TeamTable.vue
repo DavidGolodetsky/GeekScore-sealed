@@ -23,7 +23,6 @@
             <v-btn fab class="mx-2" dark color="secondary">
               <v-icon dark>mdi-chart-bar</v-icon>
             </v-btn>
-            <span class="button-text">Statistics</span>
           </router-link>
           <v-spacer></v-spacer>
           <round-add-dialog v-bind="propsToRound" />
