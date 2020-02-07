@@ -4,17 +4,17 @@ import fb from "@/fb";
 export default {
     namespaced: true,
     state: {
-        items: [],
+        games: [],
     },
     mutations: {
         SET_LOADED_GAMES(state, payload) {
-            state.items = payload
+            state.games = payload
         },
         CREATE_GAME(state, payload) {
-            state.items.push(payload)
+            state.games.push(payload)
         },
         UPDATE_GAME(state, payload) {
-            const game = state.items.find(game => game.id === payload.id)
+            const game = state.games.find(game => game.id === payload.id)
             if (payload.name) {
                 game.name = payload.name
             }
@@ -23,7 +23,7 @@ export default {
             }
         },
         DELETE_GAME(state, payload) {
-            state.items = state.items.filter(game => game.id !== payload)
+            state.games = state.games.filter(game => game.id !== payload)
         }
     },
     actions: {
@@ -33,16 +33,17 @@ export default {
             if (user) {
                 fb.database().ref('users').child(user).child('games').once('value')
                     .then((data) => {
-                        const items = []
+                        const games = []
                         const obj = data.val()
                         for (let key in obj) {
-                            items.push({
+                            games.push({
                                 id: key,
                                 name: obj[key].name,
-                                imageUrl: obj[key].imageUrl
+                                imageUrl: obj[key].imageUrl,
+                                teams: obj[key].teams,
                             })
                         }
-                        commit('SET_LOADED_GAMES', items)
+                        commit('SET_LOADED_GAMES', games)
                         commit('SET_LOADING', false, { root: true })
                     })
                     .catch((e) => {
@@ -142,12 +143,12 @@ export default {
     },
     getters: {
         games(state) {
-            return state.items
+            return state.games
         },
         game(state) {
             return (gameId) => {
-                return state.items.find((item) => {
-                    return item.id === gameId
+                return state.games.find((game) => {
+                    return game.id === gameId
                 })
             }
         },

@@ -1,31 +1,29 @@
 <template>
   <div>
     <the-title title="Teams" icon="account-group" :props="{game}" component="team-add-dialog" />
-    <div v-for="(team, i) in teams" :key="i">
-      <v-lazy
-        :options="{
-            threshold: 0.5
-          }"
-        min-height="200"
-        transition="fade-transition"
-      >
-        <transition-group appear name="fade-down">
-          <team-table :key="team.id" :team-id="team.id" />
-        </transition-group>
-      </v-lazy>
-    </div>
+    <cards-list v-if="teams.length" :items="teams">
+      <template #title="{ item }">
+        <!-- <router-link
+          :to="{name: 'game', params: {gameId: item.id}}"
+          class="card-list-name"
+        >{{ item.name }}</router-link>-->
+        <team-edit-dialog :team="item" />
+      </template>
+    </cards-list>
   </div>
 </template>
 
 <script>
-import TeamTable from "@/components/TeamTable";
 import TheTitle from "@/components/TheTitle";
+import TeamEditDialog from "@/components/TeamEditDialog";
+import CardsList from "@/components/CardsList";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    TeamTable,
-    TheTitle
+    TheTitle,
+    TeamEditDialog,
+    CardsList
   },
   props: {
     gameId: {
@@ -38,24 +36,18 @@ export default {
   },
   computed: {
     ...mapGetters("games", { getGame: "game" }),
-    ...mapGetters("teams", { getTeams: "teamsPerGame" }),
+    ...mapGetters("teams", ["teams"]),
     ...mapGetters("user", ["user"]),
+    // TODO: do I need game?
     game() {
       return this.getGame(this.gameId);
-    },
-    teams() {
-      return this.getTeams(this.gameId);
     }
   },
-  mounted() {
-    this.loadTeams(this.gameId);
-  },
-  beforeUpdate() {
-    this.backTitle(this.game.name);
+  created() {
+    this.setTeams(this.gameId);
   },
   methods: {
-    ...mapActions("teams", ["loadTeams"]),
-    ...mapActions(["backTitle"])
+    ...mapActions("teams", ["setTeams"])
   }
 };
 </script>

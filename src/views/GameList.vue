@@ -1,7 +1,7 @@
 <template>
-  <div v-if="games">
+  <div>
     <the-title title="Games" icon="cards" component="game-add-dialog" />
-    <cards-list :items="games">
+    <cards-list v-if="games.length" :items="games">
       <template #title="{ item }">
         <router-link
           :to="{name: 'game', params: {gameId: item.id}}"

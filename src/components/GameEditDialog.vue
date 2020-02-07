@@ -64,7 +64,6 @@ export default {
       };
       if (this.isDelete) {
         this.deleteGame(this.game.id);
-        this.$router.push({ name: "games" });
       } else {
         if (game.name) {
           this.updateGameInfo(game);

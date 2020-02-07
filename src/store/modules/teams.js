@@ -3,33 +3,33 @@ import fb from "@/fb";
 export default {
     namespaced: true,
     state: {
-        items: []
+        teams: []
     },
     mutations: {
-        SET_LOADED_TEAMS(state, payload) {
-            state.items = payload
+        SET_TEAMS(state, payload) {
+            state.teams.push(payload)
         },
         CREATE_TEAM(state, payload) {
-            state.items.push(payload)
+            state.teams.push(payload)
         },
         UPDATE_TEAM(state, payload) {
-            const team = state.items.find(team => team.id === payload.teamId)
+            const team = state.teams.find(team => team.id === payload.teamId)
             if (payload.name) {
                 team.name = payload.name
             }
         },
         DELETE_TEAM(state, payload) {
-            state.items = state.items.filter(team => team.id !== payload.teamId)
+            state.teams = state.teams.filter(team => team.id !== payload.teamId)
         },
         DELETE_ROUND(state, payload) {
-            state.items = state.items.map(team => {
+            state.teams = state.teams.map(team => {
                 const round = team.rounds[payload.roundId];
                 if (round) delete team.rounds[payload.roundId];
                 return { ...team }
             })
         },
         CREATE_ROUND(state, payload) {
-            const team = state.items.find((item) => item.id === payload.teamId);
+            const team = state.teams.find((team) => team.id === payload.teamId);
             const round = {
                 [payload.id]: payload
             }
@@ -37,33 +37,9 @@ export default {
         },
     },
     actions: {
-        loadTeams({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games')
-                .child(payload)
-                .child('teams')
-                .once('value')
-                .then((data) => {
-                    const items = []
-                    const obj = data.val()
-                    for (let key in obj) {
-                        items.push({
-                            id: key,
-                            gameId: obj[key].gameId,
-                            gameName: obj[key].gameName,
-                            players: obj[key].players,
-                            rounds: obj[key].rounds,
-                            name: obj[key].name,
-                        })
-                    }
-                    commit('SET_LOADED_TEAMS', items)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+        setTeams({ commit, rootGetters }, payload) {
+            const game = rootGetters['games/game'](payload)
+            if (game.teams) commit("SET_TEAMS", game.teams)
         },
         createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
@@ -147,23 +123,19 @@ export default {
         },
     },
     getters: {
-        teamsPerGame(state) {
-            return (gameId) => {
-                return state.items.filter((item) => {
-                    return item.gameId === gameId
-                })
-            }
+        teams(state) {
+            return state.teams
         },
         team(state) {
             return (teamId) => {
-                return state.items.find((item) => {
-                    return item.id === teamId
+                return state.teams.find((team) => {
+                    return team.id === teamId
                 })
             }
         },
         rounds(state) {
             return (teamId) => {
-                const team = state.items.find((item) => item.id === teamId)
+                const team = state.teams.find((team) => team.id === teamId)
                 return team.rounds ? team.rounds : null
             }
         }
