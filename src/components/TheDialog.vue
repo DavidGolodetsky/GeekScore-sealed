@@ -3,15 +3,7 @@
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on }">
         <div>
-          <v-btn
-            class="mx-2 px-0"
-            :small="simple"
-            fab
-            :text="simple"
-            dark
-            v-on="on"
-            color="secondary"
-          >
+          <v-btn class="px-0" :small="simple" fab :text="simple" dark v-on="on" :color="color">
             <v-icon dark>mdi-{{ activator }}</v-icon>
           </v-btn>
         </div>
@@ -47,6 +39,10 @@ export default {
     header: {
       type: String,
       required: true
+    },
+    color: {
+      type: String,
+      default: "secondary"
     },
     submitLogic: {
       type: Function,

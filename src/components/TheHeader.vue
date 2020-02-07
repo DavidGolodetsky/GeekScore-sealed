@@ -5,7 +5,7 @@
         <the-go-back v-if="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{name: 'home'}">
           <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
-          <span class="logo">GeekScore</span>
+          <span class="header-title">GeekScore</span>
         </router-link>
         <v-spacer />
         <div class="d-none d-sm-flex">
@@ -92,11 +92,3 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.logo {
-  color: $secondary;
-  font-size: 26px;
-  font-weight: 600;
-  text-shadow: 2px -2px 0px #000;
-}
-</style>

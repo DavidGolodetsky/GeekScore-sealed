@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-head title="Teams" icon="account-group" :props="{game}" component="team-add-dialog" />
+    <the-title title="Teams" icon="account-group" :props="{game}" component="team-add-dialog" />
     <div v-for="(team, i) in teams" :key="i">
       <v-lazy
         :options="{
@@ -19,13 +19,13 @@
 
 <script>
 import TeamTable from "@/components/TeamTable";
-import TheHead from "@/components/TheHead";
+import TheTitle from "@/components/TheTitle";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     TeamTable,
-    TheHead
+    TheTitle
   },
   props: {
     gameId: {

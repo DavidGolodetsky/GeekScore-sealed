@@ -13,6 +13,22 @@ a {
   background-color: #dae6f1;
 }
 
+.card-list-name {
+  transition: 0.3s;
+  color: #fff !important;
+  &:hover {
+    transition: 0.3s;
+    color: $secondary !important;
+  }
+}
+
+.header-title {
+  color: $secondary;
+  font-size: 22px;
+  font-weight: 600;
+  text-shadow: 2px -2px 0px #000;
+}
+
 // animations
 
 .slide-enter-active,
