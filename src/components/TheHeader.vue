@@ -2,7 +2,10 @@
   <div>
     <v-app-bar app color="primary" dense dark>
       <v-container class="d-flex align-center px-0 space-between">
-        <router-link class="logo" :to="{name: 'home'}">GeekScore</router-link>
+        <div class="d-flex align-center">
+          <v-img :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
+          <router-link class="logo" :to="{name: 'home'}">GeekScore</router-link>
+        </div>
         <v-spacer />
         <div class="d-none d-sm-flex">
           <v-btn

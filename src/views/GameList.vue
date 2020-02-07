@@ -1,6 +1,6 @@
 <template>
   <div v-if="games">
-    <game-add-dialog class="d-flex justify-end" />
+    <game-add-dialog class="d-flex justify-end my-2" />
     <div>
       <v-row>
         <v-col sm="6" md="4" cols="12" v-for="(game, i) in games" :key="i" class="mb-6">

@@ -4,7 +4,7 @@
     <v-content>
       <v-container>
         <transition name="slide" mode="out-in">
-          <router-view class="pt-4 pb-4"></router-view>
+          <router-view class="app-content"></router-view>
         </transition>
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>
@@ -47,5 +47,11 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.app-content {
+  @media #{$tablet} {
+    padding: 40px 0;
+  }
 }
 </style>

@@ -8,7 +8,7 @@
       :src="game.imageUrl"
       width="400"
     />
-    <team-add-dialog class="d-flex justify-end" :game="game" />
+    <team-add-dialog class="d-flex justify-end my-2" :game="game" />
     <div v-for="(team, i) in teams" :key="i">
       <v-lazy
         :options="{
