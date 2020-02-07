@@ -1,22 +1,6 @@
 <template>
   <div>
-    <v-card class="mb-10">
-      <v-img class="white--text align-end game-card" height="300" :src="game.imageUrl">
-        <div class="title-wrap">
-          <v-card-title class="d-flex align-center justify-space-between">
-            <div>{{ game.name }}</div>
-            <game-edit-dialog :game="game" />
-          </v-card-title>
-        </div>
-      </v-img>
-    </v-card>
-    <div class="d-flex align-center justify-space-between">
-      <div class="d-flex">
-        <v-icon color="secondary" class="mr-2">mdi-account-group</v-icon>
-        <h1 class="app-headline">Teams</h1>
-      </div>
-      <team-add-dialog class="d-flex justify-end my-2" :game="game" />
-    </div>
+    <the-head title="Teams" icon="account-group" component="team-add-dialog" />
     <div v-for="(team, i) in teams" :key="i">
       <v-lazy
         :options="{
@@ -35,15 +19,13 @@
 
 <script>
 import TeamTable from "@/components/TeamTable";
-import TeamAddDialog from "@/components/TeamAddDialog";
-import GameEditDialog from "@/components/GameEditDialog";
+import TheHead from "@/components/TheHead";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     TeamTable,
-    TeamAddDialog,
-    GameEditDialog
+    TheHead
   },
   props: {
     gameId: {

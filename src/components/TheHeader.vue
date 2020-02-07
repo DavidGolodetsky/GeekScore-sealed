@@ -95,6 +95,6 @@ export default {
   color: $secondary;
   font-size: 26px;
   font-weight: 600;
-  text-shadow: 1px -1px 0px #000;
+  text-shadow: 2px -2px 0px #000;
 }
 </style>
