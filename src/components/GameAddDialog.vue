@@ -56,6 +56,8 @@ export default {
       };
       if (this.imageFile) {
         game.image = this.imageFile;
+        const imageName = this.imageFile.name;
+        game.ext = imageName.slice(imageName.lastIndexOf("."));
       }
       this.createGame(game);
     }

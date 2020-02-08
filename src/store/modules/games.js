@@ -58,7 +58,7 @@ export default {
             if (payload.image) {
                 let imageUrl;
                 let key;
-                let ext;
+                const ext = payload.ext
 
                 fb.database().ref('users').child(user).child('games').push(payload)
                     .then((data) => {
@@ -66,19 +66,17 @@ export default {
                         return key
                     })
                     .then(key => {
-                        const filename = payload.image.name
-                        ext = filename.slice(filename.lastIndexOf('.'))
-                        return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).put(payload.image)
+                        return fb.storage().ref('users').child(user).child('games').child(`${key}${ext}`).put(payload.image)
                     })
                     .then(() => {
-                        return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).getDownloadURL()
+                        return fb.storage().ref('users').child(user).child('games').child(`${key}${ext}`).getDownloadURL()
                     })
                     .then((url) => {
                         imageUrl = url
                         return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl })
                     })
                     .then(() => {
-                        commit("CREATE_GAME", { ...payload, imageUrl, id: key })
+                        commit("CREATE_GAME", { ...payload, imageUrl, ext, id: key })
                         commit('SET_LOADING', false, { root: true })
                     })
                     .catch((e) => {
@@ -121,20 +119,21 @@ export default {
         updateGameImage({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            const filename = payload.image.name
-            const ext = filename.slice(filename.lastIndexOf('.'))
-            const pictureName = payload.id + 1;
+            const ext = payload.ext
             let imageUrl
-            fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).put(payload.image)
+            fb.storage().ref('users').child(user).child('games').child(`${payload.id}${ext}`).delete()
                 .then(() => {
-                    return fb.storage().ref('users').child(user).child('games').child(`${pictureName}.${ext}`).getDownloadURL()
+                    fb.storage().ref('users').child(user).child('games').child(`${payload.id}${ext}`).put(payload.image)
+                })
+                .then(() => {
+                    return fb.storage().ref('users').child(user).child('games').child(`${payload.id}${ext}`).getDownloadURL()
                 })
                 .then((url) => {
                     imageUrl = url
                     return fb.database().ref('users').child(user).child('games').child(payload.id).update({ imageUrl })
                 })
                 .then(() => {
-                    commit("UPDATE_GAME", { ...payload, imageUrl })
+                    commit("UPDATE_GAME", { ...payload, ext, imageUrl })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -145,10 +144,12 @@ export default {
         deleteGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games').child(payload.id).remove()
-            fb.database().ref('users').child(user).child('games').child(payload).remove()
+            fb.storage().ref('users').child(user).child('games').child(`${payload.id}${payload.ext}`).delete()
                 .then(() => {
-                    commit("DELETE_GAME", payload)
+                    fb.database().ref('users').child(user).child('games').child(payload.id).remove()
+                })
+                .then(() => {
+                    commit("DELETE_GAME", payload.id)
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

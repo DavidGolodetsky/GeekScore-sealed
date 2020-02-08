@@ -60,10 +60,11 @@ export default {
       const game = {
         name: this.name,
         image: this.imageFile,
-        id: this.game.id
+        id: this.game.id,
+        ext: this.game.ext
       };
       if (this.isDelete) {
-        this.deleteGame(this.game.id);
+        this.deleteGame(game);
       } else {
         if (game.name) {
           this.updateGameInfo(game);
