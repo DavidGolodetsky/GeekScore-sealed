@@ -13,6 +13,18 @@ a {
   background-color: #dae6f1;
 }
 
+.v-toolbar__content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.app-container {
+  padding: 0 10px !important;
+  @media #{$tablet} {
+    padding: 40px 0 !important;
+  }
+}
+
 .card-list-name {
   transition: 0.3s;
   color: #fff !important;

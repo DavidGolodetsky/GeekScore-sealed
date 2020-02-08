@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar app color="primary" dense dark>
-      <v-container class="d-flex align-center px-0 space-between">
+      <v-container class="d-flex align-center app-container space-between">
         <the-go-back v-if="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{name: 'home'}">
           <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
