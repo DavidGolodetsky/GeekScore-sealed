@@ -54,38 +54,49 @@ export default {
         },
         createGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
-            let imageUrl;
-            let key;
-            let ext;
             const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games').push(payload)
-                .then((data) => {
-                    key = data.key;
-                    return key
+            if (payload.image) {
+                let imageUrl;
+                let key;
+                let ext;
 
-                })
-                .then(key => {
-                    const filename = payload.image.name
-                    ext = filename.slice(filename.lastIndexOf('.'))
-                    return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).put(payload.image)
-                })
-                .then(() => {
-                    return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).getDownloadURL()
-                })
-                .then((url) => {
-                    imageUrl = url
-                    return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl })
-                })
-                .then(() => {
-                    commit("CREATE_GAME", { ...payload, imageUrl, id: key })
-                })
-                .then(() => {
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+                fb.database().ref('users').child(user).child('games').push(payload)
+                    .then((data) => {
+                        key = data.key;
+                        return key
+                    })
+                    .then(key => {
+                        const filename = payload.image.name
+                        ext = filename.slice(filename.lastIndexOf('.'))
+                        return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).put(payload.image)
+                    })
+                    .then(() => {
+                        return fb.storage().ref('users').child(user).child('games').child(`${key}.${ext}`).getDownloadURL()
+                    })
+                    .then((url) => {
+                        imageUrl = url
+                        return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl })
+                    })
+                    .then(() => {
+                        commit("CREATE_GAME", { ...payload, imageUrl, id: key })
+                        commit('SET_LOADING', false, { root: true })
+                    })
+                    .catch((e) => {
+                        commit('SET_LOADING', false, { root: true })
+                        console.log(e)
+                    })
+            } else {
+                const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=033915e2-a403-499f-8c08-6edfe8462ec4'
+                fb.database().ref('users').child(user).child('games').push(payload)
+                    .then((data) => {
+                        commit("CREATE_GAME", { ...payload, imageUrl, id: data.key })
+                        commit('SET_LOADING', false, { root: true })
+                    })
+                    .catch((e) => {
+                        commit('SET_LOADING', false, { root: true })
+                        console.log(e)
+                    })
+            }
         },
         updateGameInfo({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })

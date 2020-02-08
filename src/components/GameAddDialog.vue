@@ -3,7 +3,7 @@
     <v-text-field :rules="fieldRules" prepend-icon="mdi-cards-diamond" label="Name" v-model="name"></v-text-field>
     <v-file-input
       class="mb-2"
-      :rules="imageRules"
+      :rules="showImageRules"
       accept="image/png, image/jpeg, image/bmp"
       prepend-icon="mdi-image"
       label="Image"
@@ -27,9 +27,14 @@ export default {
         v => v.length <= 40 || "Field is too long"
       ],
       imageRules: [
-        v => (v && v.size < 2000000) || "Image size should be less than 2 MB"
+        v => v.size < 2000000 || "Image size should be less than 2 MB"
       ]
     };
+  },
+  computed: {
+    showImageRules() {
+      return this.imageFile ? this.imageRules : [];
+    }
   },
   methods: {
     ...mapActions("games", ["createGame"]),
