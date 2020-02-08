@@ -65,13 +65,12 @@ export default {
       };
       if (this.isDelete) {
         this.deleteGame(game);
+        return;
+      }
+      if (game.image) {
+        this.updateGameImage(game);
       } else {
-        if (game.name) {
-          this.updateGameInfo(game);
-        }
-        if (game.image) {
-          this.updateGameImage(game);
-        }
+        this.updateGameInfo(game);
       }
     }
   }

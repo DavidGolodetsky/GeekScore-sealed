@@ -37,6 +37,7 @@ export default {
       const team = {
         teamId: this.team.id,
         gameId: this.team.gameId,
+        ext: this.team.ext,
         name: this.team.name
       };
       if (this.isDelete) {

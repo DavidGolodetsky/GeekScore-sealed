@@ -54,6 +54,7 @@ export default {
                 let imageUrl;
                 let key;
                 let ext;
+                let imagePath;
                 fb.database().ref('users').child(user).child('games')
                     .child(payload.gameId)
                     .child('teams')
@@ -65,10 +66,11 @@ export default {
                     .then(key => {
                         const filename = payload.image.name
                         ext = filename.slice(filename.lastIndexOf('.'))
-                        return fb.storage().ref('users').child(user).child('teams').child(`${key}.${ext}`).put(payload.image)
+                        imagePath = fb.storage().ref('users').child(user).child('teams').child(`${key}${ext}`)
+                        return imagePath.put(payload.image)
                     })
                     .then(() => {
-                        return fb.storage().ref('users').child(user).child('teams').child(`${key}.${ext}`).getDownloadURL()
+                        return imagePath.getDownloadURL()
                     })
                     .then((url) => {
                         imageUrl = url
@@ -76,7 +78,7 @@ export default {
                             .child('teams').child(key).update({ imageUrl })
                     })
                     .then(() => {
-                        commit("CREATE_TEAM", { ...payload, imageUrl, id: key })
+                        commit("CREATE_TEAM", { ...payload, imageUrl, ext, id: key })
                         commit('SET_LOADING', false, { root: true })
                     })
                     .catch((e) => {
@@ -125,6 +127,7 @@ export default {
         deleteTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
+            fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${payload.ext}`).delete()
             fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).remove()
                 .then(() => {
                     commit("DELETE_TEAM", payload)
