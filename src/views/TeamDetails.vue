@@ -6,21 +6,29 @@
       :props="propsToRound"
       component="round-add-dialog"
     />
-    <v-data-table
-      v-if="showTable"
-      :headers="headers"
-      dark
-      :items="rounds"
-      class="elevation-1 mb-6"
-    />
-    <chart-bars :team="team" />
+    <v-row>
+      <v-col cols="12">
+        <v-data-table
+          v-if="showTable"
+          :headers="headers"
+          dark
+          :items="rounds"
+          class="elevation-1 mb-6"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <chart-bars :team="team" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import TheTitle from "@/components/TheTitle";
 import ChartBars from "@/components/ChartBars.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -75,6 +83,12 @@ export default {
       }
       return null;
     }
+  },
+  mounted() {
+    this.backTitle(this.team.name);
+  },
+  methods: {
+    ...mapActions(["backTitle"])
   }
 };
 </script>

@@ -35,13 +35,21 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("teams", ["teams"])
+    ...mapGetters("teams", ["teams"]),
+    ...mapGetters("games", { getGame: "game" }),
+    game() {
+      return this.getGame(this.gameId);
+    }
   },
   created() {
     this.setTeams(this.gameId);
   },
+  mounted() {
+    this.backTitle(this.game.name);
+  },
   methods: {
-    ...mapActions("teams", ["setTeams"])
+    ...mapActions("teams", ["setTeams"]),
+    ...mapActions(["backTitle"])
   }
 };
 </script>
