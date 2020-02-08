@@ -41,9 +41,6 @@ export default {
       required: true
     }
   },
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters("teams", { getTeam: "team", getRounds: "rounds" }),
     team() {

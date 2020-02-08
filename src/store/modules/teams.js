@@ -50,19 +50,30 @@ export default {
         createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games')
-                .child(payload.gameId)
-                .child('teams')
-                .push(payload)
-                .then((data) => {
-                    const key = data.key;
-                    commit("CREATE_TEAM", { ...payload, id: key, rounds: {} })
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
+            if (payload.image) {
+                return
+            }
+            else {
+                const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fteam.jpg?alt=media&token=09c8ec54-cccf-4b40-a35b-84dbdaecdce2'
+                const team = {
+                    ...payload,
+                    rounds: {},
+                    imageUrl
+                }
+                fb.database().ref('users').child(user).child('games')
+                    .child(payload.gameId)
+                    .child('teams')
+                    .push(team)
+                    .then((data) => {
+                        const key = data.key;
+                        commit("CREATE_TEAM", { ...team, id: key })
+                        commit('SET_LOADING', false, { root: true })
+                    })
+                    .catch((e) => {
+                        commit('SET_LOADING', false, { root: true })
+                        console.log(e)
+                    })
+            }
         },
         updateTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })

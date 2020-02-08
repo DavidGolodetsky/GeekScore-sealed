@@ -25,9 +25,6 @@ export default {
     GameEditDialog,
     CardsList
   },
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters("games", ["games"]),
     ...mapGetters("user", ["user"])
