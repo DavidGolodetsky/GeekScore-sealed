@@ -74,6 +74,7 @@ export default {
                     })
                     .then((url) => {
                         imageUrl = url
+                        console.log(imageUrl)
                         return fb.database().ref('users').child(user).child('games').child(payload.gameId)
                             .child('teams').child(key).update({ imageUrl })
                     })
@@ -117,6 +118,35 @@ export default {
             fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).update(updatedTeam)
                 .then(() => {
                     commit("UPDATE_TEAM", payload)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+        },
+        updateTeamImage({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const ext = payload.ext
+            console.log(payload)
+            let imageUrl
+            fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).delete()
+                .then(() => {
+                    console.log('hjk')
+                    fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).put(payload.image)
+                })
+                .then(() => {
+                    console.log('h777jk')
+                    return fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).getDownloadURL()
+                })
+                .then((url) => {
+                    imageUrl = url
+                    console.log(imageUrl)
+                    return fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).update({ imageUrl })
+                })
+                .then(() => {
+                    commit("UPDATE_TEAM", { ...payload, ext, imageUrl })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {

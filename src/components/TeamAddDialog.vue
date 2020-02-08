@@ -90,6 +90,8 @@ export default {
         players: this.players
       };
       if (this.imageFile) {
+        const imageName = this.imageFile.name;
+        team.ext = imageName.slice(imageName.lastIndexOf("."));
         team.image = this.imageFile;
       }
       this.createTeam(team);

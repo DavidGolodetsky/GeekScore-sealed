@@ -7,6 +7,15 @@
     :submitLogic="onSubmit"
   >
     <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+    <v-file-input
+      class="mb-2"
+      :rules="showImageRules"
+      accept="image/png, image/jpeg, image/bmp"
+      prepend-icon="mdi-image"
+      label="Image"
+      @change="onFileUpload($event)"
+    ></v-file-input>
+    <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
     <v-switch v-model="isDelete" label="Delete team" color="red" value="delete" hide-details></v-switch>
   </the-dialog>
 </template>
@@ -25,23 +34,51 @@ export default {
     return {
       name: this.team.name,
       isDelete: false,
+      imageFile: null,
+      imageUrl: this.team.imageUrl,
       fieldRules: [
         v => !!v || "Field is required",
         v => v.length <= 60 || "Field is too long"
+      ],
+      imageRules: [
+        v => v.size < 2000000 || "Image size should be less than 2 MB"
       ]
     };
   },
+  computed: {
+    showImageRules() {
+      return this.imageFile ? this.imageRules : [];
+    }
+  },
   methods: {
-    ...mapActions("teams", ["updateTeam", "deleteTeam"]),
+    ...mapActions("teams", ["updateTeam", "updateTeamImage", "deleteTeam"]),
+    onFileUpload(file) {
+      if (file) {
+        const fileReader = new FileReader();
+        fileReader.addEventListener("load", () => {
+          this.imageUrl = fileReader.result;
+        });
+        fileReader.readAsDataURL(file);
+        this.imageFile = file;
+      } else {
+        this.imageUrl = "";
+      }
+    },
     onSubmit() {
       const team = {
         teamId: this.team.id,
         gameId: this.team.gameId,
-        ext: this.team.ext,
+        image: this.imageFile,
         name: this.team.name
       };
       if (this.isDelete) {
         this.deleteTeam(team);
+        return;
+      }
+      if (this.imageFile) {
+        const imageName = this.imageFile.name;
+        team.ext = imageName.slice(imageName.lastIndexOf("."));
+        this.updateTeamImage(team);
       } else {
         this.updateTeam(team);
       }

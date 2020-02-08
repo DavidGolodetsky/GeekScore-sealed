@@ -55,60 +55,15 @@ export default {
         createGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            if (payload.image) {
-                let imageUrl;
-                let key;
-                const ext = payload.ext
-
-                fb.database().ref('users').child(user).child('games').push(payload)
-                    .then((data) => {
-                        key = data.key;
-                        return key
-                    })
-                    .then(key => {
-                        return fb.storage().ref('users').child(user).child('games').child(`${key}${ext}`).put(payload.image)
-                    })
-                    .then(() => {
-                        return fb.storage().ref('users').child(user).child('games').child(`${key}${ext}`).getDownloadURL()
-                    })
-                    .then((url) => {
-                        imageUrl = url
-                        return fb.database().ref('users').child(user).child('games').child(key).update({ imageUrl })
-                    })
-                    .then(() => {
-                        commit("CREATE_GAME", { ...payload, imageUrl, ext, id: key })
-                        commit('SET_LOADING', false, { root: true })
-                    })
-                    .catch((e) => {
-                        commit('SET_LOADING', false, { root: true })
-                        console.log(e)
-                    })
-            } else {
-                const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=033915e2-a403-499f-8c08-6edfe8462ec4'
-                const game = {
-                    ...payload,
-                    imageUrl
-                }
-                fb.database().ref('users').child(user).child('games').push(game)
-                    .then((data) => {
-                        commit("CREATE_GAME", { ...game, id: data.key })
-                        commit('SET_LOADING', false, { root: true })
-                    })
-                    .catch((e) => {
-                        commit('SET_LOADING', false, { root: true })
-                        console.log(e)
-                    })
+            const game = {
+                ...payload,
             }
-        },
-        updateGameInfo({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            const info = {
-                name: payload.name
+            if (!payload.imageUrl) {
+                game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=033915e2-a403-499f-8c08-6edfe8462ec4'
             }
-            fb.database().ref('users').child(user).child('games').child(payload.id).update(info)
-                .then(() => {
-                    commit("UPDATE_GAME", payload)
+            fb.database().ref('users').child(user).child('games').push(game)
+                .then((data) => {
+                    commit("CREATE_GAME", { ...game, id: data.key })
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -116,24 +71,16 @@ export default {
                     console.log(e)
                 })
         },
-        updateGameImage({ commit, rootState }, payload) {
+        updateGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            const ext = payload.ext
-            let imageUrl
-            fb.storage().ref('users').child(user).child('games').child(`${payload.id}${ext}`).delete()
+            const game = {
+                name: payload.name,
+                imageUrl: payload.imageUrl
+            }
+            fb.database().ref('users').child(user).child('games').child(payload.id).update(game)
                 .then(() => {
-                    fb.storage().ref('users').child(user).child('games').child(`${payload.id}${ext}`).put(payload.image)
-                })
-                .then(() => {
-                    return fb.storage().ref('users').child(user).child('games').child(`${payload.id}${ext}`).getDownloadURL()
-                })
-                .then((url) => {
-                    imageUrl = url
-                    return fb.database().ref('users').child(user).child('games').child(payload.id).update({ imageUrl })
-                })
-                .then(() => {
-                    commit("UPDATE_GAME", { ...payload, ext, imageUrl })
+                    commit("UPDATE_GAME", payload)
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
@@ -144,10 +91,7 @@ export default {
         deleteGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            fb.storage().ref('users').child(user).child('games').child(`${payload.id}${payload.ext}`).delete()
-                .then(() => {
-                    fb.database().ref('users').child(user).child('games').child(payload.id).remove()
-                })
+            fb.database().ref('users').child(user).child('games').child(payload.id).remove()
                 .then(() => {
                     commit("DELETE_GAME", payload.id)
                     commit('SET_LOADING', false, { root: true })
