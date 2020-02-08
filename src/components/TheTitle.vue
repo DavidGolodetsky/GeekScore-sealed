@@ -13,11 +13,13 @@
 <script>
 import GameAddDialog from "@/components/GameAddDialog";
 import TeamAddDialog from "@/components/TeamAddDialog";
+import RoundAddDialog from "@/components/RoundAddDialog";
 
 export default {
   components: {
     GameAddDialog,
-    TeamAddDialog
+    TeamAddDialog,
+    RoundAddDialog
   },
   props: {
     icon: {

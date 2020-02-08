@@ -1,34 +1,34 @@
 <template>
   <div>
-    <the-title title="Teams" icon="account-group" :props="{game}" component="team-add-dialog" />
-    <div v-for="(team, i) in teams" :key="i">
-      <v-lazy
-        :options="{
-            threshold: 0.5
-          }"
-        min-height="200"
-        transition="fade-transition"
-      >
-        <transition-group appear name="fade-down">
-          <team-table :key="team.id" :team-id="team.id" />
-        </transition-group>
-      </v-lazy>
-    </div>
+    <the-title
+      title="Rounds"
+      icon="sword-cross"
+      :props="propsToRound"
+      component="round-add-dialog"
+    />
+    <v-data-table
+      v-if="showTable"
+      :headers="headers"
+      dark
+      :items="rounds"
+      class="elevation-1 mb-6"
+    />
+    <chart-bars :team="team" />
   </div>
 </template>
 
 <script>
-import TeamTable from "@/components/TeamTable";
 import TheTitle from "@/components/TheTitle";
-import { mapActions, mapGetters } from "vuex";
+import ChartBars from "@/components/ChartBars.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
-    TeamTable,
+    ChartBars,
     TheTitle
   },
   props: {
-    gameId: {
+    teamId: {
       type: String,
       required: true
     }
@@ -37,23 +37,44 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("games", { getGame: "game" }),
-    ...mapGetters("user", ["user"]),
-    game() {
-      return this.getGame(this.gameId);
+    ...mapGetters("teams", { getTeam: "team", getRounds: "rounds" }),
+    team() {
+      return this.getTeam(this.teamId);
+    },
+    showTable() {
+      if (this.rounds && this.rounds.length) {
+        return true;
+      }
+      return false;
+    },
+    propsToRound() {
+      return {
+        players: this.team.players,
+        teamId: this.team.id,
+        gameId: this.team.gameId
+      };
+    },
+    headers() {
+      const headers = this.team.players.map(player => ({
+        text: player.name,
+        value: player.name.toLowerCase()
+      }));
+      const fields = [
+        { text: "Date", value: "date" },
+        { text: "Actions", value: "action", sortable: false }
+      ];
+      headers.push(...fields);
+      return headers;
+    },
+    rounds() {
+      const rounds = this.getRounds(this.teamId);
+      if (rounds) {
+        return Object.keys(rounds).map(key => {
+          return rounds[key];
+        });
+      }
+      return null;
     }
-  },
-  beforeUpdate() {
-    this.backTitle(this.game.name);
-  },
-  methods: {
-    ...mapActions(["backTitle"])
   }
 };
 </script>
-
-<style lang="scss">
-.title-wrap {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-</style>
