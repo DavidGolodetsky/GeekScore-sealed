@@ -9,6 +9,13 @@ a {
   color: #f44336;
 }
 
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
 .v-content__wrap {
   background-color: #dae6f1;
 }
@@ -19,7 +26,7 @@ a {
 }
 
 .app-container {
-  padding: 0 10px !important;
+  padding: 10px !important;
   @media #{$tablet} {
     padding: 40px 0 !important;
   }

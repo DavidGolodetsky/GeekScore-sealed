@@ -34,7 +34,7 @@ export default {
   },
   watch: {
     user(value) {
-      if (!value) {
+      if (!value && this.$route.fullPath !== "/") {
         this.$router.push("/");
       }
     }

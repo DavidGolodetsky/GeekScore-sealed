@@ -1,7 +1,7 @@
 <template>
   <div @click="goBack" class="d-flex align-center go-back">
     <v-icon class="mr-2" color="secondary" dark>mdi-arrow-left</v-icon>
-    <span v-if="backTitle" class="header-title">{{ backTitle }}</span>
+    <span v-if="backTitle" class="header-title truncate">{{ backTitle }}</span>
   </div>
 </template>
 

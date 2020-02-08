@@ -145,6 +145,7 @@ export default {
         deleteGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games').child(payload.id).remove()
             fb.database().ref('users').child(user).child('games').child(payload).remove()
                 .then(() => {
                     commit("DELETE_GAME", payload)

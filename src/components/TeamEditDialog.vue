@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      name: this.teamName,
+      name: this.team.name,
       isDelete: false,
       fieldRules: [
         v => !!v || "Field is required",
