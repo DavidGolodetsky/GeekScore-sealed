@@ -14,7 +14,7 @@ export default {
     LoginForm
   },
   methods: {
-    ...mapActions(["clearError"]),
+    ...mapActions(["clearError", "clearBackTitle"]),
     onDismiss() {
       this.clearError();
     }
@@ -22,6 +22,9 @@ export default {
   computed: {
     ...mapGetters("user", ["user"]),
     ...mapGetters(["error"])
+  },
+  created() {
+    this.clearBackTitle();
   },
   watch: {
     user(value) {

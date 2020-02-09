@@ -104,7 +104,7 @@ export default {
     },
     getters: {
         games(state) {
-            return state.games
+            return state.games.reverse()
         },
         game(state) {
             return (gameId) => {

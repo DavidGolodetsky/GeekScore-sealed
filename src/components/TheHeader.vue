@@ -35,7 +35,7 @@
           </v-list-item-icon>
           <v-list-item-content>{{item.text}}</v-list-item-content>
         </v-list-item>
-        <v-list-item v-if="user" @click="logout">
+        <v-list-item v-if="user" @click="onLogout">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
@@ -86,6 +86,9 @@ export default {
   methods: {
     ...mapActions("user", ["logout"]),
     onLogout() {
+      if (this.$route.fullPath === "/") {
+        this.sideNav = false;
+      }
       this.logout();
     }
   }

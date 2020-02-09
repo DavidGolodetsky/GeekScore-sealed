@@ -80,6 +80,7 @@ export default {
         fileReader.readAsDataURL(file);
         this.imageFile = file;
       } else {
+        this.imageFile = null;
         this.imageUrl = "";
       }
     },

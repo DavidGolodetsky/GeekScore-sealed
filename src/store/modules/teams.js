@@ -17,6 +17,9 @@ export default {
             if (payload.name) {
                 team.name = payload.name
             }
+            if (payload.imageUrl) {
+                team.imageUrl = payload.imageUrl
+            }
         },
         DELETE_TEAM(state, payload) {
             state.teams = state.teams.filter(team => team.id !== payload.teamId)
@@ -74,7 +77,6 @@ export default {
                     })
                     .then((url) => {
                         imageUrl = url
-                        console.log(imageUrl)
                         return fb.database().ref('users').child(user).child('games').child(payload.gameId)
                             .child('teams').child(key).update({ imageUrl })
                     })
@@ -129,20 +131,17 @@ export default {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             const ext = payload.ext
-            console.log(payload)
             let imageUrl
-            fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).delete()
+            const imagePath = fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`)
+            imagePath.delete()
                 .then(() => {
-                    console.log('hjk')
-                    fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).put(payload.image)
+                    return imagePath.put(payload.image)
                 })
                 .then(() => {
-                    console.log('h777jk')
-                    return fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).getDownloadURL()
+                    return imagePath.getDownloadURL()
                 })
                 .then((url) => {
                     imageUrl = url
-                    console.log(imageUrl)
                     return fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).update({ imageUrl })
                 })
                 .then(() => {
@@ -205,7 +204,7 @@ export default {
     },
     getters: {
         teams(state) {
-            return state.teams
+            return state.teams.reverse()
         },
         team(state) {
             return (teamId) => {

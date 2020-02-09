@@ -7,3 +7,16 @@
     </p>
   </div>
 </template>
+
+<script>
+import { mapActions } from "vuex";
+
+export default {
+  created() {
+    this.clearBackTitle();
+  },
+  methods: {
+    ...mapActions(["clearBackTitle"])
+  }
+};
+</script>

@@ -6,6 +6,7 @@
 
 <script>
 import TheCarousel from "@/components/TheCarousel";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -28,6 +29,12 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    this.clearBackTitle();
+  },
+  methods: {
+    ...mapActions(["clearBackTitle"])
   }
 };
 </script>
