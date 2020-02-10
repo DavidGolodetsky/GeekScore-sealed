@@ -6,20 +6,25 @@
       :props="propsToRound"
       component="round-add-dialog"
     />
-    <v-row>
+    <v-row class="mb-8">
       <v-col cols="12">
         <v-data-table
           v-if="showTable"
           :headers="headers"
           dark
           :items="rounds"
-          class="elevation-1 mb-6"
-        />
+          @input="check()"
+          class="elevation-1"
+        >
+          <template v-slot:item.action="{ item }">
+            <round-edit-dialog :item="item" v-bind="propsToRound" />
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
-        <chart-bars :team="team" />
+        <chart-bars :key="statistics" :team="team" />
       </v-col>
     </v-row>
   </div>
@@ -28,18 +33,25 @@
 <script>
 import TheTitle from "@/components/TheTitle";
 import ChartBars from "@/components/ChartBars.vue";
+import RoundEditDialog from "@/components/RoundEditDialog";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     ChartBars,
-    TheTitle
+    TheTitle,
+    RoundEditDialog
   },
   props: {
     teamId: {
       type: String,
       required: true
     }
+  },
+  data() {
+    return {
+      statistics: 0
+    };
   },
   computed: {
     ...mapGetters("teams", { getTeam: "team", getRounds: "rounds" }),
@@ -86,7 +98,17 @@ export default {
     this.backTitle(this.team.name);
   },
   methods: {
-    ...mapActions(["backTitle"])
+    ...mapActions(["backTitle"]),
+    check() {
+      console.log("awdaw");
+    }
+  },
+  watch: {
+    rounds(value, newValue) {
+      if (newValue) {
+        this.statistics++;
+      }
+    }
   }
 };
 </script>

@@ -15,17 +15,38 @@ export default {
   mounted() {
     this.renderChart(
       {
-        labels: this.team.players.map(player => player.name),
+        labels: this.getPlayers(),
         datasets: [
           {
             label: "Victories",
             backgroundColor: "#ec8506",
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+            data: this.cookData()
           }
         ]
       },
       { responsive: true, maintainAspectRatio: false }
     );
+  },
+  methods: {
+    cookData() {
+      const players = this.getPlayers();
+      const rounds = this.team.rounds;
+      const data = players.map(player => {
+        let playerRes = 0;
+        let formattedPlayer = player.toLowerCase();
+        Object.keys(rounds).forEach(round => {
+          if (rounds[round][formattedPlayer]) {
+            playerRes++;
+          }
+        });
+        return playerRes;
+      });
+
+      return [...data, 50];
+    },
+    getPlayers() {
+      return this.team.players.map(player => player.name);
+    }
   }
 };
 </script>
