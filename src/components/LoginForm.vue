@@ -8,6 +8,7 @@
         </v-card-title>
         <v-card-text>
           <v-text-field
+            clearable
             label="Email"
             type="email"
             prepend-icon="mdi-email"
@@ -16,6 +17,7 @@
             required
           />
           <v-text-field
+            clearable
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             prepend-icon="mdi-lock"
@@ -26,6 +28,7 @@
             v-model="password"
           />
           <v-text-field
+            clearable
             v-if="signupMode"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"

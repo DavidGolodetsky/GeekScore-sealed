@@ -6,8 +6,9 @@
     simple
     :submitLogic="onSubmit"
   >
-    <v-text-field :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+    <v-text-field clearable :rules="fieldRules" label="Name" v-model="name"></v-text-field>
     <v-file-input
+      clearable
       class="mb-2"
       :rules="showImageRules"
       accept="image/png, image/jpeg, image/bmp"

@@ -58,9 +58,7 @@ export default {
             const game = {
                 ...payload,
             }
-            if (!payload.imageUrl) {
-                game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=033915e2-a403-499f-8c08-6edfe8462ec4'
-            }
+            game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=033915e2-a403-499f-8c08-6edfe8462ec4'
             fb.database().ref('users').child(user).child('games').push(game)
                 .then((data) => {
                     commit("CREATE_GAME", { ...game, id: data.key })

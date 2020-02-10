@@ -12,6 +12,7 @@
         </v-card-title>
         <v-card-text>
           <v-text-field
+            clearable
             label="Email"
             type="email"
             prepend-icon="mdi-email"
