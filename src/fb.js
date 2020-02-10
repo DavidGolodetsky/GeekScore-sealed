@@ -1,5 +1,6 @@
 import firebase from "firebase"
 import store from '@/store';
+import router from '@/router';
 
 
 const firebaseConfig = {
@@ -16,6 +17,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch('user/autoSignIn', user)
+        router.push("/games");
     }
 })
 

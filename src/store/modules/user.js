@@ -65,7 +65,9 @@ export default {
                 )
         },
         autoSignIn({ commit }, payload) {
+            commit('SET_LOADING', true, { root: true })
             commit('SET_USER', { id: payload.uid })
+            commit('SET_LOADING', false, { root: true })
         },
         resetPassword({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })

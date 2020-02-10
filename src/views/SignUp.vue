@@ -28,8 +28,8 @@ export default {
   },
   watch: {
     user(value) {
-      if (value !== null && value !== undefined) {
-        this.$router.push("/");
+      if (value) {
+        this.$router.push("/games");
       }
     }
   }
