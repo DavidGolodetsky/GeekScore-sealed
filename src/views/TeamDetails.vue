@@ -65,6 +65,7 @@ export default {
         value: player.name.toLowerCase()
       }));
       const fields = [
+        { text: "Draw", value: "draw" },
         { text: "Date", value: "date" },
         { text: "Actions", value: "action", sortable: false }
       ];

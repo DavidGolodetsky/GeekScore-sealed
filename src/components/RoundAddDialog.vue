@@ -1,8 +1,8 @@
 <template>
   <the-dialog activator="plus" header="Add new round" :submitLogic="onSubmit">
-    <v-radio-group :rules="fieldRules" v-model="winner">
+    <v-radio-group class="mb-4" :rules="fieldRules" v-model="result">
       <v-radio v-for="(player, i) in players" :key="i" :label="player.name" :value="player.name"></v-radio>
-      <v-radio label="Draw" :value="draw"></v-radio>
+      <v-radio label="Draw" value="draw"></v-radio>
     </v-radio-group>
     <v-row justify="center">
       <v-menu
@@ -50,8 +50,7 @@ export default {
   data() {
     return {
       datepicker: false,
-      draw: false,
-      winner: "",
+      result: null,
       date: new Date().toISOString().substr(0, 10),
       fieldRules: [v => !!v || "Field is required"]
     };
@@ -59,13 +58,21 @@ export default {
   methods: {
     ...mapActions("teams", ["createRound"]),
     onSubmit() {
+      const round = this.cookRound();
+      this.createRound(round);
+    },
+    cookRound() {
       const round = {
-        [this.winner.toLowerCase()]: "VICTORY",
         date: this.date,
         gameId: this.gameId,
         teamId: this.teamId
       };
-      this.createRound(round);
+      if (this.result === "draw") {
+        round.draw = "DRAW";
+      } else {
+        round[this.result.toLowerCase()] = "VICTORY";
+      }
+      return round;
     }
   }
 };
