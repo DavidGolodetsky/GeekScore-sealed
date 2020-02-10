@@ -8,14 +8,7 @@
     />
     <v-row class="mb-8">
       <v-col cols="12">
-        <v-data-table
-          v-if="showTable"
-          :headers="headers"
-          dark
-          :items="rounds"
-          @input="check()"
-          class="elevation-1"
-        >
+        <v-data-table v-if="showTable" :headers="headers" dark :items="rounds" class="elevation-1">
           <template v-slot:item.action="{ item }">
             <round-edit-dialog :item="item" v-bind="propsToRound" />
           </template>
@@ -98,10 +91,7 @@ export default {
     this.backTitle(this.team.name);
   },
   methods: {
-    ...mapActions(["backTitle"]),
-    check() {
-      console.log("awdaw");
-    }
+    ...mapActions(["backTitle"])
   },
   watch: {
     rounds(value, newValue) {
