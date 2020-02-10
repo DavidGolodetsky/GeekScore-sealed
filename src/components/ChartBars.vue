@@ -42,7 +42,9 @@ export default {
         return playerRes;
       });
 
-      return [...data, 50];
+      let top = Math.round(Math.max.apply(null, data) + 10 / 10);
+      console.log(top);
+      return [...data, 0, top];
     },
     getPlayers() {
       return this.team.players.map(player => player.name);
