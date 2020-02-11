@@ -42,13 +42,14 @@ export default {
     actions: {
         setTeams({ commit, rootGetters }, payload) {
             const game = rootGetters['games/game'](payload)
+            let data = []
             if (game.teams) {
                 const teams = game.teams
-                const filteredTeams = Object.keys(teams).map(key => {
+                data = Object.keys(teams).map(key => {
                     return { ...teams[key], id: key }
                 })
-                commit("SET_TEAMS", filteredTeams)
             }
+            commit("SET_TEAMS", data)
         },
         createTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })

@@ -41,11 +41,9 @@ export default {
       return this.getGame(this.gameId);
     }
   },
-  created() {
-    this.setTeams(this.gameId);
-  },
   mounted() {
     this.backTitle(this.game.name);
+    this.setTeams(this.gameId);
   },
   methods: {
     ...mapActions("teams", ["setTeams"]),
