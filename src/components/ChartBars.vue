@@ -43,7 +43,6 @@ export default {
       });
 
       let top = Math.round(Math.max.apply(null, data) + 10 / 10);
-      console.log(top);
       return [...data, 0, top];
     },
     getPlayers() {
