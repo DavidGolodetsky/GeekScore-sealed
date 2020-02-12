@@ -137,7 +137,6 @@ export default {
         deleteRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            console.log(payload)
             fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
                 .then(() => {
                     commit("DELETE_ROUND", payload)

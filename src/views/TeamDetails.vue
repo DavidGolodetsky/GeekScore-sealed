@@ -21,7 +21,7 @@
       </v-tab>
     </v-tabs>
 
-    <v-tabs-items v-model="tab">
+    <v-tabs-items v-if="showTable" v-model="tab">
       <v-tab-item value="tab-1">
         <v-data-table :headers="headers" dark :items="rounds" class="elevation-1">
           <template v-slot:item.action="{ item }">
