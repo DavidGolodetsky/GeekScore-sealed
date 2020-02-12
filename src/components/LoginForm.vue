@@ -17,7 +17,6 @@
             required
           />
           <v-text-field
-            clearable
             :type="showPassword ? 'text' : 'password'"
             label="Password"
             prepend-icon="mdi-lock"
@@ -28,7 +27,6 @@
             v-model="password"
           />
           <v-text-field
-            clearable
             v-if="signupMode"
             :type="showPassword ? 'text' : 'password'"
             label="Confirm password"
