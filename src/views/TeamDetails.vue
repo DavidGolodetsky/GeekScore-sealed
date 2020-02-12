@@ -3,23 +3,36 @@
     <the-title
       title="Rounds"
       icon="sword-cross"
+      class="mb-4"
       :props="propsToRound"
       component="round-add-dialog"
     />
-    <v-row class="mb-8">
-      <v-col cols="12">
-        <v-data-table v-if="showTable" :headers="headers" dark :items="rounds" class="elevation-1">
+    <v-tabs v-if="showTable" v-model="tab" background-color="primary " centered dark icons-and-text>
+      <v-tabs-slider></v-tabs-slider>
+
+      <v-tab href="#tab-1">
+        Table
+        <v-icon>mdi-table-large</v-icon>
+      </v-tab>
+
+      <v-tab href="#tab-2">
+        Statistics
+        <v-icon>mdi-chart-bar</v-icon>
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item value="tab-1">
+        <v-data-table :headers="headers" dark :items="rounds" class="elevation-1">
           <template v-slot:item.action="{ item }">
             <round-edit-dialog :item="item" v-bind="propsToRound" />
           </template>
         </v-data-table>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
+      </v-tab-item>
+      <v-tab-item value="tab-2">
         <chart-bars :key="statistics" :team="team" />
-      </v-col>
-    </v-row>
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
@@ -43,7 +56,8 @@ export default {
   },
   data() {
     return {
-      statistics: 0
+      statistics: 0,
+      tab: null
     };
   },
   computed: {
@@ -79,12 +93,9 @@ export default {
     },
     rounds() {
       const rounds = this.getRounds(this.teamId);
-      if (rounds) {
-        return Object.keys(rounds).map(key => {
-          return rounds[key];
-        });
-      }
-      return null;
+      return Object.keys(rounds).map(key => {
+        return rounds[key];
+      });
     }
   },
   mounted() {
