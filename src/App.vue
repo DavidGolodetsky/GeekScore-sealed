@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-scroll="onScroll">
     <the-header />
     <v-content>
       <v-container class="app-container">
@@ -9,6 +9,9 @@
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>
         </div>
+        <v-btn v-if="showTop" class="go-top" dark fab color="primary" @click="goTop">
+          <v-icon dark>mdi-chevron-up</v-icon>
+        </v-btn>
       </v-container>
     </v-content>
     <the-footer />
@@ -27,7 +30,9 @@ export default {
     TheFooter
   },
 
-  data: () => ({}),
+  data: () => ({
+    showTop: false
+  }),
   computed: {
     ...mapGetters(["loading"]),
     ...mapGetters("user", ["user"])
@@ -36,6 +41,22 @@ export default {
     user(value) {
       if (!value && this.$route.fullPath !== "/") {
         this.$router.push("/");
+      }
+    }
+  },
+  methods: {
+    goTop() {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+    },
+    onScroll() {
+      if (window.pageYOffset > 500) {
+        this.showTop = true;
+      } else {
+        this.showTop = false;
       }
     }
   }
@@ -55,5 +76,11 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.go-top {
+  position: fixed;
+  right: 50px;
+  bottom: 150px;
 }
 </style>
