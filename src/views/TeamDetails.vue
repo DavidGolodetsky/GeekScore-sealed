@@ -25,7 +25,7 @@
       <v-tab-item value="tab-1">
         <v-data-table :headers="headers" dark :items="rounds" class="elevation-1">
           <template v-slot:item.action="{ item }">
-            <round-edit-dialog :item="item" v-bind="propsToRound" />
+            <round-edit-dialog :item="item" />
           </template>
         </v-data-table>
       </v-tab-item>
@@ -94,7 +94,7 @@ export default {
     rounds() {
       const rounds = this.getRounds(this.teamId);
       return Object.keys(rounds).map(key => {
-        return rounds[key];
+        return { ...rounds[key], id: key };
       });
     }
   },
