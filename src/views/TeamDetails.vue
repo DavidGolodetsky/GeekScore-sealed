@@ -7,32 +7,34 @@
       :props="propsToRound"
       component="round-add-dialog"
     />
-    <v-tabs v-if="showTable" v-model="tab" background-color="primary " centered dark icons-and-text>
-      <v-tabs-slider></v-tabs-slider>
+    <div v-if="showTable">
+      <v-tabs v-model="tab" background-color="primary " centered dark icons-and-text>
+        <v-tabs-slider></v-tabs-slider>
 
-      <v-tab href="#tab-1">
-        Table
-        <v-icon>mdi-table-large</v-icon>
-      </v-tab>
+        <v-tab href="#tab-1">
+          Table
+          <v-icon>mdi-table-large</v-icon>
+        </v-tab>
 
-      <v-tab href="#tab-2">
-        Statistics
-        <v-icon>mdi-chart-bar</v-icon>
-      </v-tab>
-    </v-tabs>
+        <v-tab href="#tab-2">
+          Statistics
+          <v-icon>mdi-chart-bar</v-icon>
+        </v-tab>
+      </v-tabs>
 
-    <v-tabs-items v-if="showTable" v-model="tab">
-      <v-tab-item value="tab-1">
-        <v-data-table :headers="headers" dark :items="rounds" class="elevation-1">
-          <template v-slot:item.action="{ item }">
-            <round-edit-dialog :item="item" />
-          </template>
-        </v-data-table>
-      </v-tab-item>
-      <v-tab-item value="tab-2">
-        <chart-bars :key="statistics" :team="team" />
-      </v-tab-item>
-    </v-tabs-items>
+      <v-tabs-items v-model="tab">
+        <v-tab-item value="tab-1">
+          <v-data-table :headers="headers" dark :items="rounds" class="elevation-1">
+            <template v-slot:item.action="{ item }">
+              <round-edit-dialog :item="item" />
+            </template>
+          </v-data-table>
+        </v-tab-item>
+        <v-tab-item value="tab-2">
+          <chart-bars :key="statistics" :team="team" />
+        </v-tab-item>
+      </v-tabs-items>
+    </div>
   </div>
 </template>
 
@@ -93,9 +95,12 @@ export default {
     },
     rounds() {
       const rounds = this.getRounds(this.teamId);
-      return Object.keys(rounds).map(key => {
-        return { ...rounds[key], id: key };
-      });
+      if (rounds) {
+        return Object.keys(rounds).map(key => {
+          return { ...rounds[key], id: key };
+        });
+      }
+      return [];
     }
   },
   mounted() {
