@@ -33,12 +33,7 @@ a {
 }
 
 .card-list-name {
-  transition: 0.3s;
   color: #fff !important;
-  &:hover {
-    transition: 0.3s;
-    color: $secondary !important;
-  }
 }
 
 .header-title {

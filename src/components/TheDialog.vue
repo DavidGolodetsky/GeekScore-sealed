@@ -1,13 +1,17 @@
 <template>
   <div>
+    <v-btn
+      class="px-0"
+      :small="simple"
+      fab
+      :text="simple"
+      dark
+      @click.prevent="dialog = true"
+      :color="color"
+    >
+      <v-icon dark>mdi-{{ activator }}</v-icon>
+    </v-btn>
     <v-dialog v-model="dialog" max-width="600px">
-      <template v-slot:activator="{ on }">
-        <div>
-          <v-btn class="px-0" :small="simple" fab :text="simple" dark v-on="on" :color="color">
-            <v-icon dark>mdi-{{ activator }}</v-icon>
-          </v-btn>
-        </div>
-      </template>
       <v-card>
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>

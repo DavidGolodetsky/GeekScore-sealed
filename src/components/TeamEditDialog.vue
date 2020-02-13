@@ -70,7 +70,7 @@ export default {
         teamId: this.team.id,
         gameId: this.team.gameId,
         image: this.imageFile,
-        name: this.team.name
+        name: this.name
       };
       if (this.isDelete) {
         this.deleteTeam(team);
@@ -81,6 +81,7 @@ export default {
         team.ext = imageName.slice(imageName.lastIndexOf("."));
         this.updateTeamImage(team);
       } else {
+        console.log(team);
         this.updateTeam(team);
       }
     }

@@ -1,12 +1,8 @@
 <template>
   <div>
     <the-title title="Games" icon="cards" component="game-add-dialog" />
-    <cards-list v-if="games.length" :items="games">
-      <template #title="{ item }">
-        <router-link
-          :to="{name: 'game', params: {gameId: item.id}}"
-          class="card-list-name"
-        >{{ item.name }}</router-link>
+    <cards-list v-if="games.length" :items="games" :route="{name: 'game', params: {gameId: ''}}">
+      <template #action="{ item }">
         <game-edit-dialog :game="item" />
       </template>
     </cards-list>

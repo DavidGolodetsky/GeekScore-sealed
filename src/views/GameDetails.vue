@@ -1,12 +1,8 @@
 <template>
   <div>
     <the-title title="Teams" icon="account-group" :props="{gameId}" component="team-add-dialog" />
-    <cards-list v-if="teams.length" :items="teams">
-      <template #title="{ item }">
-        <router-link
-          :to="{name: 'team', params: {teamId: item.id}}"
-          class="card-list-name"
-        >{{ item.name }}</router-link>
+    <cards-list v-if="teams.length" :items="teams" :route="{name: 'team', params: {teamId: ''}}">
+      <template #action="{ item }">
         <team-edit-dialog :team="item" />
       </template>
     </cards-list>
