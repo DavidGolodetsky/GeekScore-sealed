@@ -80,7 +80,11 @@ export default {
 
 .go-top {
   position: fixed;
-  right: 50px;
-  bottom: 150px;
+  right: 10px;
+  bottom: 20px;
+  @media #{$tablet} {
+    right: 50px;
+    bottom: 150px;
+  }
 }
 </style>

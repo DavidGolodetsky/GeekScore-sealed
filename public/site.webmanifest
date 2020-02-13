@@ -1,5 +1,6 @@
 {
-  "name": "GeekScore",
+  "name": "Geek Score",
+  "short_name": "GeekScore",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
@@ -14,6 +15,5 @@
   ],
   "theme_color": "#ff9800",
   "background_color": "#386694",
-  "start_url": "index.html",
   "display": "standalone"
 }
