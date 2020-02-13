@@ -9,7 +9,14 @@
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>
         </div>
-        <v-btn v-if="showTop" class="go-top" dark fab color="primary" @click="goTop">
+        <v-btn
+          v-if="showTop"
+          class="go-top"
+          dark
+          fab
+          color="primary"
+          @click="$vuetify.goTo(0, options)"
+        >
           <v-icon dark>mdi-chevron-up</v-icon>
         </v-btn>
       </v-container>
@@ -31,7 +38,12 @@ export default {
   },
 
   data: () => ({
-    showTop: false
+    showTop: false,
+    options: {
+      duration: 300,
+      offset: 0,
+      easing: "easeInOutCubic"
+    }
   }),
   computed: {
     ...mapGetters(["loading"]),
@@ -45,13 +57,6 @@ export default {
     }
   },
   methods: {
-    goTop() {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth"
-      });
-    },
     onScroll() {
       if (window.pageYOffset > 500) {
         this.showTop = true;

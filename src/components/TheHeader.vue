@@ -5,7 +5,7 @@
         <the-go-back v-if="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{name: 'home'}">
           <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
-          <span class="header-title">GeekScore</span>
+          <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
         <div class="d-none d-sm-flex">
