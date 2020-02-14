@@ -1,7 +1,7 @@
 <template>
   <the-dialog
     activator="pencil"
-    color="#fff"
+    color="#607d8b"
     header="Edit round info"
     simple
     :submitLogic="onSubmit"

@@ -51,3 +51,10 @@ export default {
   }
 };
 </script>
+
+
+<style scoped lang="scss">
+canvas#bar-chart {
+  background-color: $light-grey;
+}
+</style>

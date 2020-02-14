@@ -24,7 +24,7 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
-          <v-data-table :headers="headers" dark :items="rounds" class="elevation-1">
+          <v-data-table :headers="headers" :items="rounds" class="app-table elevation-1">
             <template v-slot:item.action="{ item }">
               <round-edit-dialog :item="item" />
             </template>
@@ -118,3 +118,10 @@ export default {
   }
 };
 </script>
+
+
+<style scoped lang="scss">
+.app-table {
+  background-color: $light-grey;
+}
+</style>
