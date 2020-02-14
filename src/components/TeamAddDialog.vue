@@ -36,6 +36,10 @@ export default {
     gameId: {
       type: String,
       required: true
+    },
+    gameName: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -62,6 +66,7 @@ export default {
     onSubmit() {
       const team = {
         gameId: this.gameId,
+        gameName: this.gameName,
         name: this.name,
         players: this.players
       };

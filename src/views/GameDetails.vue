@@ -1,6 +1,11 @@
 <template>
   <div>
-    <the-title title="Teams" icon="account-group" :props="{gameId}" component="team-add-dialog" />
+    <the-title
+      title="Teams"
+      icon="account-group"
+      :props="{gameId, gameName}"
+      component="team-add-dialog"
+    />
     <cards-list v-if="teams.length" :items="teams" :route="{name: 'team', params: {teamId: ''}}">
       <template #action="{ item }">
         <team-edit-dialog :team="item" />
@@ -35,6 +40,9 @@ export default {
     ...mapGetters("games", { getGame: "game" }),
     game() {
       return this.getGame(this.gameId);
+    },
+    gameName() {
+      return this.game.name;
     }
   },
   mounted() {

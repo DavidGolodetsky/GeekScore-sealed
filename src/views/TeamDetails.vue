@@ -104,7 +104,7 @@ export default {
     }
   },
   mounted() {
-    this.backTitle(this.team.name);
+    this.backTitle(`${this.team.name}: ${this.team.gameName}`);
   },
   methods: {
     ...mapActions(["backTitle"])
