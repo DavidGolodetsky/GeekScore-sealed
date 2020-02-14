@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     setRoute(id) {
-      const route = this.route;
+      let route = { ...this.route };
       route.params = {
         [Object.keys(this.route.params)[0]]: id
       };
