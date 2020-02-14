@@ -42,7 +42,8 @@ export default {
         return playerRes;
       });
 
-      let top = Math.round(Math.max.apply(null, data) + 10 / 10);
+      let top = Math.round(Math.max.apply(null, data) + 10 / 10) + 5;
+
       return [...data, 0, top];
     },
     getPlayers() {

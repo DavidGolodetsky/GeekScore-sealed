@@ -16,9 +16,10 @@
     ></v-select>
     <template v-if="players.length">
       <v-text-field
-        clearable
         v-for="(player, i) in players"
         v-model="player.name"
+        :readonly="isMe(player)"
+        :clearable="!(isMe(player))"
         prepend-icon="mdi-account"
         :rules="fieldRules"
         :key="i"
@@ -57,11 +58,14 @@ export default {
   methods: {
     ...mapActions("teams", ["createTeam"]),
     setPlayers(event) {
-      this.players = [];
-      for (let i = 0; i < event; i++) {
+      this.players = [{ name: "Me" }];
+      for (let i = 1; i < event; i++) {
         let player = { name: "" };
         this.players.push(player);
       }
+    },
+    isMe(player) {
+      return player.name === "Me" ? true : false;
     },
     onSubmit() {
       const team = {

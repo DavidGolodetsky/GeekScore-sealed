@@ -15,7 +15,6 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            clearable
             v-model="date"
             :rules="fieldRules"
             label="Date"

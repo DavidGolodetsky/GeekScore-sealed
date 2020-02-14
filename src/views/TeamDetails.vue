@@ -8,8 +8,8 @@
       component="round-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs v-model="tab" background-color="primary " centered dark icons-and-text>
-        <v-tabs-slider></v-tabs-slider>
+      <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
+        <v-tabs-slider color="secondary"></v-tabs-slider>
 
         <v-tab href="#tab-1">
           Table
