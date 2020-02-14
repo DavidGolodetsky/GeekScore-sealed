@@ -65,7 +65,7 @@ export default {
 
 <style scoped lang="scss">
 .title-wrap {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 .app-card {
   transition: 0.3s;
