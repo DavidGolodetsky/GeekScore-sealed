@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition appear name="fade-down">
-      <v-alert dismissible outlined :value="true" :type="type" @input="onClose()">{{ text }}</v-alert>
+      <v-alert dismissible :value="true" :type="type" @input="onClose()">{{ text }}</v-alert>
     </transition>
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
       required: true
     }
   },
-
   methods: {
     onClose() {
       this.$emit("dismissed");
