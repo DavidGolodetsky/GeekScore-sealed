@@ -6,7 +6,7 @@
       outlined
       dark
       color="primary"
-      class="mx-auto mt-5"
+      class="mx-auto my-4 pa-4"
     >
       <v-form
         v-model="valid"
@@ -76,6 +76,8 @@
 
 <script>
 import { mapActions } from "vuex";
+import { fbStart } from "@/fb";
+
 export default {
   props: {
     signupMode: {
@@ -98,6 +100,9 @@ export default {
         v => v.length >= 6 || "Password is too short"
       ]
     };
+  },
+  mounted() {
+    fbStart();
   },
   methods: {
     ...mapActions("user", ["signUpUser", "signInUser"]),
