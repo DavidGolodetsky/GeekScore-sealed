@@ -1,5 +1,10 @@
 <template>
-  <the-dialog activator="plus" header="Add new team" button-text="New team" :submitLogic="onSubmit">
+  <the-dialog
+    activator="plus"
+    header="Add new team"
+    button-text="New team"
+    :submitLogic="onSubmit"
+  >
     <v-text-field
       clearable
       :rules="fieldRules"
@@ -19,7 +24,7 @@
         v-for="(player, i) in players"
         v-model="player.name"
         :readonly="isMe(player)"
-        :clearable="!(isMe(player))"
+        :clearable="!isMe(player)"
         prepend-icon="mdi-account"
         :rules="fieldRules"
         :key="i"
@@ -50,7 +55,11 @@ export default {
       players: [],
       fieldRules: [
         v => !!v || "Field is required",
-        v => v.length <= 40 || "Field is too long"
+        v => v.length <= 40 || "Field is too long",
+        v => {
+          let pl = this.players.filter(player => player.name === v);
+          return (!!v && pl.length < 2) || "Player name should be unique";
+        }
       ],
       selectRules: [v => !!v || "Field is required"]
     };
