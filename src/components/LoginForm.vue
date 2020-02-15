@@ -1,12 +1,29 @@
 <template>
   <div>
-    <v-card width="400" raised outlined color="cyan lighten-5" class="mx-auto mt-5">
-      <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
-        <v-card-title class="pb-10">
+    <v-card
+      width="400"
+      raised
+      outlined
+      dark
+      color="primary"
+      class="mx-auto mt-5"
+    >
+      <v-form
+        v-model="valid"
+        lazy-validation
+        ref="form"
+        @submit.prevent="onSubmit"
+      >
+        <v-card-title>
           <h3 v-if="signupMode">Sign Up</h3>
           <h3 v-else>Sign In</h3>
         </v-card-title>
         <v-card-text>
+          <div id="firebaseui-auth-container"></div>
+          <div id="loader">Loading...</div>
+          <div class="d-md-flex d-none or-wrapper">
+            <span class="or">OR</span>
+          </div>
           <v-text-field
             clearable
             label="Email"
@@ -40,15 +57,18 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-row>
-            <v-col align="right">
-              <v-btn color="success" type="submit" :disabled="!valid">Submit</v-btn>
-            </v-col>
-          </v-row>
+          <v-btn
+            class="py-2"
+            color="secondary"
+            width="100%"
+            type="submit"
+            :disabled="!valid"
+            >Submit</v-btn
+          >
         </v-card-actions>
       </v-form>
       <div v-if="!signupMode" class="text-center mb-3">
-        <router-link :to="{name: 'resetPass'}">Forgot password?</router-link>
+        <router-link :to="{ name: 'resetPass' }">Forgot password?</router-link>
       </div>
     </v-card>
   </div>
@@ -112,3 +132,37 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.or-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 30px 0;
+}
+.or {
+  width: 53px;
+  height: 53px;
+  font-weight: 700;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  &:after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    background-color: #fff;
+    height: 1px;
+    width: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+</style>

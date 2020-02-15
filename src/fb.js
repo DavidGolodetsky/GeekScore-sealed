@@ -1,4 +1,5 @@
 import firebase from "firebase"
+import * as firebaseui from 'firebaseui'
 import store from '@/store';
 import router from '@/router';
 
@@ -20,5 +21,29 @@ firebase.auth().onAuthStateChanged((user) => {
         router.push("/games");
     }
 })
+
+
+var uiConfig = {
+    signInFlow: 'popup',
+    signInSuccessUrl: 'https://geekscore.netlify.com/games',
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+        signInFailure(error) {
+            // eslint-disable-next-line no-undef
+            return handleUIError(error);
+        },
+        uiShown: function () {
+            document.getElementById('loader').style.display = 'none';
+        }
+    }
+};
+
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
+ui.start('#firebaseui-auth-container', uiConfig);
+
+
 
 export default firebase;
