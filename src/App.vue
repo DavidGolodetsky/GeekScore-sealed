@@ -7,7 +7,11 @@
           <router-view></router-view>
         </transition>
         <div v-if="loading" class="loader-wrap">
-          <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>
+          <v-progress-circular
+            :size="50"
+            indeterminate
+            color="amber"
+          ></v-progress-circular>
         </div>
         <v-btn
           v-if="showTop"
@@ -85,6 +89,7 @@ export default {
 
 .go-top {
   position: fixed;
+  z-index: 10;
   right: 10px;
   bottom: 20px;
   @media #{$tablet} {
