@@ -9,6 +9,12 @@ a {
   color: #f44336;
 }
 
+.app-headline {
+  color: $secondary;
+  font-size: 25px;
+  user-select: none;
+}
+
 .truncate {
   overflow: hidden;
   white-space: nowrap;
@@ -37,6 +43,7 @@ a {
 }
 
 .header-title {
+  user-select: none;
   color: $secondary;
   font-size: 22px;
   font-weight: 600;

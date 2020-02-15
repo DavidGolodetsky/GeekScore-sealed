@@ -5,7 +5,11 @@
         <v-icon color="secondary" class="mx-2">mdi-{{ icon }}</v-icon>
         <h1 class="app-headline">{{ title }}</h1>
       </div>
-      <component :is="component" v-bind="props" class="d-flex justify-end my-2" />
+      <component
+        :is="component"
+        v-bind="props"
+        class="d-flex justify-end my-2"
+      />
     </div>
   </div>
 </template>
@@ -42,6 +46,7 @@ export default {
 
 <style lang="scss">
 .app-headline {
+  user-select: none;
   color: $secondary;
   font-size: 25px;
 }

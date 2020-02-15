@@ -1,4 +1,5 @@
 import firebase from "firebase"
+import * as firebaseui from 'firebaseui'
 import store from '@/store';
 import router from '@/router';
 
@@ -20,5 +21,31 @@ firebase.auth().onAuthStateChanged((user) => {
         router.push("/games");
     }
 })
+
+const uiConfig = {
+    signInFlow: 'popup',
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+        signInSuccess: () => false,
+        signInFailure(error) {
+            // eslint-disable-next-line no-undef
+            return handleUIError(error);
+        },
+        uiShown() {
+            document.getElementById('loader').style.display = 'none';
+        }
+    }
+};
+
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+export const fbStart = () => {
+    ui.start('#firebaseui-auth-container', uiConfig);
+}
+
+
 
 export default firebase;

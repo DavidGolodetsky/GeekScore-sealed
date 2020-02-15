@@ -1,7 +1,20 @@
 <template>
   <v-footer padless>
-    <v-layout justify-center wrap primary py-3 text-center white--text xs12>
-      <strong>&copy; {{ new Date().getFullYear() }} — Geek Score</strong>
+    <v-layout
+      justify-space-between
+      py-2
+      wrap
+      primary
+      text-center
+      white--text
+      xs12
+    >
+      <v-container class="d-flex flex-wrap justify-space-between">
+        <small class="mr-6"
+          >&copy; {{ new Date().getFullYear() }} — Geek Score</small
+        >
+        <small>Contact: dholodetsky@gmail.com</small>
+      </v-container>
     </v-layout>
   </v-footer>
 </template>
