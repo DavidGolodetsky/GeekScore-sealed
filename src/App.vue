@@ -94,7 +94,7 @@ export default {
   bottom: 20px;
   @media #{$tablet} {
     right: 50px;
-    bottom: 120px;
+    bottom: 80px;
   }
 }
 </style>

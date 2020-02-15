@@ -4,6 +4,11 @@ a {
   text-decoration: none;
 }
 
+.v-application ol,
+.v-application ul {
+  padding-left: 0;
+}
+
 .app-error {
   font-size: 12px;
   color: #f44336;
@@ -72,3 +77,12 @@ a {
 }
 
 // animations END
+
+.firebaseui-card-content {
+  padding: 0;
+}
+
+.firebaseui-idp-button,
+.firebaseui-tenant-button {
+  max-width: 250px;
+}

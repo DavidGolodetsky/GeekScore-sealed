@@ -6,7 +6,7 @@
       outlined
       dark
       color="primary"
-      class="mx-auto my-4 pa-4"
+      class="mx-auto my-4 px-4 pt-4"
     >
       <v-form
         v-model="valid"
@@ -58,7 +58,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn
-            class="py-2"
+            class="my-2 py-2 submit-btn"
             color="secondary"
             width="100%"
             type="submit"
@@ -68,7 +68,9 @@
         </v-card-actions>
       </v-form>
       <div v-if="!signupMode" class="text-center mb-3">
-        <router-link :to="{ name: 'resetPass' }">Forgot password?</router-link>
+        <router-link class="forgot" :to="{ name: 'resetPass' }"
+          >Forgot password?</router-link
+        >
       </div>
     </v-card>
   </div>
@@ -169,5 +171,13 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
   }
+}
+.submit-btn {
+  max-width: 250px;
+  margin: 0 auto;
+}
+.forgot {
+  color: #fff;
+  text-decoration: underline;
 }
 </style>
