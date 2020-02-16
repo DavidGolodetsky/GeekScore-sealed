@@ -78,6 +78,8 @@ a {
 
 // animations END
 
+// firebase UI
+
 .firebaseui-card-content {
   padding: 0;
 }
@@ -86,3 +88,13 @@ a {
 .firebaseui-tenant-button {
   max-width: 250px;
 }
+
+.firebaseui-idp-text.firebaseui-idp-text-long {
+  display: none;
+}
+
+.firebaseui-idp-text.firebaseui-idp-text-short {
+  display: table-cell;
+}
+
+// firebase UI END

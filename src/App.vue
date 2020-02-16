@@ -18,7 +18,6 @@
           class="go-top"
           dark
           fab
-          color="primary"
           @click="$vuetify.goTo(0, options)"
         >
           <v-icon dark>mdi-chevron-up</v-icon>
@@ -92,6 +91,7 @@ export default {
   z-index: 10;
   right: 10px;
   bottom: 20px;
+  background-color: lighten($primary, 15%) !important;
   @media #{$tablet} {
     right: 50px;
     bottom: 80px;
