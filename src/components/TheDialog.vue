@@ -11,7 +11,7 @@
     >
       <v-icon dark>mdi-{{ activator }}</v-icon>
     </v-btn>
-    <v-dialog v-model="dialog" max-width="600px">
+    <v-dialog v-model="dialog" max-width="600">
       <v-card>
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>

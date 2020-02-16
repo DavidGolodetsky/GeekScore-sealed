@@ -76,8 +76,6 @@ a {
   transform: translateY(-30px);
 }
 
-// animations END
-
 // firebase UI
 
 .firebaseui-card-content {
@@ -97,4 +95,8 @@ a {
   display: table-cell;
 }
 
-// firebase UI END
+// Vuetify
+
+.v-dialog .v-sheet {
+  background-color: $light-grey !important;
+}

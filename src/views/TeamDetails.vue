@@ -32,6 +32,7 @@
         <v-tab-item value="tab-1">
           <v-card>
             <v-card-title class="table-title">
+              {{ this.team.name }}
               <v-spacer></v-spacer>
               <v-text-field
                 class="search pt-0"
@@ -47,8 +48,16 @@
               :headers="headers"
               :items="rounds"
               :search="search"
+              single-expand
+              :expanded.sync="expanded"
+              show-expand
               class="app-table elevation-1"
             >
+              <template v-slot:expanded-item="{ item, headers }">
+                <td :colspan="headers.length">
+                  {{ item.comment }}
+                </td>
+              </template>
               <template v-slot:item.action="{ item }">
                 <round-edit-dialog :item="item" />
               </template>
@@ -87,7 +96,8 @@ export default {
     return {
       statistics: 0,
       tab: null,
-      search: ""
+      search: "",
+      expanded: []
     };
   },
   computed: {
