@@ -14,7 +14,7 @@
           ></v-progress-circular>
         </div>
         <v-btn
-          v-if="showTop"
+          :class="{ active: showTop }"
           class="go-top"
           dark
           fab
@@ -89,12 +89,18 @@ export default {
 .go-top {
   position: fixed;
   z-index: 10;
+  opacity: 0;
+  transition: 0.3;
   right: 10px;
   bottom: 20px;
   background-color: lighten($primary, 15%) !important;
   @media #{$tablet} {
     right: 50px;
     bottom: 80px;
+  }
+  &.active {
+    transition: 0.3;
+    opacity: 0.7;
   }
 }
 </style>
