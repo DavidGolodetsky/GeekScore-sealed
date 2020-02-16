@@ -7,6 +7,12 @@
       label="Name"
       v-model="name"
     ></v-text-field>
+    <v-switch
+      v-model="coop"
+      label="Cooperative"
+      color="secondary"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
@@ -17,6 +23,7 @@ export default {
   data() {
     return {
       name: "",
+      coop: false,
       fieldRules: [
         v => !!v || "Field is required",
         v => v.length <= 40 || "Field is too long"

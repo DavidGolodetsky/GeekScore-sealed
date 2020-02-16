@@ -6,10 +6,25 @@
     simple
     :submitLogic="onSubmit"
   >
-    <v-text-field clearable :rules="fieldRules" label="Name" v-model="name"></v-text-field>
-    <v-text-field clearable prepend-icon="mdi-image" label="Image URL" v-model="imageUrl"></v-text-field>
+    <v-text-field
+      clearable
+      :rules="fieldRules"
+      label="Name"
+      v-model="name"
+    ></v-text-field>
+    <v-text-field
+      clearable
+      prepend-icon="mdi-image"
+      label="Image URL"
+      v-model="imageUrl"
+    ></v-text-field>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
-    <v-switch v-model="isDelete" label="Delete game" color="red" value="delete" hide-details></v-switch>
+    <v-switch
+      v-model="isDelete"
+      label="Delete game"
+      color="red"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 

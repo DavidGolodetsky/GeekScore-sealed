@@ -29,8 +29,15 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="secondary darken-1" text @click="close">Close</v-btn>
-            <v-btn color="secondary" text type="submit" :disabled="!valid"
+            <v-btn color="secondary darken-1" rounded text @click="close"
+              >Close</v-btn
+            >
+            <v-btn
+              color="secondary darken-1"
+              rounded
+              text
+              type="submit"
+              :disabled="!valid"
               >Submit</v-btn
             >
           </v-card-actions>
