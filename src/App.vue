@@ -100,7 +100,7 @@ export default {
   }
   &.active {
     transition: 0.3;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 }
 </style>
