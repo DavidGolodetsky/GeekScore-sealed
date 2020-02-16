@@ -3,16 +3,11 @@
     <v-text-field
       clearable
       :rules="fieldRules"
-      prepend-icon="mdi-cards-diamond"
+      prepend-icon="mdi-dice-multiple"
       label="Name"
       v-model="name"
     ></v-text-field>
-    <v-switch
-      v-model="coop"
-      label="Cooperative"
-      color="secondary"
-      hide-details
-    ></v-switch>
+    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
   </the-dialog>
 </template>
 

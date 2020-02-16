@@ -10,17 +10,19 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      rounds: this.team.rounds
+    };
   },
   mounted() {
     this.renderChart(
       {
-        labels: this.getPlayers(),
+        labels: this.team.coop ? ["Victories", "Defeats"] : this.getPlayers(),
         datasets: [
           {
             label: "Victories",
             backgroundColor: "#ec8506",
-            data: this.cookData()
+            data: this.team.coop ? this.getCoopStat() : this.getPlayersStat()
           }
         ]
       },
@@ -28,14 +30,23 @@ export default {
     );
   },
   methods: {
-    cookData() {
+    getCoopStat() {
+      let victories = null;
+      let defeats = null;
+      Object.values(this.rounds).forEach(round => {
+        round.result === "VICTORY" ? victories++ : defeats++;
+      });
+      const data = [victories, defeats];
+      let top = Math.round(Math.max.apply(null, data) + 10 / 10) + 5;
+      return [victories, defeats, 0, top];
+    },
+    getPlayersStat() {
       const players = this.getPlayers();
-      const rounds = this.team.rounds;
       const data = players.map(player => {
         let playerRes = 0;
         let formattedPlayer = player.toLowerCase();
-        Object.keys(rounds).forEach(round => {
-          if (rounds[round][formattedPlayer]) {
+        Object.keys(this.rounds).forEach(round => {
+          if (this.rounds[round][formattedPlayer]) {
             playerRes++;
           }
         });

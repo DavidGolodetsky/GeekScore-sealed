@@ -21,6 +21,12 @@ export default {
             if (payload.imageUrl) {
                 game.imageUrl = payload.imageUrl
             }
+            if (payload.bggURL) {
+                game.bggURL = payload.bggURL
+            }
+            if (payload.melodiceURL) {
+                game.melodiceURL = payload.melodiceURL
+            }
         },
         DELETE_GAME(state, payload) {
             state.games = state.games.filter(game => game.id !== payload)
@@ -41,6 +47,8 @@ export default {
                                 name: obj[key].name,
                                 coop: obj[key].coop,
                                 imageUrl: obj[key].imageUrl,
+                                bggURL: obj[key].bggURL,
+                                melodiceURL: obj[key].melodiceURL,
                                 teams: obj[key].teams,
                             })
                         }
@@ -75,7 +83,9 @@ export default {
             const user = rootState.user.user.id
             const game = {
                 name: payload.name,
-                imageUrl: payload.imageUrl
+                imageUrl: payload.imageUrl,
+                melodiceURL: payload.melodiceURL,
+                bggURL: payload.bggURL,
             }
             fb.database().ref('users').child(user).child('games').child(payload.id).update(game)
                 .then(() => {
@@ -103,7 +113,7 @@ export default {
     },
     getters: {
         games(state) {
-            return state.games.reverse()
+            return state.games
         },
         game(state) {
             return (gameId) => {

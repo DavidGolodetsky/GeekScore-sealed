@@ -4,17 +4,11 @@
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
-      :props="propsToRound"
+      :props="{teamId: this.team.id}"
       component="round-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs
-        v-model="tab"
-        background-color="primary"
-        centered
-        dark
-        icons-and-text
-      >
+      <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
         <v-tabs-slider color="secondary"></v-tabs-slider>
 
         <v-tab href="#tab-1">
@@ -31,14 +25,6 @@
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
           <v-card>
-            <div v-if="team.coop" class="players-panel">
-              <strong> Players:</strong>
-              <ul>
-                <li v-for="(player, i) in team.players" :key="i">
-                  {{ player.name }}
-                </li>
-              </ul>
-            </div>
             <v-card-title class="table-title">
               <v-spacer class="d-none d-sm-flex"></v-spacer>
               <v-text-field
@@ -60,9 +46,7 @@
               class="app-table elevation-1"
             >
               <template v-slot:expanded-item="{ item, headers }">
-                <td :colspan="headers.length">
-                  {{ item.comment }}
-                </td>
+                <td :colspan="headers.length">{{ item.comment }}</td>
               </template>
               <template v-slot:item.action="{ item }">
                 <round-edit-dialog :item="item" />
@@ -117,20 +101,15 @@ export default {
       }
       return false;
     },
-    propsToRound() {
-      return {
-        players: this.team.players,
-        teamId: this.team.id,
-        gameId: this.team.gameId
-      };
-    },
     headers() {
       const headers = this.team.players.map(player => ({
         text: player.name,
         value: player.name.toLowerCase()
       }));
       const fields = [
-        { text: "Draw", value: "draw" },
+        this.team.coop
+          ? { text: "Result", value: "result" }
+          : { text: "Draw", value: "draw" },
         { text: "Date", value: "date" },
         { text: "Actions", value: "action", sortable: false }
       ];

@@ -1,8 +1,12 @@
 <template>
   <the-dialog activator="plus" header="Add new round" :submitLogic="onSubmit">
-    <v-radio-group class="mb-4" :rules="fieldRules" v-model="result">
+    <v-radio-group v-if="team.coop" class="mb-4" :rules="fieldRules" v-model="result">
+      <v-radio label="Defeat" value="DEFEAT"></v-radio>
+      <v-radio label="Victory" value="VICTORY"></v-radio>
+    </v-radio-group>
+    <v-radio-group v-else class="mb-4" :rules="fieldRules" v-model="result">
       <v-radio
-        v-for="(player, i) in players"
+        v-for="(player, i) in team.players"
         :key="i"
         :label="player.name"
         :value="player.name"
@@ -28,10 +32,7 @@
             v-on="on"
           ></v-text-field>
         </template>
-        <v-date-picker
-          v-model="date"
-          @input="datepicker = false"
-        ></v-date-picker>
+        <v-date-picker v-model="date" @input="datepicker = false"></v-date-picker>
       </v-menu>
     </v-row>
     <v-row>
@@ -48,18 +49,10 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
-    players: {
-      type: Array,
-      required: true
-    },
     teamId: {
-      type: String,
-      required: true
-    },
-    gameId: {
       type: String,
       required: true
     }
@@ -73,6 +66,12 @@ export default {
       fieldRules: [v => !!v || "Field is required"]
     };
   },
+  computed: {
+    ...mapGetters("teams", { getTeam: "team" }),
+    team() {
+      return this.getTeam(this.teamId);
+    }
+  },
   methods: {
     ...mapActions("teams", ["createRound"]),
     onSubmit() {
@@ -82,14 +81,18 @@ export default {
     cookRound() {
       const round = {
         date: this.date,
-        gameId: this.gameId,
+        gameId: this.team.gameId,
         teamId: this.teamId,
         comment: this.comment
       };
-      if (this.result === "draw") {
-        round.draw = "DRAW";
+      if (this.team.coop) {
+        round.result = this.result;
       } else {
-        round[this.result.toLowerCase()] = "VICTORY";
+        if (this.result === "draw") {
+          round.draw = "DRAW";
+        } else {
+          round[this.result.toLowerCase()] = "VICTORY";
+        }
       }
       return round;
     }

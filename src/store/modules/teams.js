@@ -170,7 +170,7 @@ export default {
     },
     getters: {
         teams(state) {
-            return state.teams.reverse()
+            return state.teams
         },
         team(state) {
             return (teamId) => {

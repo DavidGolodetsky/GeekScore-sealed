@@ -18,9 +18,39 @@
                 :src="item.imageUrl"
               >
                 <div class="title-wrap">
-                  <v-card-title class="d-flex align-center justify-space-between">
-                    <span class="card-list-name">{{ item.name }}</span>
-                    <slot name="action" :item="item" />
+                  <v-card-title>
+                    <div class="card-list-name">{{ item.name }}</div>
+                    <div class="card-list-actions">
+                      <v-btn
+                        v-if="item.bggURL"
+                        :href="item.bggURL"
+                        class="px-0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        small
+                        text
+                        fab
+                        @click.stop
+                        color="#fff"
+                      >
+                        <v-icon dark>mdi-dice-multiple</v-icon>
+                      </v-btn>
+                      <v-btn
+                        v-if="item.melodiceURL"
+                        :href="item.melodiceURL"
+                        class="px-0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        small
+                        text
+                        fab
+                        @click.stop
+                        color="#fff"
+                      >
+                        <v-icon dark>mdi-music</v-icon>
+                      </v-btn>
+                      <slot name="action" :item="item" />
+                    </div>
                   </v-card-title>
                 </div>
               </v-img>
@@ -73,5 +103,14 @@ export default {
     transition: 0.3s;
     box-shadow: 7px 9px 20px -6px rgba(0, 0, 0, 0.75);
   }
+}
+.card-list-name {
+  width: 100%;
+  color: $secondary !important;
+}
+.card-list-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 </style>
