@@ -22,7 +22,7 @@
     <v-switch
       v-model="isDelete"
       label="Delete game"
-      color="red"
+      color="error"
       hide-details
     ></v-switch>
   </the-dialog>
@@ -44,7 +44,7 @@ export default {
       isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,
-      fieldRules: [v => v.length <= 60 || "Field is too long"]
+      fieldRules: [v => (!!v && v.length <= 60) || "Field is too long"]
     };
   },
   methods: {

@@ -9,7 +9,7 @@
     <v-switch
       v-model="isDelete"
       label="Delete round"
-      color="red"
+      color="error"
       hide-details
     ></v-switch>
   </the-dialog>

@@ -99,7 +99,7 @@ export default {
       ],
       passwordRules: [
         v => !!v || "Field is required",
-        v => v.length >= 6 || "Password is too short"
+        v => (!!v && v.length >= 6) || "Password is too short"
       ]
     };
   },

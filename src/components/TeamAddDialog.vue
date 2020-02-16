@@ -31,19 +31,22 @@
         :label="`Player #${i + 1}`"
       ></v-text-field>
     </template>
+    <v-switch
+      v-if="!game.coop"
+      v-model="coop"
+      label="Cooperative"
+      color="secondary"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   props: {
     gameId: {
-      type: String,
-      required: true
-    },
-    gameName: {
       type: String,
       required: true
     }
@@ -51,6 +54,7 @@ export default {
   data() {
     return {
       name: "",
+      coop: false,
       numberOfPlayers: [2, 3, 4, 5, 6, 7, 8],
       players: [],
       fieldRules: [
@@ -63,6 +67,12 @@ export default {
       ],
       selectRules: [v => !!v || "Field is required"]
     };
+  },
+  computed: {
+    ...mapGetters("games", { getGame: "game" }),
+    game() {
+      return this.getGame(this.gameId);
+    }
   },
   methods: {
     ...mapActions("teams", ["createTeam"]),
@@ -79,8 +89,9 @@ export default {
     onSubmit() {
       const team = {
         gameId: this.gameId,
-        gameName: this.gameName,
+        gameName: this.game.name,
         name: this.name,
+        coop: this.coop,
         players: this.players
       };
       this.createTeam(team);

@@ -26,7 +26,7 @@ export default {
       coop: false,
       fieldRules: [
         v => !!v || "Field is required",
-        v => v.length <= 40 || "Field is too long"
+        v => (!!v && v.length <= 40) || "Field is too long"
       ]
     };
   },

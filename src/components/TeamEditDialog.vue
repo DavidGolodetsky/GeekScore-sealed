@@ -25,7 +25,7 @@
     <v-switch
       v-model="isDelete"
       label="Delete team"
-      color="red"
+      color="error"
       hide-details
     ></v-switch>
   </the-dialog>
@@ -49,10 +49,11 @@ export default {
       imageUrl: this.team.imageUrl,
       fieldRules: [
         v => !!v || "Field is required",
-        v => v.length <= 60 || "Field is too long"
+        v => (!!v && v.length <= 60) || "Field is too long"
       ],
       imageRules: [
-        v => v.size < 2000000 || "Image size should be less than 2 MB"
+        v =>
+          (v ? v.size < 2000000 : true) || "Image size should be less than 2 MB"
       ]
     };
   },
@@ -73,6 +74,7 @@ export default {
         this.imageFile = file;
       } else {
         this.imageUrl = "";
+        this.imageFile = null;
       }
     },
     onSubmit() {
@@ -91,7 +93,6 @@ export default {
         team.ext = imageName.slice(imageName.lastIndexOf("."));
         this.updateTeamImage(team);
       } else {
-        console.log(team);
         this.updateTeam(team);
       }
     }

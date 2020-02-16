@@ -32,7 +32,8 @@
         <v-tab-item value="tab-1">
           <v-card>
             <v-card-title class="table-title">
-              <span class="d-none d-sm-flex"> {{ this.team.name }}</span>
+              {{ team.coop }}
+              <span class="d-none d-sm-flex"> {{ team.name }}</span>
               <v-spacer class="d-none d-sm-flex"></v-spacer>
               <v-text-field
                 class="search pt-0"
