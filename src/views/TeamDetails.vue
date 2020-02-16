@@ -32,8 +32,8 @@
         <v-tab-item value="tab-1">
           <v-card>
             <v-card-title class="table-title">
-              {{ this.team.name }}
-              <v-spacer></v-spacer>
+              <span class="d-none d-sm-flex"> {{ this.team.name }}</span>
+              <v-spacer class="d-none d-sm-flex"></v-spacer>
               <v-text-field
                 class="search pt-0"
                 v-model="search"
@@ -163,7 +163,9 @@ export default {
   background-color: $light-grey;
 }
 .search {
-  max-width: 300px;
   background-color: $light-grey;
+  @media #{$tablet} {
+    max-width: 300px;
+  }
 }
 </style>
