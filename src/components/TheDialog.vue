@@ -16,7 +16,12 @@
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
         </v-card-title>
-        <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
+        <v-form
+          v-model="valid"
+          lazy-validation
+          ref="form"
+          @submit.prevent="onSubmit"
+        >
           <v-card-text>
             <v-container>
               <slot />
@@ -25,7 +30,9 @@
           <v-card-actions>
             <v-spacer />
             <v-btn color="blue darken-1" text @click="close">Close</v-btn>
-            <v-btn color="blue darken-1" text type="submit" :disabled="!valid">Submit</v-btn>
+            <v-btn color="blue darken-1" text type="submit" :disabled="!valid"
+              >Submit</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
@@ -81,7 +88,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped lang="scss">
 .button-text {

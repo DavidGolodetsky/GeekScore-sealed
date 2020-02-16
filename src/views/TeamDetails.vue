@@ -8,7 +8,13 @@
       component="round-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
+      <v-tabs
+        v-model="tab"
+        background-color="primary"
+        centered
+        dark
+        icons-and-text
+      >
         <v-tabs-slider color="secondary"></v-tabs-slider>
 
         <v-tab href="#tab-1">
@@ -24,14 +30,35 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
-          <v-data-table :headers="headers" :items="rounds" class="app-table elevation-1">
-            <template v-slot:item.action="{ item }">
-              <round-edit-dialog :item="item" />
-            </template>
-          </v-data-table>
+          <v-card>
+            <v-card-title class="table-title">
+              <v-spacer></v-spacer>
+              <v-text-field
+                class="search pt-0"
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
+
+            <v-data-table
+              :headers="headers"
+              :items="rounds"
+              :search="search"
+              class="app-table elevation-1"
+            >
+              <template v-slot:item.action="{ item }">
+                <round-edit-dialog :item="item" />
+              </template>
+            </v-data-table>
+          </v-card>
         </v-tab-item>
         <v-tab-item value="tab-2">
-          <chart-bars :key="statistics" :team="team" />
+          <v-card>
+            <chart-bars :key="statistics" :team="team" />
+          </v-card>
         </v-tab-item>
       </v-tabs-items>
     </div>
@@ -59,7 +86,8 @@ export default {
   data() {
     return {
       statistics: 0,
-      tab: null
+      tab: null,
+      search: ""
     };
   },
   computed: {
@@ -119,9 +147,13 @@ export default {
 };
 </script>
 
-
 <style scoped lang="scss">
-.app-table {
+.app-table,
+.table-title {
+  background-color: $light-grey;
+}
+.search {
+  max-width: 300px;
   background-color: $light-grey;
 }
 </style>
