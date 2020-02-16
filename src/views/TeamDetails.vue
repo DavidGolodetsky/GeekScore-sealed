@@ -31,9 +31,15 @@
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
           <v-card>
+            <div v-if="team.coop" class="players-panel">
+              <strong> Players:</strong>
+              <ul>
+                <li v-for="(player, i) in team.players" :key="i">
+                  {{ player.name }}
+                </li>
+              </ul>
+            </div>
             <v-card-title class="table-title">
-              {{ team.coop }}
-              <span class="d-none d-sm-flex"> {{ team.name }}</span>
               <v-spacer class="d-none d-sm-flex"></v-spacer>
               <v-text-field
                 class="search pt-0"
@@ -44,7 +50,6 @@
                 hide-details
               ></v-text-field>
             </v-card-title>
-
             <v-data-table
               :headers="headers"
               :items="rounds"
@@ -168,5 +173,9 @@ export default {
   @media #{$tablet} {
     max-width: 300px;
   }
+}
+.players-panel {
+  background-color: $light-grey;
+  padding: 10px;
 }
 </style>

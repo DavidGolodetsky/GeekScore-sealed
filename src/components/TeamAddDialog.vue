@@ -91,7 +91,7 @@ export default {
         gameId: this.gameId,
         gameName: this.game.name,
         name: this.name,
-        coop: this.coop,
+        coop: this.coop || this.game.coop,
         players: this.players
       };
       this.createTeam(team);
