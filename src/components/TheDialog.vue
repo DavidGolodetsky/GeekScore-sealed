@@ -14,7 +14,7 @@
     <v-dialog v-model="dialog" max-width="600">
       <v-card>
         <v-card-title>
-          <h3 class="app-headline">{{ header }}</h3>
+          <h3>{{ header }}</h3>
         </v-card-title>
         <v-form
           v-model="valid"
@@ -29,8 +29,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="blue darken-1" text @click="close">Close</v-btn>
-            <v-btn color="blue darken-1" text type="submit" :disabled="!valid"
+            <v-btn color="secondary darken-1" text @click="close">Close</v-btn>
+            <v-btn color="secondary" text type="submit" :disabled="!valid"
               >Submit</v-btn
             >
           </v-card-actions>
