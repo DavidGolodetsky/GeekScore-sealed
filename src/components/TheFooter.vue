@@ -13,7 +13,7 @@
         <small class="mr-6"
           >&copy; {{ new Date().getFullYear() }} — Geek Score</small
         >
-        <small>Contact: dholodetsky@gmail.com</small>
+        <small>Contact: geekscore.info@gmail.com</small>
       </v-container>
     </v-layout>
   </v-footer>
