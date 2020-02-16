@@ -34,6 +34,7 @@ export default {
     ...mapActions("games", ["createGame"]),
     onSubmit() {
       const game = {
+        coop: this.coop,
         name: this.name
       };
       this.createGame(game);

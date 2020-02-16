@@ -39,6 +39,7 @@ export default {
                             games.push({
                                 id: key,
                                 name: obj[key].name,
+                                coop: obj[key].coop,
                                 imageUrl: obj[key].imageUrl,
                                 teams: obj[key].teams,
                             })
