@@ -27,6 +27,9 @@ export default {
             if (payload.melodiceURL) {
                 game.melodiceURL = payload.melodiceURL
             }
+            if (payload.rulesURL) {
+                game.rulesURL = payload.rulesURL
+            }
         },
         DELETE_GAME(state, payload) {
             state.games = state.games.filter(game => game.id !== payload)
@@ -49,6 +52,7 @@ export default {
                                 imageUrl: obj[key].imageUrl,
                                 bggURL: obj[key].bggURL,
                                 melodiceURL: obj[key].melodiceURL,
+                                rulesURL: obj[key].rulesURL,
                                 teams: obj[key].teams,
                             })
                         }
@@ -85,6 +89,7 @@ export default {
                 name: payload.name,
                 imageUrl: payload.imageUrl,
                 melodiceURL: payload.melodiceURL,
+                rulesURL: payload.rulesURL,
                 bggURL: payload.bggURL,
             }
             console.log(game)

@@ -30,6 +30,13 @@
     <v-text-field
       clearable
       :rules="linkRules"
+      label="Rules URL"
+      prepend-icon="mdi-book-open-variant"
+      v-model="rulesURL"
+    ></v-text-field>
+    <v-text-field
+      clearable
+      :rules="linkRules"
       prepend-icon="mdi-image"
       label="Image URL"
       v-model="imageUrl"
@@ -54,6 +61,7 @@ export default {
       name: this.game.name,
       bggURL: this.game.bggURL ? this.game.bggURL : "",
       melodiceURL: this.game.melodiceURL ? this.game.melodiceURL : "",
+      rulesURL: this.game.rulesURL ? this.game.rulesURL : "",
       isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,
@@ -76,7 +84,8 @@ export default {
         imageUrl: this.imageUrl,
         id: this.game.id,
         bggURL: this.bggURL,
-        melodiceURL: this.melodiceURL
+        melodiceURL: this.melodiceURL,
+        rulesURL: this.rulesURL
       };
       if (this.isDelete) {
         this.deleteGame(game);

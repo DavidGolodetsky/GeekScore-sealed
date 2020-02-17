@@ -24,11 +24,11 @@
                 :src="item.imageUrl"
               >
                 <div class="title-wrap">
-                  <v-card-title v-if="item.bggURL || item.melodiceURL" class="card-list-actions">
+                  <v-card-title v-if="showBottmPlate(item)" class="card-list-actions">
                     <v-btn
                       v-if="item.bggURL"
                       :href="item.bggURL"
-                      class="px-0"
+                      class="px-0 mx-1"
                       target="_blank"
                       rel="noopener noreferrer"
                       small
@@ -40,9 +40,23 @@
                       <v-icon dark>mdi-cards</v-icon>
                     </v-btn>
                     <v-btn
+                      v-if="item.rulesURL"
+                      :href="item.rulesURL"
+                      class="px-0 mx-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      small
+                      text
+                      fab
+                      @click.stop
+                      color="#fff"
+                    >
+                      <v-icon dark>mdi-book-open-variant</v-icon>
+                    </v-btn>
+                    <v-btn
                       v-if="item.melodiceURL"
                       :href="item.melodiceURL"
-                      class="px-0"
+                      class="px-0 mx-1"
                       target="_blank"
                       rel="noopener noreferrer"
                       small
@@ -90,6 +104,12 @@ export default {
         [Object.keys(this.route.params)[0]]: id
       };
       return route;
+    },
+    showBottmPlate(item) {
+      if (item.bggURL || item.melodiceURL || item.rulesURL) {
+        return true;
+      }
+      return false;
     }
   }
 };
