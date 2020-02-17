@@ -11,6 +11,12 @@
         >
           <v-card :key="item.id" raised class="mx-auto app-card">
             <router-link :to="setRoute(item.id)">
+              <div class="title-wrap">
+                <v-card-title class="d-flex justify-space-between">
+                  <span class="card-list-name">{{ item.name }}</span>
+                  <slot name="action" :item="item" />
+                </v-card-title>
+              </div>
               <v-img
                 :lazy-src="lazyImg"
                 class="white--text align-end item-card"
@@ -18,39 +24,35 @@
                 :src="item.imageUrl"
               >
                 <div class="title-wrap">
-                  <v-card-title>
-                    <div class="card-list-name">{{ item.name }}</div>
-                    <div class="card-list-actions">
-                      <v-btn
-                        v-if="item.bggURL"
-                        :href="item.bggURL"
-                        class="px-0"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        small
-                        text
-                        fab
-                        @click.stop
-                        color="#fff"
-                      >
-                        <v-icon dark>mdi-cards</v-icon>
-                      </v-btn>
-                      <v-btn
-                        v-if="item.melodiceURL"
-                        :href="item.melodiceURL"
-                        class="px-0"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        small
-                        text
-                        fab
-                        @click.stop
-                        color="#fff"
-                      >
-                        <v-icon dark>mdi-music</v-icon>
-                      </v-btn>
-                      <slot name="action" :item="item" />
-                    </div>
+                  <v-card-title v-if="item.bggURL || item.melodiceURL" class="card-list-actions">
+                    <v-btn
+                      v-if="item.bggURL"
+                      :href="item.bggURL"
+                      class="px-0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      small
+                      text
+                      fab
+                      @click.stop
+                      color="#fff"
+                    >
+                      <v-icon dark>mdi-cards</v-icon>
+                    </v-btn>
+                    <v-btn
+                      v-if="item.melodiceURL"
+                      :href="item.melodiceURL"
+                      class="px-0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      small
+                      text
+                      fab
+                      @click.stop
+                      color="#fff"
+                    >
+                      <v-icon dark>mdi-music</v-icon>
+                    </v-btn>
                   </v-card-title>
                 </div>
               </v-img>
@@ -105,7 +107,6 @@ export default {
   }
 }
 .card-list-name {
-  width: 100%;
   color: $secondary !important;
 }
 .card-list-actions {
