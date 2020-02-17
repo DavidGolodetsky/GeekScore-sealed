@@ -87,6 +87,7 @@ export default {
                 melodiceURL: payload.melodiceURL,
                 bggURL: payload.bggURL,
             }
+            console.log(game)
             fb.database().ref('users').child(user).child('games').child(payload.id).update(game)
                 .then(() => {
                     commit("UPDATE_GAME", payload)

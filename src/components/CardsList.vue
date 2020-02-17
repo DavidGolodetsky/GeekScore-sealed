@@ -33,7 +33,7 @@
                         @click.stop
                         color="#fff"
                       >
-                        <v-icon dark>mdi-dice-multiple</v-icon>
+                        <v-icon dark>mdi-cards</v-icon>
                       </v-btn>
                       <v-btn
                         v-if="item.melodiceURL"

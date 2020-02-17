@@ -17,7 +17,7 @@
       clearable
       :rules="linkRules"
       label="Board geek game URL"
-      prepend-icon="mdi-cards-diamond"
+      prepend-icon="mdi-cards"
       v-model="bggURL"
     ></v-text-field>
     <v-text-field
@@ -52,8 +52,8 @@ export default {
   data() {
     return {
       name: this.game.name,
-      bggURL: this.game.bggURL,
-      melodiceURL: this.game.melodiceURL,
+      bggURL: this.game.bggURL ? this.game.bggURL : "",
+      melodiceURL: this.game.melodiceURL ? this.game.melodiceURL : "",
       isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,

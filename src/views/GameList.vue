@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-title title="Games" icon="cards" component="game-add-dialog" />
+    <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
     <cards-list v-if="games.length" :items="games" :route="{name: 'game', params: {gameId: ''}}">
       <template #action="{ item }">
         <game-edit-dialog :game="item" />
