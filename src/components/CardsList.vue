@@ -131,6 +131,11 @@ export default {
   color: $secondary;
 }
 
+.v-image__image--preload {
+  -webkit-filter: none;
+  filter: none;
+}
+
 .card-list-actions {
   display: flex;
   justify-content: flex-end;
