@@ -9,7 +9,7 @@
           min-height="200"
           transition="fade-transition"
         >
-          <v-card :key="item.id" raised class="mx-auto app-card">
+          <v-card dark :key="item.id" raised class="mx-auto app-card">
             <router-link :to="setRoute(item.id)">
               <div class="title-wrap">
                 <v-card-title class="d-flex justify-space-between">
