@@ -41,12 +41,16 @@
               :items="rounds"
               :search="search"
               single-expand
+              :items-per-page="5"
               :expanded.sync="expanded"
               show-expand
               class="app-table elevation-1"
             >
               <template v-slot:expanded-item="{ item, headers }">
-                <td :colspan="headers.length">{{ item.comment }}</td>
+                <td :colspan="headers.length">
+                  <div v-if="item.turn">First turn: {{ item.turn }}</div>
+                  <div v-if="item.comment">Comment: {{ item.comment }}</div>
+                </td>
               </template>
               <template v-slot:item.action="{ item }">
                 <round-edit-dialog :item="item" />

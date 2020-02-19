@@ -14,6 +14,10 @@
       <v-card>
         <v-card-title>
           <h3>{{ header }}</h3>
+          <v-spacer></v-spacer>
+          <v-btn small fab text @click="close">
+            <v-icon dark>mdi-close</v-icon>
+          </v-btn>
         </v-card-title>
         <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
           <v-card-text>
@@ -23,7 +27,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="secondary darken-1" rounded text @click="close">Close</v-btn>
+            <v-btn color="secondary darken-1" rounded text @click="close">Cancel</v-btn>
             <v-btn color="secondary darken-1" rounded text type="submit" :disabled="!valid">Submit</v-btn>
           </v-card-actions>
         </v-form>

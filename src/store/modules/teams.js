@@ -134,20 +134,6 @@ export default {
                 })
 
         },
-        deleteRound({ commit, rootState }, payload) {
-            commit('SET_LOADING', true, { root: true })
-            const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
-                .then(() => {
-                    commit("DELETE_ROUND", payload)
-                    commit('SET_LOADING', false, { root: true })
-                })
-                .catch((e) => {
-                    commit('SET_LOADING', false, { root: true })
-                    console.log(e)
-                })
-
-        },
         createRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
@@ -166,6 +152,20 @@ export default {
                     commit('SET_LOADING', false, { root: true })
                     console.log(e)
                 })
+        },
+        deleteRound({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
+                .then(() => {
+                    commit("DELETE_ROUND", payload)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+
         },
     },
     getters: {

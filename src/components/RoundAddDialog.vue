@@ -1,10 +1,16 @@
 <template>
   <the-dialog activator="plus" header="Add new round" :submitLogic="onSubmit">
-    <v-radio-group v-if="team.coop" class="mb-4" :rules="fieldRules" v-model="result">
+    <v-radio-group
+      v-if="team.coop"
+      label="Result:"
+      class="mb-4"
+      :rules="fieldRules"
+      v-model="result"
+    >
       <v-radio label="Defeat" value="DEFEAT"></v-radio>
       <v-radio label="Victory" value="VICTORY"></v-radio>
     </v-radio-group>
-    <v-radio-group v-else class="mb-4" :rules="fieldRules" v-model="result">
+    <v-radio-group label="Result:" v-else class="mb-4" :rules="fieldRules" v-model="result">
       <v-radio
         v-for="(player, i) in team.players"
         :key="i"
@@ -45,6 +51,14 @@
         prepend-icon="mdi-comment"
       ></v-textarea>
     </v-row>
+    <v-radio-group label="First turn:" class="mb-4" v-model="turn">
+      <v-radio
+        v-for="(player, i) in team.players"
+        :key="i"
+        :label="player.name"
+        :value="player.name"
+      ></v-radio>
+    </v-radio-group>
   </the-dialog>
 </template>
 
@@ -61,6 +75,7 @@ export default {
     return {
       datepicker: false,
       comment: "",
+      turn: "",
       result: null,
       date: new Date().toISOString().substr(0, 10),
       fieldRules: [v => !!v || "Field is required"]
@@ -81,6 +96,7 @@ export default {
     cookRound() {
       const round = {
         date: this.date,
+        turn: this.turn,
         gameId: this.team.gameId,
         teamId: this.teamId,
         comment: this.comment
