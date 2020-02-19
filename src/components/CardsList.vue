@@ -128,8 +128,9 @@ export default {
   }
 }
 .card-list-name {
-  color: $secondary !important;
+  color: $secondary;
 }
+
 .card-list-actions {
   display: flex;
   justify-content: flex-end;

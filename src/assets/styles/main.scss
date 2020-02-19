@@ -32,15 +32,19 @@ a {
   background-color: #50514f;
 }
 
-.v-toolbar__content {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.app-container {
-  padding: 10px !important;
-  @media #{$tablet} {
-    padding: 40px 0 !important;
+#app {
+  .v-toolbar__content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .app-container {
+    padding: 10px;
+    @media #{$tablet} {
+      padding: 40px 0;
+    }
+  }
+  .v-dialog .v-sheet {
+    background-color: $light-grey;
   }
 }
 
@@ -90,10 +94,4 @@ a {
 
 .firebaseui-idp-text.firebaseui-idp-text-short {
   display: table-cell;
-}
-
-// Vuetify
-
-.v-dialog .v-sheet {
-  background-color: $light-grey !important;
 }
