@@ -55,7 +55,7 @@ export default {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
 
-            const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fteam.jpg?alt=media&token=09c8ec54-cccf-4b40-a35b-84dbdaecdce2'
+            const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fteam.jpg?alt=media&token=74d21226-02b7-4ad6-aa88-220c960f82c3'
             const team = {
                 ...payload,
                 rounds: {},
