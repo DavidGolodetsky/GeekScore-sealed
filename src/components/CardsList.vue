@@ -24,6 +24,7 @@
                 :src="item.imageUrl"
               >
                 <div class="title-wrap">
+                  <!-- TODO:put in loop -->
                   <v-card-title v-if="showBottmPlate(item)" class="card-list-actions">
                     <v-btn
                       v-if="item.bggURL"

@@ -53,7 +53,7 @@ export default {
         return playerRes;
       });
 
-      let top = Math.round(Math.max.apply(null, data) + 10 / 10) + 5;
+      let top = Math.ceil(Math.max.apply(null, data) / 10) * 10;
 
       return [...data, 0, top];
     },
