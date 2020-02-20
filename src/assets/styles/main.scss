@@ -40,7 +40,7 @@ a {
   .app-container {
     padding: 10px;
     @media #{$tablet} {
-      padding: 40px 0;
+      padding: 40px 10px;
     }
   }
   .v-dialog .v-sheet {
