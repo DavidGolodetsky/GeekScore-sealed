@@ -31,6 +31,9 @@ const routes = [
       } else {
         next({ name: "NotFound" })
       }
+      if (from.name === 'games') {
+        store.dispatch('teams/setTeams', to.params.gameId)
+      }
     },
     meta: { requiresAuth: true },
   },

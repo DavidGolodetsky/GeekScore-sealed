@@ -1,11 +1,6 @@
 <template>
   <div>
-    <the-title
-      title="Teams"
-      icon="account-group"
-      :props="{ gameId }"
-      component="team-add-dialog"
-    />
+    <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
     <cards-list
       v-if="teams.length"
       :items="teams"
@@ -51,10 +46,8 @@ export default {
   },
   mounted() {
     this.backTitle(this.game.name);
-    this.setTeams(this.gameId);
   },
   methods: {
-    ...mapActions("teams", ["setTeams"]),
     ...mapActions(["backTitle"])
   }
 };
