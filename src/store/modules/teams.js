@@ -1,4 +1,5 @@
 import fb from "@/fb";
+import Vue from "vue";
 
 export default {
     namespaced: true,
@@ -36,7 +37,7 @@ export default {
             const round = {
                 [payload.id]: payload
             }
-            team.rounds = { ...team.rounds, ...round }
+            Vue.set(team, 'rounds', { ...team.rounds, ...round })
         },
     },
     actions: {
