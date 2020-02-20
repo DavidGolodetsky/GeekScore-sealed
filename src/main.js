@@ -19,7 +19,5 @@ new Vue({
 const shouldSW = 'serviceWorker' in navigator
 const prod = process.env.NODE_ENV === 'production'
 if (shouldSW && prod) {
-  navigator.serviceWorker.register('/service-worker.js').then(() => {
-    console.log('Service worker have been register!')
-  })
+  navigator.serviceWorker.register('/service-worker.js')
 }

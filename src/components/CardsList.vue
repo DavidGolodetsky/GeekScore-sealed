@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row justify="end">
+    <v-row>
       <v-col sm="6" md="4" cols="12">
         <v-text-field clearable prepend-icon="mdi-magnify" dark label="Search" v-model="search"></v-text-field>
       </v-col>
@@ -34,8 +34,9 @@
                   <!-- TODO:put in loop -->
                   <v-card-title v-if="showBottmPlate(item)" class="card-list-actions">
                     <v-btn
-                      v-if="item.bggURL"
-                      :href="item.bggURL"
+                      v-for="(action, i) in getActions(item)"
+                      :key="i"
+                      :href="action.link"
                       class="px-0 mx-1"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -45,35 +46,7 @@
                       @click.stop
                       color="#fff"
                     >
-                      <v-icon dark>mdi-cards</v-icon>
-                    </v-btn>
-                    <v-btn
-                      v-if="item.rulesURL"
-                      :href="item.rulesURL"
-                      class="px-0 mx-1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      small
-                      text
-                      fab
-                      @click.stop
-                      color="#fff"
-                    >
-                      <v-icon dark>mdi-book-open-variant</v-icon>
-                    </v-btn>
-                    <v-btn
-                      v-if="item.melodiceURL"
-                      :href="item.melodiceURL"
-                      class="px-0 mx-1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      small
-                      text
-                      fab
-                      @click.stop
-                      color="#fff"
-                    >
-                      <v-icon dark>mdi-music</v-icon>
+                      <v-icon dark>mdi-{{ action.icon }}</v-icon>
                     </v-btn>
                   </v-card-title>
                 </div>
@@ -92,7 +65,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     items: {
@@ -123,6 +95,19 @@ export default {
     }
   },
   methods: {
+    getActions(item) {
+      const actions = [];
+      if (item.bggURL) {
+        actions.push({ link: item.bggURL, icon: "cards" });
+      }
+      if (item.rulesURL) {
+        actions.push({ link: item.rulesURL, icon: "book-open-variant" });
+      }
+      if (item.melodiceURL) {
+        actions.push({ link: item.melodiceURL, icon: "music" });
+      }
+      return actions;
+    },
     setRoute(id) {
       let route = { ...this.route };
       route.params = {

@@ -92,7 +92,6 @@ export default {
                 rulesURL: payload.rulesURL,
                 bggURL: payload.bggURL,
             }
-            console.log(game)
             fb.database().ref('users').child(user).child('games').child(payload.id).update(game)
                 .then(() => {
                     commit("UPDATE_GAME", payload)
