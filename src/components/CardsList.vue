@@ -1,7 +1,12 @@
 <template>
   <div>
+    <v-row justify="end">
+      <v-col sm="6" md="4" cols="12">
+        <v-text-field clearable append-icon="mdi-magnify" dark label="Search" v-model="search"></v-text-field>
+      </v-col>
+    </v-row>
     <v-row>
-      <v-col sm="6" md="4" cols="12" v-for="(item, i) in items" :key="i" class="mb-6">
+      <v-col sm="6" md="4" cols="12" v-for="(item, i) in filteredItems" :key="i" class="mb-6">
         <v-lazy
           :options="{
           threshold: .5
@@ -95,8 +100,22 @@ export default {
   },
   data() {
     return {
-      lazyImg: lazy.img
+      lazyImg: lazy.img,
+      search: ""
     };
+  },
+  computed: {
+    filteredItems() {
+      if (this.search) {
+        return this.items.filter(item => {
+          return this.search
+            .toLowerCase()
+            .split(" ")
+            .every(v => item.name.toLowerCase().includes(v));
+        });
+      }
+      return this.items;
+    }
   },
   methods: {
     setRoute(id) {
