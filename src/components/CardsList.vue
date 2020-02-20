@@ -2,18 +2,18 @@
   <div>
     <v-row>
       <v-col sm="6" md="4" cols="12">
-        <v-text-field clearable prepend-icon="mdi-magnify" dark label="Search" v-model="search"></v-text-field>
+        <v-text-field
+          v-if="shouldSearch"
+          clearable
+          prepend-icon="mdi-magnify"
+          dark
+          label="Search"
+          v-model="search"
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-row>
-      <v-col
-        sm="6"
-        md="4"
-        cols="12"
-        v-for="(item, i) in filteredItems.slice().reverse()"
-        :key="i"
-        class="mb-6"
-      >
+      <v-col sm="6" md="4" cols="12" v-for="(item, i) in filteredItems" :key="i" class="mb-6">
         <v-lazy
           :options="{
           threshold: .5
@@ -84,14 +84,18 @@ export default {
   computed: {
     filteredItems() {
       if (this.search) {
-        return this.items.filter(item => {
+        const filtered = this.items.filter(item => {
           return this.search
             .toLowerCase()
             .split(" ")
             .every(v => item.name.toLowerCase().includes(v));
         });
+        return filtered.slice().reverse();
       }
-      return this.items;
+      return this.items.slice().reverse();
+    },
+    shouldSearch() {
+      return this.items.length > 3 ? true : false;
     }
   },
   methods: {
