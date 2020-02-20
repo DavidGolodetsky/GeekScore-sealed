@@ -7,11 +7,7 @@
           <router-view></router-view>
         </transition>
         <div v-if="loading" class="loader-wrap">
-          <v-progress-circular
-            :size="50"
-            indeterminate
-            color="amber"
-          ></v-progress-circular>
+          <v-progress-circular :size="50" indeterminate color="secondary"></v-progress-circular>
         </div>
         <v-btn
           :class="{ active: showTop }"

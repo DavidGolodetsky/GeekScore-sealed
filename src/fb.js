@@ -29,7 +29,7 @@ const uiConfig = {
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
-        signInSuccess: () => false,
+        signInSuccessWithAuthResult: () => false,
         signInFailure(error) {
             // eslint-disable-next-line no-undef
             return handleUIError(error);

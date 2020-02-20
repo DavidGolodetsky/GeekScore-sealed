@@ -2,7 +2,7 @@
   <div>
     <v-row justify="end">
       <v-col sm="6" md="4" cols="12">
-        <v-text-field clearable append-icon="mdi-magnify" dark label="Search" v-model="search"></v-text-field>
+        <v-text-field clearable prepend-icon="mdi-magnify" dark label="Search" v-model="search"></v-text-field>
       </v-col>
     </v-row>
     <v-row>
@@ -29,12 +29,7 @@
                   <slot name="action" :item="item" />
                 </v-card-title>
               </div>
-              <v-img
-                :lazy-src="lazyImg"
-                class="white--text align-end item-card"
-                height="350"
-                :src="item.imageUrl"
-              >
+              <v-img class="white--text align-end" height="350" :src="item.imageUrl">
                 <div class="title-wrap">
                   <!-- TODO:put in loop -->
                   <v-card-title v-if="showBottmPlate(item)" class="card-list-actions">
@@ -82,6 +77,11 @@
                     </v-btn>
                   </v-card-title>
                 </div>
+                <template v-slot:placeholder>
+                  <v-row class="fill-height ma-0" align="center" justify="center">
+                    <v-progress-circular indeterminate color="secondary"></v-progress-circular>
+                  </v-row>
+                </template>
               </v-img>
             </router-link>
           </v-card>
@@ -92,7 +92,6 @@
 </template>
 
 <script>
-import lazy from "@/assets/scripts/lazy";
 
 export default {
   props: {
@@ -107,7 +106,6 @@ export default {
   },
   data() {
     return {
-      lazyImg: lazy.img,
       search: ""
     };
   },
