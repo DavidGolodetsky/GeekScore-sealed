@@ -24,39 +24,7 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item value="tab-1">
-          <v-card>
-            <v-card-title class="table-title">
-              <v-spacer class="d-none d-sm-flex"></v-spacer>
-              <v-text-field
-                class="search pt-0"
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field>
-            </v-card-title>
-            <v-data-table
-              :headers="headers"
-              :items="rounds"
-              :search="search"
-              single-expand
-              :items-per-page="5"
-              :expanded.sync="expanded"
-              show-expand
-              class="app-table elevation-1"
-            >
-              <template v-slot:expanded-item="{ item, headers }">
-                <td :colspan="headers.length">
-                  <div v-if="item.turn">First turn: {{ item.turn }}</div>
-                  <div v-if="item.comment">Comment: {{ item.comment }}</div>
-                </td>
-              </template>
-              <template v-slot:item.action="{ item }">
-                <round-edit-dialog :item="item" />
-              </template>
-            </v-data-table>
-          </v-card>
+          <the-table :team="team" :rounds="rounds" />
         </v-tab-item>
         <v-tab-item value="tab-2">
           <v-card>
@@ -70,15 +38,15 @@
 
 <script>
 import TheTitle from "@/components/TheTitle";
+import TheTable from "@/components/TheTable";
 import ChartBars from "@/components/ChartBars.vue";
-import RoundEditDialog from "@/components/RoundEditDialog";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     ChartBars,
-    TheTitle,
-    RoundEditDialog
+    TheTable,
+    TheTitle
   },
   props: {
     teamId: {
@@ -89,9 +57,7 @@ export default {
   data() {
     return {
       statistics: 0,
-      tab: null,
-      search: "",
-      expanded: []
+      tab: null
     };
   },
   computed: {
@@ -104,21 +70,6 @@ export default {
         return true;
       }
       return false;
-    },
-    headers() {
-      const headers = this.team.players.map(player => ({
-        text: player.name,
-        value: player.name.toLowerCase()
-      }));
-      const fields = [
-        this.team.coop
-          ? { text: "Result", value: "result" }
-          : { text: "Draw", value: "draw" },
-        { text: "Date", value: "date" },
-        { text: "Actions", value: "action", sortable: false }
-      ];
-      headers.push(...fields);
-      return headers;
     },
     rounds() {
       const rounds = this.getRounds(this.teamId);
@@ -146,19 +97,3 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.app-table,
-.table-title {
-  background-color: $light-grey;
-}
-.search {
-  background-color: $light-grey;
-  @media #{$tablet} {
-    max-width: 300px;
-  }
-}
-.players-panel {
-  background-color: $light-grey;
-  padding: 10px;
-}
-</style>
