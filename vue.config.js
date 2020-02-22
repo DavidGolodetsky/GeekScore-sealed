@@ -28,9 +28,12 @@ module.exports = {
               "public/site.webmanifest",
               "dist/**/*.{js,css}"
             ],
-            runtimeCaching: [{
-              urlPattern: //
-            }],
+            runtimeCaching: [
+              {
+                urlPattern: /^https:\/\/(jpg|png)/,
+                handler: "fastest"
+              }
+            ],
             stripPrefix: "/"
           })
         ]
