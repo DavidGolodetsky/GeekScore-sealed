@@ -11,6 +11,12 @@ module.exports = {
       }
     }
   },
+  pwa: {
+    workboxOptions: {
+      swSrc: 'service-worker.js',
+      exclude: [/\.map$/, /_redirects/]
+    }
+  },
   configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
       return {
