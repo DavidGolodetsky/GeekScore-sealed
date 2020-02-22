@@ -30,7 +30,7 @@ module.exports = {
             ],
             runtimeCaching: [
               {
-                urlPattern: /^https:\/\/(jpg|png)/,
+                urlPattern: /(https?:\/\/.*\.(?:png|jpg))/i,
                 handler: "fastest"
               }
             ],
