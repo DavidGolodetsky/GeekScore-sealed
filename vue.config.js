@@ -19,6 +19,7 @@ module.exports = {
         handler: 'networkFirst',
         options: {
           networkTimeoutSeconds: 20,
+          maxEntries: 5,
           cacheName: 'api-cache',
           cacheableResponse: {
             statuses: [0, 200],
