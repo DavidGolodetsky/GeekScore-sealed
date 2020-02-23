@@ -1,5 +1,6 @@
 {
   "name": "Geek Score",
+  "short_name": "Geek Score",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
