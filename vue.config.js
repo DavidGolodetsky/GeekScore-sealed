@@ -32,12 +32,6 @@ module.exports = {
             runtimeCaching: [{
               urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
               handler: 'fastest',
-              options: {
-                cache: {
-                  maxEntries: 5,
-                  name: 'recently-img'
-                }
-              }
             }],
             stripPrefix: "/"
           })
