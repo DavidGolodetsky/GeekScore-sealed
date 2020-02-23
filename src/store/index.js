@@ -17,6 +17,7 @@ export default new Vuex.Store({
     error: null,
     backTitle: null,
     loading: false,
+    online: false
   },
   mutations: {
     SET_LOADING(state, payload) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     BACK_TITLE(state, payload) {
       state.backTitle = payload
     },
+    SET_ONLINE(state, payload) {
+      state.online = payload
+    },
   },
   actions: {
     clearError({ commit }) {
@@ -44,6 +48,9 @@ export default new Vuex.Store({
     },
     clearBackTitle({ commit }) {
       commit('CLEAR_BACK_TITLE')
+    },
+    setOnline({ commit }) {
+      commit('SET_ONLINE')
     }
   },
   getters: {

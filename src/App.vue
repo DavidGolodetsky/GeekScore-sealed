@@ -27,7 +27,7 @@
 <script>
 import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -48,6 +48,9 @@ export default {
     ...mapGetters(["loading"]),
     ...mapGetters("user", ["user"])
   },
+  mounted() {
+    this.checkOnline();
+  },
   watch: {
     user(value) {
       if (!value && this.$route.fullPath !== "/") {
@@ -56,6 +59,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setOnline"]),
+    checkOnline() {
+      let online = navigator.onLine;
+      window.addEventListener("online", () => (online = true));
+      window.addEventListener("offline", () => (online = false));
+      this.setOnline(online);
+    },
     onScroll() {
       if (window.pageYOffset > 500) {
         this.showTop = true;
