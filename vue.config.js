@@ -15,7 +15,7 @@ module.exports = {
     workboxOptions: {
       exclude: [/\.map$/, /_redirects/],
       runtimeCaching: [{
-        urlPattern: /(https?:\/\/.*\.(?:png|jpg))/i,
+        urlPattern: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g,
         handler: 'networkFirst',
         options: {
           networkTimeoutSeconds: 20,
