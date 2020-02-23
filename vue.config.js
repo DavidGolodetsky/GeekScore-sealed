@@ -19,7 +19,7 @@ module.exports = {
         handler: 'networkFirst',
         options: {
           networkTimeoutSeconds: 20,
-          cacheName: 'api-cache',
+          cacheName: 'img-cache',
           cacheableResponse: {
             statuses: [0, 200],
           },
@@ -30,7 +30,7 @@ module.exports = {
         handler: 'networkFirst',
         options: {
           networkTimeoutSeconds: 20,
-          cacheName: 'api-cache',
+          cacheName: 'fonts-cache',
           cacheableResponse: {
             statuses: [0, 200],
           },
