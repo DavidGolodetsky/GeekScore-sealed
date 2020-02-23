@@ -1,9 +1,9 @@
 <template>
   <v-app v-scroll="onScroll">
-    <the-alert v-if="!online" type="warining" text="Geek Score is offline"></the-alert>
     <the-header />
     <v-content>
       <v-container class="app-container">
+        <the-alert v-if="!online" type="warning" :text="offlineText" />
         <transition name="slide" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -40,6 +40,7 @@ export default {
   data: () => ({
     showTop: false,
     online: false,
+    offlineText: "Geek Score is offline. Some features might be disabled",
     options: {
       duration: 300,
       offset: 0,

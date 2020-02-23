@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singup" :text="error.message"></the-alert>
+    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singup" :text="error.message" />
     <login-form class="mt-12" signup-mode></login-form>
   </div>
 </template>

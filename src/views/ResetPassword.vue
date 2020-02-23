@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message"></the-alert>
+    <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <div v-if="resettedPassword">
       <p class="mb-5">Check your email for a new password</p>
       <the-go-back />
