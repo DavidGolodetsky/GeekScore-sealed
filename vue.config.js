@@ -14,17 +14,17 @@ module.exports = {
   pwa: {
     workboxOptions: {
       exclude: [/\.map$/, /_redirects/],
-      runtimeCaching: [{
-        urlPattern: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g,
-        handler: 'networkFirst',
-        options: {
-          networkTimeoutSeconds: 20,
-          cacheName: 'api-cache',
-          cacheableResponse: {
-            statuses: [0, 200],
-          },
-        },
-      }]
+      // runtimeCaching: [{
+      //   urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
+      //   handler: 'fastest',
+      //   options: {
+      //     networkTimeoutSeconds: 20,
+      //     cacheName: 'api-cache',
+      //     cacheableResponse: {
+      //       statuses: [0, 200],
+      //     },
+      //   },
+      // }]
     }
   },
   configureWebpack: () => {
@@ -39,6 +39,11 @@ module.exports = {
               "public/site.webmanifest",
               "dist/**/*.{js,css}"
             ],
+
+            runtimeCaching: [{
+              urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
+              handler: 'fastest',
+            }],
             stripPrefix: "/"
           })
         ]
