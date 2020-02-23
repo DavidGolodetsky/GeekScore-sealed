@@ -16,7 +16,7 @@ module.exports = {
       exclude: [/\.map$/, /_redirects/],
       runtimeCaching: [{
         urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
-        handler: 'fastest',
+        handler: 'networkFirst',
         options: {
           networkTimeoutSeconds: 20,
           cacheName: 'api-cache',
@@ -39,11 +39,6 @@ module.exports = {
               "public/site.webmanifest",
               "dist/**/*.{js,css}"
             ],
-
-            // runtimeCaching: [{
-            //   urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
-            //   handler: 'fastest',
-            // }],
             stripPrefix: "/"
           })
         ]
