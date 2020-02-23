@@ -12,9 +12,8 @@ module.exports = {
     }
   },
   pwa: {
-    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      exclude: [/\.map$/, /_redirects/, /manifest\.json$/],
+      exclude: [/\.map$/, /_redirects/],
       runtimeCaching: [{
         urlPattern: /(https?:\/\/.*\.(?:png|jpg))/i,
         handler: 'networkFirst',
