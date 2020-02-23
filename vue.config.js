@@ -24,6 +24,17 @@ module.exports = {
             statuses: [0, 200],
           },
         },
+      },
+      {
+        urlPattern: /^https:\/\/(fonts)/,
+        handler: 'networkFirst',
+        options: {
+          networkTimeoutSeconds: 20,
+          cacheName: 'api-cache',
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
       }]
     }
   },
