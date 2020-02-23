@@ -1,5 +1,6 @@
 <template>
   <v-app v-scroll="onScroll">
+    <the-alert v-if="!online" type="warining" text="Geek Score is offline"></the-alert>
     <the-header />
     <v-content>
       <v-container class="app-container">
@@ -38,6 +39,7 @@ export default {
 
   data: () => ({
     showTop: false,
+    online: false,
     options: {
       duration: 300,
       offset: 0,
@@ -61,10 +63,10 @@ export default {
   methods: {
     ...mapActions(["setOnline"]),
     checkOnline() {
-      let online = navigator.onLine;
-      window.addEventListener("online", () => (online = true));
-      window.addEventListener("offline", () => (online = false));
-      this.setOnline(online);
+      this.online = navigator.onLine;
+      window.addEventListener("online", () => (this.online = true));
+      window.addEventListener("offline", () => (this.online = false));
+      this.setOnline(this.online);
     },
     onScroll() {
       if (window.pageYOffset > 500) {
