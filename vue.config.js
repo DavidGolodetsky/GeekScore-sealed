@@ -13,18 +13,7 @@ module.exports = {
   },
   pwa: {
     workboxOptions: {
-      exclude: [/\.map$/, /_redirects/],
-      // runtimeCaching: [{
-      //   urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
-      //   handler: 'fastest',
-      //   options: {
-      //     networkTimeoutSeconds: 20,
-      //     cacheName: 'api-cache',
-      //     cacheableResponse: {
-      //       statuses: [0, 200],
-      //     },
-      //   },
-      // }]
+      exclude: [/\.map$/, /_redirects/]
     }
   },
   configureWebpack: () => {
@@ -43,6 +32,12 @@ module.exports = {
             runtimeCaching: [{
               urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg))/g,
               handler: 'fastest',
+              options: {
+                cache: {
+                  maxEntries: 5,
+                  name: 'recently-img'
+                }
+              }
             }],
             stripPrefix: "/"
           })
