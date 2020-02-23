@@ -12,8 +12,20 @@ module.exports = {
     }
   },
   pwa: {
+    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      exclude: [/\.map$/, /_redirects/]
+      exclude: [/\.map$/, /_redirects/, /manifest\.json$/],
+      runtimeCaching: [{
+        urlPattern: /(https?:\/\/.*\.(?:png|jpg))/i,
+        handler: 'networkFirst',
+        options: {
+          networkTimeoutSeconds: 20,
+          cacheName: 'api-cache',
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      }]
     }
   },
   configureWebpack: () => {
@@ -27,12 +39,6 @@ module.exports = {
               "public/index.html",
               "public/site.webmanifest",
               "dist/**/*.{js,css}"
-            ],
-            runtimeCaching: [
-              {
-                urlPattern: /(https?:\/\/.*\.(?:png|jpg))/i,
-                handler: "fastest"
-              }
             ],
             stripPrefix: "/"
           })
