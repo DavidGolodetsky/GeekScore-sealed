@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card>
+    <v-card class="mb-4">
       <v-card-title class="table-title">
         <v-spacer class="d-none d-sm-flex"></v-spacer>
         <v-text-field
