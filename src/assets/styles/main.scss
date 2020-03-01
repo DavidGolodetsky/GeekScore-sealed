@@ -37,6 +37,10 @@ a {
     padding-left: 0;
     padding-right: 0;
   }
+  .disable-hover,
+  .disable-hover * {
+    pointer-events: none !important;
+  }
   .app-container {
     padding: 10px;
     @media #{$tablet} {
