@@ -47,6 +47,16 @@
                     >
                       <v-icon dark>mdi-{{ action.icon }}</v-icon>
                     </v-btn>
+                    <v-btn
+                      class="px-0 mx-1"
+                      small
+                      text
+                      fab
+                      @click.stop.prevent="favorite(item)"
+                      :color="item.favorite ? 'error' : '#fff'"
+                    >
+                      <v-icon dark>mdi-heart</v-icon>
+                    </v-btn>
                   </v-card-title>
                 </div>
                 <template v-slot:placeholder>
@@ -64,6 +74,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     items: {
@@ -89,15 +101,16 @@ export default {
             .split(" ")
             .every(v => item.name.toLowerCase().includes(v));
         });
-        return filtered.slice().reverse();
+        return this.getItemsOrder(filtered);
       }
-      return this.items.slice().reverse();
+      return this.getItemsOrder(this.items);
     },
     shouldSearch() {
       return this.items.length > 3 ? true : false;
     }
   },
   methods: {
+    ...mapActions("games", ["toggleFavorite"]),
     getActions(item) {
       const actions = [];
       if (item.bggURL) {
@@ -111,6 +124,10 @@ export default {
       }
       return actions;
     },
+    getItemsOrder(items) {
+      const reversed = items.slice().reverse();
+      return reversed.sort((x, y) => y.favorite - x.favorite);
+    },
     setRoute(id) {
       let route = { ...this.route };
       route.params = {
@@ -123,6 +140,10 @@ export default {
         return true;
       }
       return false;
+    },
+    favorite(item) {
+      const favorite = !item.favorite;
+      this.toggleFavorite({ favorite, id: item.id });
     }
   }
 };

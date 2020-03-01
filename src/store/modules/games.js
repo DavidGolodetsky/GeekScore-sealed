@@ -33,6 +33,10 @@ export default {
         },
         DELETE_GAME(state, payload) {
             state.games = state.games.filter(game => game.id !== payload)
+        },
+        TOGGLE_FAVORITE(state, payload) {
+            const game = state.games.find(game => game.id === payload.id)
+            game.favorite = payload.favorite
         }
     },
     actions: {
@@ -54,6 +58,7 @@ export default {
                                 melodiceURL: obj[key].melodiceURL,
                                 rulesURL: obj[key].rulesURL,
                                 teams: obj[key].teams,
+                                favorite: obj[key].favorite ? obj[key].favorite : false,
                             })
                         }
                         commit('SET_LOADED_GAMES', games)
@@ -108,6 +113,22 @@ export default {
             fb.database().ref('users').child(user).child('games').child(payload.id).remove()
                 .then(() => {
                     commit("DELETE_GAME", payload.id)
+                    commit('SET_LOADING', false, { root: true })
+                })
+                .catch((e) => {
+                    commit('SET_LOADING', false, { root: true })
+                    console.log(e)
+                })
+        },
+        toggleFavorite({ commit, rootState }, payload) {
+            commit('SET_LOADING', true, { root: true })
+            const user = rootState.user.user.id
+            const game = {
+                favorite: payload.favorite
+            }
+            fb.database().ref('users').child(user).child('games').child(payload.id).update(game)
+                .then(() => {
+                    commit("TOGGLE_FAVORITE", payload)
                     commit('SET_LOADING', false, { root: true })
                 })
                 .catch((e) => {
