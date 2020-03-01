@@ -5,7 +5,7 @@
       <v-container class="app-container">
         <the-alert v-if="!online" type="warning" :text="offlineText" />
         <transition name="slide" mode="out-in">
-          <router-view :class="{ 'disable-hover': isScrolling}"></router-view>
+          <router-view></router-view>
         </transition>
         <div v-if="loading" class="loader-wrap">
           <v-progress-circular :size="50" indeterminate color="secondary"></v-progress-circular>
@@ -40,7 +40,6 @@ export default {
   data: () => ({
     showTop: false,
     online: false,
-    isScrolling: false,
     offlineText: "Geek Score is offline. Some features might be disabled",
     options: {
       duration: 300,
@@ -71,12 +70,6 @@ export default {
       this.setOnline(this.online);
     },
     onScroll() {
-      this.isScrolling = true;
-      console.log(this.isScrolling);
-      setTimeout(() => {
-        this.isScrolling = false;
-        console.log(this.isScrolling);
-      }, 500);
       if (window.pageYOffset > 500) {
         this.showTop = true;
       } else {
@@ -86,9 +79,6 @@ export default {
   }
 };
 </script>
-
-
-
 
 <style scoped lang="scss">
 .loader-wrap {
@@ -115,7 +105,7 @@ export default {
   background-color: lighten($primary, 15%);
   @media #{$tablet} {
     right: 50px;
-    bottom: 40px;
+    bottom: 80px;
   }
   &.active {
     transition: 0.3;
