@@ -13,11 +13,18 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col sm="6" md="4" cols="12" v-for="(item, i) in filteredItems" :key="i" class="mb-6">
+      <v-col
+        sm="6"
+        md="4"
+        cols="12"
+        v-for="(item, i) in filteredItems"
+        :key="i"
+        class="mb-6"
+      >
         <v-lazy
           :options="{
-          threshold: .5
-        }"
+            threshold: 0.5
+          }"
           min-height="200"
           transition="fade-transition"
         >
@@ -29,24 +36,30 @@
                   <slot name="action" :item="item" />
                 </v-card-title>
               </div>
-              <v-img class="white--text align-end" height="350" :src="item.imageUrl">
+              <v-img
+                class="white--text align-end"
+                height="350"
+                :src="item.imageUrl"
+              >
                 <div class="title-wrap">
-                  <v-card-title v-if="showBottmPlate(item)" class="card-list-actions">
-                    <v-btn
-                      v-for="(action, i) in getActions(item)"
-                      :key="i"
-                      :href="action.link"
-                      class="px-0 mx-1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      small
-                      text
-                      fab
-                      @click.stop
-                      color="#fff"
-                    >
-                      <v-icon dark>mdi-{{ action.icon }}</v-icon>
-                    </v-btn>
+                  <v-card-title class="card-list-actions">
+                    <template v-if="getActions(item).length">
+                      <v-btn
+                        v-for="(action, i) in getActions(item)"
+                        :key="i"
+                        :href="action.link"
+                        class="px-0 mx-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        small
+                        text
+                        fab
+                        @click.stop
+                        color="#fff"
+                      >
+                        <v-icon dark>mdi-{{ action.icon }}</v-icon>
+                      </v-btn>
+                    </template>
                     <v-btn
                       class="px-0 mx-1"
                       small
@@ -60,8 +73,15 @@
                   </v-card-title>
                 </div>
                 <template v-slot:placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
-                    <v-progress-circular indeterminate color="secondary"></v-progress-circular>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-progress-circular
+                      indeterminate
+                      color="secondary"
+                    ></v-progress-circular>
                   </v-row>
                 </template>
               </v-img>
@@ -134,12 +154,6 @@ export default {
         [Object.keys(this.route.params)[0]]: id
       };
       return route;
-    },
-    showBottmPlate(item) {
-      if (item.bggURL || item.melodiceURL || item.rulesURL) {
-        return true;
-      }
-      return false;
     },
     favorite(item) {
       const favorite = !item.favorite;
