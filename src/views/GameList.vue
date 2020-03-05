@@ -1,7 +1,12 @@
 <template>
   <div>
     <the-title title="Games" icon="dice-multiple" component="game-add-dialog" />
-    <cards-list v-if="games.length" :items="games" :route="{name: 'game', params: {gameId: ''}}">
+    <cards-list
+      v-if="games.length"
+      :items="games"
+      @favorite="toggleFavorite"
+      :route="{name: 'game', params: {gameId: ''}}"
+    >
       <template #action="{ item }">
         <game-edit-dialog :game="item" />
       </template>
@@ -30,8 +35,11 @@ export default {
     this.clearBackTitle();
   },
   methods: {
-    ...mapActions("games", ["loadGames"]),
-    ...mapActions(["clearBackTitle"])
+    ...mapActions("games", ["loadGames", "updateGame"]),
+    ...mapActions(["clearBackTitle"]),
+    toggleFavorite(data) {
+      this.updateGame(data);
+    }
   }
 };
 </script>

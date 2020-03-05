@@ -14,13 +14,9 @@ export default {
             state.teams.push(payload)
         },
         UPDATE_TEAM(state, payload) {
-            const team = state.teams.find(team => team.id === payload.teamId)
-            if (payload.name) {
-                team.name = payload.name
-            }
-            if (payload.imageUrl) {
-                team.imageUrl = payload.imageUrl
-            }
+            const team = state.teams.find(team => team.id === payload.id)
+            state.teams = state.teams.filter(team => team.id !== payload.id)
+            state.teams.push({ ...team, ...payload })
         },
         DELETE_TEAM(state, payload) {
             state.teams = state.teams.filter(team => team.id !== payload.teamId)
@@ -38,7 +34,7 @@ export default {
                 [payload.id]: payload
             }
             Vue.set(team, 'rounds', { ...team.rounds, ...round })
-        },
+        }
     },
     actions: {
         setTeams({ commit, rootGetters }, payload) {
@@ -59,8 +55,9 @@ export default {
             const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fteam.jpg?alt=media&token=74d21226-02b7-4ad6-aa88-220c960f82c3'
             const team = {
                 ...payload,
+                imageUrl,
                 rounds: {},
-                imageUrl
+                favorite: false
             }
             fb.database().ref('users').child(user).child('games')
                 .child(payload.gameId)
@@ -79,10 +76,9 @@ export default {
         updateTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            const updatedTeam = {
-                name: payload.name
-            }
-            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).update(updatedTeam)
+            // eslint-disable-next-line no-unused-vars
+            const getTeam = ({ gameId, ...rest }) => rest
+            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update(getTeam(payload))
                 .then(() => {
                     commit("UPDATE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })

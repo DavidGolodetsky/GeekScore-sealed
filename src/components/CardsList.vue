@@ -13,14 +13,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col
-        sm="6"
-        md="4"
-        cols="12"
-        v-for="(item, i) in filteredItems"
-        :key="i"
-        class="mb-6"
-      >
+      <v-col sm="6" md="4" cols="12" v-for="(item, i) in filteredItems" :key="i" class="mb-6">
         <v-lazy
           :options="{
             threshold: 0.5
@@ -36,11 +29,7 @@
                   <slot name="action" :item="item" />
                 </v-card-title>
               </div>
-              <v-img
-                class="white--text align-end"
-                height="350"
-                :src="item.imageUrl"
-              >
+              <v-img class="white--text align-end" height="350" :src="item.imageUrl">
                 <div class="title-wrap">
                   <v-card-title class="card-list-actions">
                     <template v-if="getActions(item).length">
@@ -73,15 +62,8 @@
                   </v-card-title>
                 </div>
                 <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="secondary"
-                    ></v-progress-circular>
+                  <v-row class="fill-height ma-0" align="center" justify="center">
+                    <v-progress-circular indeterminate color="secondary"></v-progress-circular>
                   </v-row>
                 </template>
               </v-img>
@@ -94,7 +76,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 
 export default {
   props: {
@@ -130,7 +111,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions("games", ["toggleFavorite"]),
     getActions(item) {
       const actions = [];
       if (item.bggURL) {
@@ -157,7 +137,11 @@ export default {
     },
     favorite(item) {
       const favorite = !item.favorite;
-      this.toggleFavorite({ favorite, id: item.id });
+      const data = {
+        favorite,
+        id: item.id
+      };
+      this.$emit("favorite", data);
     }
   }
 };

@@ -4,6 +4,7 @@
     <cards-list
       v-if="teams.length"
       :items="teams"
+      @favorite="toggleFavorite"
       :route="{ name: 'team', params: { teamId: '' } }"
     >
       <template #action="{ item }">
@@ -48,7 +49,16 @@ export default {
     this.backTitle(this.game.name);
   },
   methods: {
-    ...mapActions(["backTitle"])
+    ...mapActions(["backTitle"]),
+    ...mapActions("teams", ["updateTeam"]),
+    toggleFavorite(data) {
+      const payload = {
+        ...data,
+        gameId: this.gameId
+      };
+      console.log(payload);
+      this.updateTeam(payload);
+    }
   }
 };
 </script>
