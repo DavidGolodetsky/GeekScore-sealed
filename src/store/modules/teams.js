@@ -93,7 +93,7 @@ export default {
             const user = rootState.user.user.id
             const ext = payload.ext
             let imageUrl
-            const imagePath = fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`)
+            const imagePath = fb.storage().ref('users').child(user).child('teams').child(`${payload.id}${ext}`)
             if (fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`)) {
                 fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).delete()
             }
@@ -103,7 +103,7 @@ export default {
                 })
                 .then((url) => {
                     imageUrl = url
-                    return fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).update({ imageUrl })
+                    return fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update({ imageUrl })
                 })
                 .then(() => {
                     commit("UPDATE_TEAM", { ...payload, ext, imageUrl })
