@@ -54,6 +54,7 @@
                       small
                       text
                       fab
+                      v-if="showFavorite"
                       @click.stop.prevent="favorite(item)"
                       :color="item.favorite ? 'error' : '#fff'"
                     >
@@ -76,7 +77,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     items: {
@@ -108,6 +108,9 @@ export default {
     },
     shouldSearch() {
       return this.items.length > 3 ? true : false;
+    },
+    showFavorite() {
+      return this.items.length > 1 ? true : false;
     }
   },
   methods: {
