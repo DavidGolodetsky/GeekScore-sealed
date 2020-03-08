@@ -19,7 +19,7 @@ export default {
             state.teams.push({ ...team, ...payload })
         },
         DELETE_TEAM(state, payload) {
-            state.teams = state.teams.filter(team => team.id !== payload.teamId)
+            state.teams = state.teams.filter(team => team.id !== payload.id)
         },
         DELETE_ROUND(state, payload) {
             state.teams = state.teams.map(team => {
@@ -117,10 +117,10 @@ export default {
         deleteTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            if (fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${payload.ext}`)) {
-                fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${payload.ext}`).delete()
+            if (fb.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`)) {
+                fb.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`).delete()
             }
-            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).remove()
+            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).remove()
                 .then(() => {
                     commit("DELETE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })
