@@ -31,7 +31,7 @@ export default {
     ...mapGetters("user", ["user"])
   },
   created() {
-    this.loadGames();
+    this.shouldLoadGames();
     this.clearBackTitle();
   },
   methods: {
@@ -39,6 +39,9 @@ export default {
     ...mapActions(["clearBackTitle"]),
     toggleFavorite(data) {
       this.updateGame(data);
+    },
+    shouldLoadGames() {
+      this.games.length ? "" : this.loadGames();
     }
   }
 };
