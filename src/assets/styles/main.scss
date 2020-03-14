@@ -46,6 +46,9 @@ a {
   .v-dialog .v-sheet {
     background-color: $light-grey;
   }
+  .v-btn.secondary .v-btn__content {
+    color: $primary;
+  }
 }
 
 .header-title {
