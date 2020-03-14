@@ -13,6 +13,7 @@
         <v-btn
           :class="{ active: showTop }"
           class="go-top"
+          aria-label="Go to top"
           dark
           fab
           @click="$vuetify.goTo(0, options)"

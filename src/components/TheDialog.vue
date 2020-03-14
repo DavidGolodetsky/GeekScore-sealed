@@ -4,6 +4,7 @@
       class="px-0"
       :small="simple"
       fab
+      aria-label="Open modal"
       :text="simple"
       @click.prevent="dialog = true"
       :color="color"
@@ -15,7 +16,7 @@
         <v-card-title>
           <h3>{{ header }}</h3>
           <v-spacer></v-spacer>
-          <v-btn small fab text @click="close">
+          <v-btn small aria-label="Close modal" fab text @click="close">
             <v-icon dark>mdi-close</v-icon>
           </v-btn>
         </v-card-title>

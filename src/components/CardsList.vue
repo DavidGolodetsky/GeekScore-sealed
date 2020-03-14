@@ -41,6 +41,7 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         small
+                        :aria-label="item.name"
                         text
                         fab
                         @click.stop
@@ -53,6 +54,7 @@
                       class="px-0 mx-1"
                       small
                       text
+                      aria-label="Favorite"
                       fab
                       v-if="showFavorite"
                       @click.stop.prevent="favorite(item)"
@@ -117,13 +119,25 @@ export default {
     getActions(item) {
       const actions = [];
       if (item.bggURL) {
-        actions.push({ link: item.bggURL, icon: "cards" });
+        actions.push({
+          link: item.bggURL,
+          name: "Board game geek",
+          icon: "cards"
+        });
       }
       if (item.rulesURL) {
-        actions.push({ link: item.rulesURL, icon: "book-open-variant" });
+        actions.push({
+          link: item.rulesURL,
+          name: "Rules",
+          icon: "book-open-variant"
+        });
       }
       if (item.melodiceURL) {
-        actions.push({ link: item.melodiceURL, icon: "music" });
+        actions.push({
+          link: item.melodiceURL,
+          name: "Melodice",
+          icon: "music"
+        });
       }
       return actions;
     },

@@ -25,3 +25,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.v-alert.warning .v-alert__wrapper,
+.v-alert.warning .v-icon,
+.v-alert.warning .v-btn--icon {
+  color: $primary;
+}
+</style>
