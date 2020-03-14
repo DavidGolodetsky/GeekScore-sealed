@@ -55,7 +55,7 @@ export default {
     return {
       name: "",
       coop: false,
-      numberOfPlayers: [2, 3, 4, 5, 6, 7, 8],
+      numberOfPlayers: [1, 2, 3, 4, 5, 6, 7, 8],
       players: [],
       fieldRules: [
         v => !!v || "Field is required",
