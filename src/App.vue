@@ -3,7 +3,7 @@
     <the-header />
     <v-content>
       <v-container class="app-container">
-        <the-alert v-if="!online" type="warning" :text="offlineText" />
+        <the-alert v-if="isOffline" type="warning" :text="offlineText" />
         <transition name="slide" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -28,10 +28,12 @@
 <script>
 import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
+import { VueOfflineMixin } from "vue-offline";
 
 export default {
   name: "App",
+  mixins: [VueOfflineMixin],
   components: {
     TheHeader,
     TheFooter
@@ -39,7 +41,6 @@ export default {
 
   data: () => ({
     showTop: false,
-    online: false,
     offlineText: "Geek Score is offline. Some features might be disabled",
     options: {
       duration: 300,
@@ -51,9 +52,6 @@ export default {
     ...mapGetters(["loading"]),
     ...mapGetters("user", ["user"])
   },
-  mounted() {
-    this.checkOnline();
-  },
   watch: {
     user(value) {
       if (!value && this.$route.fullPath !== "/") {
@@ -62,13 +60,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setOnline"]),
-    checkOnline() {
-      this.online = navigator.onLine;
-      window.addEventListener("online", () => (this.online = true));
-      window.addEventListener("offline", () => (this.online = false));
-      this.setOnline(this.online);
-    },
     onScroll() {
       if (window.pageYOffset > 500) {
         this.showTop = true;

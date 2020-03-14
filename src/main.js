@@ -3,10 +3,16 @@ import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import './registerServiceWorker';
 import router from './router';
-import store from './store'
-import '@/globalComponents'
+import store from './store';
+import VueOffline from 'vue-offline';
+import '@/globalComponents';
 
 Vue.config.productionTip = false
+
+Vue.use(VueOffline, {
+  mixin: false,
+  storage: false
+})
 
 new Vue({
   vuetify,
