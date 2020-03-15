@@ -82,16 +82,26 @@ export default {
         let player = { name: "" };
         this.players.push(player);
       }
+      event === 1 ? (this.coop = true) : "";
     },
     isMe(player) {
       return player.name === "Me" ? true : false;
+    },
+    setCoop() {
+      let coop;
+      if (this.players.length === 1) {
+        coop = true;
+      } else {
+        coop = this.coop || this.game.coop;
+      }
+      return coop;
     },
     onSubmit() {
       const team = {
         gameId: this.gameId,
         gameName: this.game.name,
         name: this.name,
-        coop: this.coop || this.game.coop,
+        coop: this.setCoop(),
         players: this.players
       };
       this.createTeam(team);

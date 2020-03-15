@@ -10,7 +10,13 @@
       <v-radio label="Defeat" value="DEFEAT"></v-radio>
       <v-radio label="Victory" value="VICTORY"></v-radio>
     </v-radio-group>
-    <v-radio-group label="Result:" v-else class="mb-4" :rules="fieldRules" v-model="result">
+    <v-radio-group
+      label="Result:"
+      v-else
+      class="mb-4"
+      :rules="fieldRules"
+      v-model="result"
+    >
       <v-radio
         v-for="(player, i) in team.players"
         :key="i"
@@ -38,7 +44,10 @@
             v-on="on"
           ></v-text-field>
         </template>
-        <v-date-picker v-model="date" @input="datepicker = false"></v-date-picker>
+        <v-date-picker
+          v-model="date"
+          @input="datepicker = false"
+        ></v-date-picker>
       </v-menu>
     </v-row>
     <v-row>
@@ -51,7 +60,12 @@
         prepend-icon="mdi-comment"
       ></v-textarea>
     </v-row>
-    <v-radio-group label="First turn:" class="mb-4" v-model="turn">
+    <v-radio-group
+      v-if="team.players.length > 1"
+      label="First turn:"
+      class="mb-4"
+      v-model="turn"
+    >
       <v-radio
         v-for="(player, i) in team.players"
         :key="i"
