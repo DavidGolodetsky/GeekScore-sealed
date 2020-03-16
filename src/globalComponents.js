@@ -1,15 +1,15 @@
 import Vue from 'vue'
 
 Vue.component('TheAlert',
-    () => import(/* webpackChunkName: "theAlert" */  '@/components/TheAlert.vue')
+    () => import(/* webpackChunkName: "theAlert" */  '@/components/TheAlert')
 )
 
 Vue.component(
     'TheDialog',
-    () => import(/* webpackChunkName: "theDialog" */  '@/components/TheDialog.vue')
+    () => import(/* webpackChunkName: "theDialog" */  '@/components/TheDialog')
 )
 
 Vue.component(
     'TheGoBack',
-    () => import(/* webpackChunkName: "theGoBack" */  '@/components/TheGoBack.vue')
+    () => import(/* webpackChunkName: "theGoBack" */  '@/components/TheGoBack')
 )

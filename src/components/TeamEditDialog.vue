@@ -6,7 +6,12 @@
     simple
     :submitLogic="onSubmit"
   >
-    <v-text-field clearable :rules="fieldRules" label="Name" v-model="name"></v-text-field>
+    <v-text-field
+      clearable
+      :rules="fieldRules"
+      label="Name"
+      v-model="name"
+    ></v-text-field>
     <v-file-input
       clearable
       class="mb-2"
@@ -17,7 +22,12 @@
       @change="onFileUpload($event)"
     ></v-file-input>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
-    <v-switch v-model="isDelete" label="Delete team" color="error" hide-details></v-switch>
+    <v-switch
+      v-model="isDelete"
+      label="Delete team"
+      color="error"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
@@ -27,8 +37,8 @@ import { mapActions } from "vuex";
 export default {
   props: {
     team: {
-      type: Object,
-      required: true
+      type: Object
+      // required: true
     }
   },
   data() {

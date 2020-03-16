@@ -24,7 +24,7 @@
       >
         <template v-slot:expanded-item="{ item, headers }">
           <td :colspan="headers.length">
-            <div v-if="item.turn">First turn: {{ item.turn }}</div>
+            <div class="turn" v-if="item.turn">First turn: {{ item.turn }}</div>
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
@@ -45,12 +45,12 @@ export default {
   },
   props: {
     team: {
-      type: Object,
-      required: true
+      type: Object
+      // required: true
     },
     rounds: {
-      type: Array,
-      required: true
+      type: Array
+      // required: true
     }
   },
   data() {

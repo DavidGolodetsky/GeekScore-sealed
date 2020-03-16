@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import GameList from '@/views/GameList.vue';
-import HomePage from '@/views/HomePage.vue';
+import GameList from '@/views/GameList';
+import HomePage from '@/views/HomePage';
 import store from '@/store';
 
 Vue.use(Router)
@@ -22,7 +22,7 @@ const routes = [
     path: '/game/:gameId',
     name: 'game',
     props: true,
-    component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails.vue'),
+    component: () => import(/* webpackChunkName: "game" */ '../views/GameDetails'),
     beforeEnter: (to, from, next) => {
       // TODO:rewrite with game getter, same for team
       const isGame = store.getters['games/games'].find(game => game.id === to.params.gameId);
@@ -41,29 +41,29 @@ const routes = [
     path: '/team/:teamId',
     name: 'team',
     props: true,
-    component: () => import(/* webpackChunkName: "team" */ '../views/TeamDetails.vue'),
+    component: () => import(/* webpackChunkName: "team" */ '../views/TeamDetails'),
     meta: { requiresAuth: true },
   },
   {
     path: "/signin",
     name: "signIn",
-    component: () => import(/* webpackChunkName: "signIn" */ '../views/SignIn.vue')
+    component: () => import(/* webpackChunkName: "signIn" */ '../views/SignIn')
   },
   {
     path: "/signup",
     name: "signUp",
-    component: () => import(/* webpackChunkName: "signUp" */ '../views/SignUp.vue')
+    component: () => import(/* webpackChunkName: "signUp" */ '../views/SignUp')
   },
   {
     path: "/reset",
     name: "resetPass",
-    component: () => import(/* webpackChunkName: "resetPass" */ '../views/ResetPassword.vue')
+    component: () => import(/* webpackChunkName: "resetPass" */ '../views/ResetPassword')
   },
   {
     path: "/404",
     alias: "*",
     name: "notFound",
-    component: () => import(/* webpackChunkName: "notFound" */ '../views/NotFound.vue')
+    component: () => import(/* webpackChunkName: "notFound" */ '../views/NotFound')
   }
 ]
 

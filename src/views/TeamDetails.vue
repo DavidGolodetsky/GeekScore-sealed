@@ -4,11 +4,17 @@
       title="Rounds"
       icon="sword-cross"
       class="mb-4"
-      :props="{teamId: this.team.id}"
+      :props="{ teamId: this.team.id }"
       component="round-add-dialog"
     />
     <div v-if="showTable">
-      <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
+      <v-tabs
+        v-model="tab"
+        background-color="primary"
+        centered
+        dark
+        icons-and-text
+      >
         <v-tabs-slider color="secondary"></v-tabs-slider>
 
         <v-tab href="#tab-1">
@@ -39,7 +45,7 @@
 <script>
 import TheTitle from "@/components/TheTitle";
 import TheTable from "@/components/TheTable";
-import ChartBars from "@/components/ChartBars.vue";
+import ChartBars from "@/components/ChartBars";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -96,4 +102,3 @@ export default {
   }
 };
 </script>
-
