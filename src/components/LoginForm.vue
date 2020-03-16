@@ -126,6 +126,7 @@ export default {
         } else {
           this.signInUser(userInfo);
         }
+        this.$router.push("/");
       }
     }
   },
