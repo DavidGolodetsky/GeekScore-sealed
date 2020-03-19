@@ -10,20 +10,14 @@
       <v-radio label="Defeat" value="DEFEAT"></v-radio>
       <v-radio label="Victory" value="VICTORY"></v-radio>
     </v-radio-group>
-    <v-radio-group
-      label="Result:"
-      v-else
-      class="mb-4"
-      :rules="fieldRules"
-      v-model="result"
-    >
+    <v-radio-group label="Result:" v-else class="mb-4" :rules="fieldRules" v-model="result">
       <v-radio
         v-for="(player, i) in team.players"
         :key="i"
         :label="player.name"
         :value="player.name"
       ></v-radio>
-      <v-radio label="Draw" value="draw"></v-radio>
+      <v-radio label="Tie" value="tie"></v-radio>
     </v-radio-group>
     <v-row justify="center">
       <v-menu
@@ -44,10 +38,7 @@
             v-on="on"
           ></v-text-field>
         </template>
-        <v-date-picker
-          v-model="date"
-          @input="datepicker = false"
-        ></v-date-picker>
+        <v-date-picker v-model="date" @input="datepicker = false"></v-date-picker>
       </v-menu>
     </v-row>
     <v-row>
@@ -60,12 +51,7 @@
         prepend-icon="mdi-comment"
       ></v-textarea>
     </v-row>
-    <v-radio-group
-      v-if="team.players.length > 1"
-      label="First turn:"
-      class="mb-4"
-      v-model="turn"
-    >
+    <v-radio-group v-if="team.players.length > 1" label="First turn:" class="mb-4" v-model="turn">
       <v-radio
         v-for="(player, i) in team.players"
         :key="i"
@@ -118,8 +104,8 @@ export default {
       if (this.team.coop) {
         round.result = this.result;
       } else {
-        if (this.result === "draw") {
-          round.draw = "DRAW";
+        if (this.result === "tie") {
+          round.tie = "TIE";
         } else {
           round[this.result.toLowerCase()] = "VICTORY";
         }

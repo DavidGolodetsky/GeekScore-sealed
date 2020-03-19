@@ -68,7 +68,7 @@ export default {
       const fields = [
         this.team.coop
           ? { text: "Result", value: "result" }
-          : { text: "Draw", value: "draw" },
+          : { text: "Tie", value: "tie" },
         { text: "Date", value: "date" },
         { text: "Actions", value: "action", sortable: false }
       ];
