@@ -49,6 +49,9 @@ a {
   .v-btn.secondary .v-btn__content {
     color: $primary;
   }
+  .v-data-footer__pagination {
+    margin: 0 20px !important;
+  }
 }
 
 .header-title {

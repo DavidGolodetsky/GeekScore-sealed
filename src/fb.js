@@ -1,4 +1,6 @@
-import firebase from "firebase"
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 import * as firebaseui from 'firebaseui'
 import store from '@/store';
 import router from '@/router';
@@ -30,10 +32,6 @@ const uiConfig = {
     ],
     callbacks: {
         signInSuccessWithAuthResult: () => false,
-        signInFailure(error) {
-            // eslint-disable-next-line no-undef
-            return handleUIError(error);
-        },
         uiShown() {
             document.getElementById('loader').style.display = 'none';
         }

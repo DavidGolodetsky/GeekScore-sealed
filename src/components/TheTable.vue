@@ -45,12 +45,12 @@ export default {
   },
   props: {
     team: {
-      type: Object
-      // required: true
+      type: Object,
+      required: true
     },
     rounds: {
-      type: Array
-      // required: true
+      type: Array,
+      required: true
     }
   },
   data() {

@@ -7,7 +7,12 @@
       label="Name"
       v-model="name"
     ></v-text-field>
-    <v-switch v-model="coop" label="Cooperative" color="secondary" hide-details></v-switch>
+    <v-switch
+      v-model="coop"
+      label="Cooperative"
+      color="secondary"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
