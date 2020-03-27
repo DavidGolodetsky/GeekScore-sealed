@@ -76,6 +76,7 @@ export default {
         updateTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
+            // eslint-disable-next-line no-unused-vars
             const getTeam = ({ gameId, ...rest }) => rest
             fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update(getTeam(payload))
                 .then(() => {
