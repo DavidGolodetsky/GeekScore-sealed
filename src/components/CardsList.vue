@@ -127,7 +127,6 @@ export default {
       return this.getItemsOrder(this.items);
     },
     shouldSearch() {
-      // testing
       return this.items.length > 3 ? true : false;
     },
     showFavorite() {
