@@ -7,8 +7,6 @@
   <meta http-equiv="Accept-CH" content="DRP, Viewport-Width, Downlink" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
   <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet" />
   <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png" />
@@ -21,10 +19,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Geek Score" />
   <title>Geek Score</title>
-  <link rel="prefetch" as="style" onload="this.rel = 'stylesheet'"
-    href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
-  <link rel="prefetch" as="style" onload="this.rel = 'stylesheet'"
+  <link rel="preload" as="style" type="text/css" onload="this.rel = 'stylesheet'"
+    href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+  <link rel='preload' as="style" onload="this.rel = 'stylesheet'"
     href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+  <link rel='prefetch' as="style" onload="this.rel = 'stylesheet'"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
 </head>
 
 <body>
