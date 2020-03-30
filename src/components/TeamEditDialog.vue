@@ -37,8 +37,8 @@ import { mapActions } from "vuex";
 export default {
   props: {
     team: {
-      type: Object
-      // required: true
+      type: Object,
+      required: true
     }
   },
   data() {

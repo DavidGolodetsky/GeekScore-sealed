@@ -41,8 +41,22 @@
       label="Image URL"
       v-model="imageUrl"
     ></v-text-field>
+    <v-file-input
+      clearable
+      class="mb-2"
+      :rules="showImageRules"
+      accept="image/png, image/jpeg, image/bmp"
+      prepend-icon="mdi-image"
+      label="Image"
+      @change="onFileUpload($event)"
+    ></v-file-input>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
-    <v-switch v-model="isDelete" label="Delete game" color="error" hide-details></v-switch>
+    <v-switch
+      v-model="isDelete"
+      label="Delete game"
+      color="error"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
@@ -59,12 +73,12 @@ export default {
   data() {
     return {
       name: this.game.name,
+      imageFile: null,
       bggURL: this.game.bggURL ? this.game.bggURL : "",
       melodiceURL: this.game.melodiceURL ? this.game.melodiceURL : "",
       rulesURL: this.game.rulesURL ? this.game.rulesURL : "",
       isDelete: false,
       imageUrl: this.game.imageUrl,
-      imageFile: null,
       fieldRules: [v => (!!v && v.length <= 60) || "Field is too long"],
       linkRules: [
         v => {
@@ -73,15 +87,37 @@ export default {
             return !!link || "Please provide a correct link";
           } else return true;
         }
+      ],
+      imageRules: [
+        v =>
+          (v ? v.size < 2000000 : true) || "Image size should be less than 2 MB"
       ]
     };
   },
+  computed: {
+    showImageRules() {
+      return this.imageFile ? this.imageRules : [];
+    }
+  },
   methods: {
     ...mapActions("games", ["updateGame", "deleteGame"]),
+    onFileUpload(file) {
+      if (file) {
+        const fileReader = new FileReader();
+        fileReader.addEventListener("load", () => {
+          this.imageUrl = fileReader.result;
+        });
+        fileReader.readAsDataURL(file);
+        this.imageFile = file;
+      } else {
+        this.imageUrl = "";
+        this.imageFile = null;
+      }
+    },
     onSubmit() {
       const game = {
         name: this.name,
-        imageUrl: this.imageUrl,
+        image: this.imageFile,
         id: this.game.id,
         bggURL: this.bggURL,
         melodiceURL: this.melodiceURL,
@@ -91,7 +127,13 @@ export default {
         this.deleteGame(game);
         return;
       }
-      this.updateGame(game);
+      if (this.imageFile) {
+        const imageName = this.imageFile.name;
+        game.ext = imageName.slice(imageName.lastIndexOf("."));
+        this.updateTeamImage(game);
+      } else {
+        this.updateGame(game);
+      }
     }
   }
 };
