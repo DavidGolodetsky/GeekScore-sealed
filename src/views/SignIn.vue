@@ -3,7 +3,10 @@
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <login-form class="mt-12">
       <template #title>
-        <h3>Sign In</h3>
+        <div class="d-flex align-items-center">
+          <v-icon class="mr-3">mdi-login</v-icon>
+          <h3 class="app-headline">Sign In</h3>
+        </div>
       </template>
       <template #forgot>
         <div class="text-center mb-3">

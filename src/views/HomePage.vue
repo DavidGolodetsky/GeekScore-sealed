@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="text-center mb-6">Welcome to Geek Score!</h1>
-    <v-timeline dark align-top :dense="$vuetify.breakpoint.smAndDown">
+    <h1 class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
+    <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
         v-for="(item, i) in items"
         :key="i"
@@ -17,6 +17,15 @@
         </v-card>
       </v-timeline-item>
     </v-timeline>
+    <div class="d-flex justify-center">
+      <v-btn
+        class="my-2 py-2 submit-btn"
+        color="secondary"
+        width="100%"
+        type="submit"
+        :to="{name: 'signIn'}"
+      >Sign In</v-btn>
+    </div>
   </div>
 </template>
 

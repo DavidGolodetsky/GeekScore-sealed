@@ -153,8 +153,4 @@ export default {
     transform: translate(-50%, -50%);
   }
 }
-.submit-btn {
-  max-width: 250px;
-  margin: 0 auto;
-}
 </style>

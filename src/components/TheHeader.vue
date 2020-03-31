@@ -24,7 +24,7 @@
             <v-icon>mdi-logout</v-icon>Log out
           </v-btn>
         </div>
-        <v-app-bar-nav-icon class="d-sm-none" @click.stop="sideNav = !sideNav"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="user" class="d-sm-none" @click.stop="sideNav = !sideNav"></v-app-bar-nav-icon>
       </v-container>
     </v-app-bar>
     <v-navigation-drawer app right dark fixed temporary v-model="sideNav">
@@ -59,28 +59,13 @@ export default {
     ...mapGetters("user", ["user"]),
     ...mapGetters(["backTitle"]),
     navItems() {
-      if (this.user) {
-        return [
-          {
-            text: "Games",
-            icon: "dice-multiple",
-            link: "/games"
-          }
-        ];
-      } else {
-        return [
-          {
-            text: "Sign up",
-            icon: "account-circle ",
-            link: "/signup"
-          },
-          {
-            text: "Sign in",
-            icon: "login",
-            link: "/signin"
-          }
-        ];
-      }
+      return [
+        {
+          text: "Games",
+          icon: "dice-multiple",
+          link: "/games"
+        }
+      ];
     }
   },
   methods: {
