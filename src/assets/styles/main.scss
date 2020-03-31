@@ -14,10 +14,10 @@ color: #fff;
   list-style: none;
 }
 
-.app-error {
-  font-size: 12px;
-  color: #f44336;
+.v-application a {
+  color:#fff;
 }
+
 
 .app-headline {
   color: $secondary;
@@ -33,13 +33,11 @@ color: #fff;
 }
 
 
-.v-content__wrap {
-  background-color: #50514f;
-}
-
 #app {
+  .v-content__wrap {
+    background-color: $bg;
+  }
   .link {
-    color: #fff;
     text-decoration: underline;
   }
   .v-toolbar__content {

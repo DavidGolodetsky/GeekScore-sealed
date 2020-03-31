@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged((user) => {
         store.dispatch('user/autoSignIn', user)
         router.push("/games");
     } else {
-        router.push("/");
+        router.push("/signin");
     }
 })
 
