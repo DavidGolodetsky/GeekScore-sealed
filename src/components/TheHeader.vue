@@ -4,12 +4,7 @@
       <v-container class="d-flex align-center app-container space-between">
         <the-go-back v-if="backTitle" />
         <router-link v-else class="d-flex align-center" :to="{ name: 'home' }">
-          <v-img
-            class="mr-1"
-            :src="require(`@/assets/img/logo.svg`)"
-            height="35"
-            width="35"
-          ></v-img>
+          <v-img class="mr-1" :src="require(`@/assets/img/logo.svg`)" height="35" width="35"></v-img>
           <span class="header-title">Geek Score</span>
         </router-link>
         <v-spacer />
@@ -25,29 +20,16 @@
             <v-icon left>mdi-{{ item.icon }}</v-icon>
             {{ item.text }}
           </v-btn>
-          <v-btn
-            :small="$vuetify.breakpoint.smOnly"
-            text
-            rounded
-            v-if="user"
-            @click="onLogout"
-          >
+          <v-btn :small="$vuetify.breakpoint.smOnly" text rounded v-if="user" @click="onLogout">
             <v-icon>mdi-logout</v-icon>Log out
           </v-btn>
         </div>
-        <v-app-bar-nav-icon
-          class="d-sm-none"
-          @click.stop="sideNav = !sideNav"
-        ></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon class="d-sm-none" @click.stop="sideNav = !sideNav"></v-app-bar-nav-icon>
       </v-container>
     </v-app-bar>
     <v-navigation-drawer app right dark fixed temporary v-model="sideNav">
       <v-list>
-        <v-list-item
-          :to="item.link"
-          v-for="(item, index) in navItems"
-          :key="index"
-        >
+        <v-list-item :to="item.link" v-for="(item, index) in navItems" :key="index">
           <v-list-item-icon>
             <v-icon>mdi-{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -80,9 +62,9 @@ export default {
       if (this.user) {
         return [
           {
-            text: "Games",
-            icon: "cards",
-            link: "/games"
+            text: "Home",
+            icon: "home",
+            link: "/"
           }
         ];
       } else {

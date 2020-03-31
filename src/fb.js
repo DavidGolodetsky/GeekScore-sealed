@@ -21,7 +21,9 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch('user/autoSignIn', user)
-        router.push("/games");
+        router.push("/");
+    } else {
+        router.push("/signin");
     }
 })
 

@@ -2,10 +2,7 @@
   <div>
     <v-card width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
-        <v-card-title>
-          <h3 v-if="signupMode">Sign Up</h3>
-          <h3 v-else>Sign In</h3>
-        </v-card-title>
+        <slot name="title" />
         <v-card-text>
           <div id="firebaseui-auth-container"></div>
           <div id="loader">Loading...</div>
@@ -31,17 +28,7 @@
             required
             v-model="password"
           />
-          <v-text-field
-            v-if="signupMode"
-            :type="showPassword ? 'text' : 'password'"
-            label="Confirm password"
-            prepend-icon="mdi-lock"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="showPassword = !showPassword"
-            :rules="[comparePasswords]"
-            required
-            v-model="confirmPassword"
-          />
+          <slot name="confirm" />
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
@@ -54,11 +41,8 @@
           >Submit</v-btn>
         </v-card-actions>
       </v-form>
-      <!-- TODO: refactor as slot -->
-      <div v-if="!signupMode" class="text-center mb-3">
-        <router-link class="forgot" :to="{ name: 'resetPass' }">Forgot password?</router-link>
-      </div>
-      <!-- TODO: already have account as slot -->
+      <slot name="forgot" />
+      <slot name="redirect" />
     </v-card>
   </div>
 </template>
@@ -162,9 +146,5 @@ export default {
 .submit-btn {
   max-width: 250px;
   margin: 0 auto;
-}
-.forgot {
-  color: #fff;
-  text-decoration: underline;
 }
 </style>

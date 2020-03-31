@@ -4,6 +4,10 @@ a {
   text-decoration: none;
 }
 
+body {
+color: #fff;
+}
+
 .v-application ol,
 .v-application ul {
   padding-left: 0;
@@ -28,11 +32,16 @@ a {
   width: 240px;
 }
 
+
 .v-content__wrap {
   background-color: #50514f;
 }
 
 #app {
+  .link {
+    color: #fff;
+    text-decoration: underline;
+  }
   .v-toolbar__content {
     padding-left: 0;
     padding-right: 0;
