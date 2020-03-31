@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import HomePage from '@/views/HomePage';
+import GameList from '@/views/GameList';
 import store from '@/store';
 
 Vue.use(Router)
@@ -14,7 +15,7 @@ const routes = [
   {
     path: '/games',
     name: 'games',
-    component: () => import(/* webpackChunkName: "game" */ '../views/GameList'),
+    component: GameList,
     meta: { requiresAuth: true },
   },
   {

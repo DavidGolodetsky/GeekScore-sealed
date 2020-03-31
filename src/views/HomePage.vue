@@ -1,18 +1,18 @@
 <template>
   <div>
-    <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
+    <h1 class="text-center mb-6">Welcome to Geek Score!</h1>
+    <v-timeline dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
         v-for="(item, i) in items"
         :key="i"
-        :color="item.color"
-        :icon="item.icon"
+        color="secondary"
+        :icon="`mdi-${item.icon}`"
         fill-dot
       >
-        <v-card :color="item.color" dark>
-          <v-card-title class="title">Lorem Ipsum Dolor</v-card-title>
+        <v-card color="silver" light>
+          <v-card-title class="title">{{ item.title }}</v-card-title>
           <v-card-text class="white text--primary">
-            <p>Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</p>
-            <v-btn :color="item.color" class="mx-0" outlined>Button</v-btn>
+            <p>{{ item.text }}</p>
           </v-card-text>
         </v-card>
       </v-timeline-item>
@@ -25,20 +25,31 @@ export default {
   data: () => ({
     items: [
       {
-        color: "red lighten-2",
-        icon: "mdi-star"
+        title: "Games",
+        text:
+          "Add your favorite board games. Add more info about this awesome game!",
+        color: "warning",
+        icon: "dice-multiple"
       },
       {
-        color: "purple darken-1",
-        icon: "mdi-book-variant"
+        title: "Teams",
+        text:
+          "Create team of buddies to dive in the world of board games! You can add as many teams per game as you want.",
+        color: "accent",
+        icon: "account-group"
       },
       {
-        color: "green lighten-1",
-        icon: "mdi-airballoon"
+        title: "Rounds",
+        text:
+          "When team is ready to play - roll the dice! Add result of your game to rounds table which is there per team in this game.",
+        color: "info",
+        icon: "sword-cross"
       },
       {
-        color: "indigo",
-        icon: "mdi-buffer"
+        title: "Statistics",
+        text: "Check out statistics - see who is the best!",
+        color: "success",
+        icon: "chart-bar"
       }
     ]
   })

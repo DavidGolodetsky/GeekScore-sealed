@@ -4,18 +4,11 @@ a {
   text-decoration: none;
 }
 
-body {
-color: #fff;
-}
 
 .v-application ol,
 .v-application ul {
   padding-left: 0;
   list-style: none;
-}
-
-.v-application a {
-  color:#fff;
 }
 
 
@@ -38,6 +31,7 @@ color: #fff;
     background-color: $bg;
   }
   .link {
+    color:#fff;
     text-decoration: underline;
   }
   .v-toolbar__content {
@@ -45,6 +39,7 @@ color: #fff;
     padding-right: 0;
   }
   .app-container {
+    color: #fff;
     padding: 10px;
     @media #{$tablet} {
       padding: 40px 10px;

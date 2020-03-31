@@ -63,7 +63,7 @@ export default {
         return [
           {
             text: "Games",
-            icon: "cards",
+            icon: "dice-multiple",
             link: "/games"
           }
         ];
