@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import GameList from '@/views/GameList';
-import HomePage from '@/views/HomePage';
 import store from '@/store';
 
 Vue.use(Router)
@@ -10,11 +9,6 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomePage
-  },
-  {
-    path: '/games',
-    name: 'games',
     component: GameList,
     meta: { requiresAuth: true },
   },

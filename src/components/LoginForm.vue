@@ -1,19 +1,7 @@
 <template>
   <div>
-    <v-card
-      width="400"
-      raised
-      outlined
-      dark
-      color="primary"
-      class="mx-auto my-4 px-4 pt-4"
-    >
-      <v-form
-        v-model="valid"
-        lazy-validation
-        ref="form"
-        @submit.prevent="onSubmit"
-      >
+    <v-card width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
+      <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <v-card-title>
           <h3 v-if="signupMode">Sign Up</h3>
           <h3 v-else>Sign In</h3>
@@ -63,15 +51,14 @@
             width="100%"
             type="submit"
             :disabled="!valid"
-            >Submit</v-btn
-          >
+          >Submit</v-btn>
         </v-card-actions>
       </v-form>
+      <!-- TODO: refactor as slot -->
       <div v-if="!signupMode" class="text-center mb-3">
-        <router-link class="forgot" :to="{ name: 'resetPass' }"
-          >Forgot password?</router-link
-        >
+        <router-link class="forgot" :to="{ name: 'resetPass' }">Forgot password?</router-link>
       </div>
+      <!-- TODO: already have account as slot -->
     </v-card>
   </div>
 </template>
