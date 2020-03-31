@@ -62,9 +62,9 @@ export default {
       if (this.user) {
         return [
           {
-            text: "Home",
-            icon: "home",
-            link: "/"
+            text: "Games",
+            icon: "cards",
+            link: "/games"
           }
         ];
       } else {

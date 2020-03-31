@@ -28,7 +28,17 @@
             required
             v-model="password"
           />
-          <slot name="confirm" />
+          <v-text-field
+            v-if="signupMode"
+            :type="showPassword ? 'text' : 'password'"
+            label="Confirm password"
+            prepend-icon="mdi-lock"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="showPassword = !showPassword"
+            :rules="[comparePasswords]"
+            required
+            v-model="confirmPassword"
+          />
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>

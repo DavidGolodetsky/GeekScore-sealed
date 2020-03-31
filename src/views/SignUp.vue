@@ -5,17 +5,10 @@
       <template #title>
         <h3>Sign Up</h3>
       </template>
-      <template #confirm>
-        <v-text-field
-          :type="showPassword ? 'text' : 'password'"
-          label="Confirm password"
-          prepend-icon="mdi-lock"
-          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="showPassword = !showPassword"
-          :rules="[comparePasswords]"
-          required
-          v-model="confirmPassword"
-        />
+      <template #forgot>
+        <div class="text-center mb-3">
+          <router-link :to="{ name: 'resetPass' }" class="link">Forgot password?</router-link>
+        </div>
       </template>
       <template #redirect>
         <div class="text-center mb-3">
