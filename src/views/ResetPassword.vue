@@ -8,7 +8,10 @@
     <v-card v-else width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <v-card-title class="pb-10">
-          <h3 class="app-headline">Reset Password</h3>
+          <div class="d-flex align-items-center">
+            <v-icon class="mr-3">mdi-lock-reset</v-icon>
+            <h3 class="app-headline">Reset Password</h3>
+          </div>
         </v-card-title>
         <v-card-text>
           <v-text-field
