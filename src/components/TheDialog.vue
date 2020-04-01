@@ -85,11 +85,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-.button-text {
-  text-transform: uppercase;
-  font-size: 12px;
-  color: $secondary;
-}
-</style>

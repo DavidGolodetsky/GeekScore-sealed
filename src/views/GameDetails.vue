@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="game-details">
     <the-title title="Teams" icon="account-group" :props="{ gameId }" component="team-add-dialog" />
     <cards-list
       v-if="teams.length"
@@ -64,7 +64,9 @@ export default {
 </script>
 
 <style lang="scss">
-.title-wrap {
-  background-color: rgba(0, 0, 0, 0.7);
+.game-details {
+  .title-wrap {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
 }
 </style>

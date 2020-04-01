@@ -1,5 +1,5 @@
 <template>
-  <v-app v-scroll="onScroll">
+  <v-app class="app" v-scroll="onScroll">
     <the-header />
     <v-content>
       <v-container class="app-container">
@@ -8,11 +8,7 @@
           <router-view></router-view>
         </transition>
         <div v-if="loading" class="loader-wrap">
-          <v-progress-circular
-            :size="50"
-            indeterminate
-            color="secondary"
-          ></v-progress-circular>
+          <v-progress-circular :size="50" indeterminate color="secondary"></v-progress-circular>
         </div>
         <v-btn
           :class="{ active: showTop }"
@@ -77,35 +73,37 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.loader-wrap {
-  width: 100%;
-  z-index: 1000;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-#app .go-top {
-  position: fixed;
-  z-index: 10;
-  opacity: 0;
-  transition: 0.3;
-  right: 10px;
-  bottom: 20px;
-  background-color: lighten($primary, 15%);
-  @media #{$tablet} {
-    right: 50px;
-    bottom: 80px;
+.app {
+  .loader-wrap {
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
   }
-  &.active {
+
+  .go-top {
+    position: fixed;
+    z-index: 10;
+    opacity: 0;
     transition: 0.3;
-    opacity: 0.8;
+    right: 10px;
+    bottom: 20px;
+    background-color: lighten($primary, 15%);
+    @media #{$tablet} {
+      right: 50px;
+      bottom: 80px;
+    }
+    &.active {
+      transition: 0.3;
+      opacity: 0.8;
+    }
   }
 }
 </style>

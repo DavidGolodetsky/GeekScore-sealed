@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="the-table">
     <v-card class="mb-4">
       <v-card-title class="table-title">
         <v-spacer class="d-none d-sm-flex"></v-spacer>
@@ -80,14 +80,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.app-table,
-.table-title {
-  background-color: $light-grey;
-}
-.search {
-  background-color: $light-grey;
-  @media #{$tablet} {
-    max-width: 300px;
+.the-table {
+  .app-table,
+  .table-title {
+    background-color: $light-grey;
+  }
+  .search {
+    background-color: $light-grey;
+    @media #{$tablet} {
+      max-width: 300px;
+    }
   }
 }
 </style>

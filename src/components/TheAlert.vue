@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="the-alert">
     <transition appear name="fade-down">
-      <v-alert dismissible :value="true" :type="type" @input="onClose()">{{
+      <v-alert dismissible :value="true" :type="type" @input="onClose()">
+        {{
         text
-      }}</v-alert>
+        }}
+      </v-alert>
     </transition>
   </div>
 </template>
@@ -29,9 +31,11 @@ export default {
 </script>
 
 <style lang="scss">
-.v-alert.warning .v-alert__wrapper,
-.v-alert.warning .v-icon,
-.v-alert.warning .v-btn--icon {
-  color: $primary;
+.the-alert {
+  .v-alert.warning .v-alert__wrapper,
+  .v-alert.warning .v-icon,
+  .v-alert.warning .v-btn--icon {
+    color: $primary;
+  }
 }
 </style>

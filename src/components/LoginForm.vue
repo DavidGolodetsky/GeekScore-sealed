@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-form">
     <v-card width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <slot name="title" />
@@ -123,35 +123,37 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.or-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 50px 0 30px 0;
-}
-.or {
-  width: 53px;
-  height: 53px;
-  font-weight: 700;
-  color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 50%;
-  position: absolute;
-  z-index: 1;
-  &:after {
-    content: "";
-    z-index: -1;
-    position: absolute;
+.login-form {
+  .or-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0 30px 0;
+  }
+  .or {
+    width: 53px;
+    height: 53px;
+    font-weight: 700;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #fff;
-    height: 1px;
-    width: 300px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    &:after {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      background-color: #fff;
+      height: 1px;
+      width: 300px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="d-flex justify-space-between align-center mb-6">
-      <div class="d-flex">
-        <v-icon color="secondary" class="mx-2">mdi-{{ icon }}</v-icon>
-        <h1 class="app-headline">{{ title }}</h1>
-      </div>
-      <component :is="component" v-bind="props" class="d-flex justify-end my-2" />
+  <div class="d-flex justify-space-between align-center mb-6">
+    <div class="d-flex">
+      <v-icon color="secondary" class="mx-2">mdi-{{ icon }}</v-icon>
+      <h1 class="app-headline">{{ title }}</h1>
     </div>
+    <component :is="component" v-bind="props" class="d-flex justify-end my-2" />
   </div>
 </template>
 
@@ -41,10 +39,5 @@ export default {
 </script>
 
 <style lang="scss">
-// TODO: scoped
-.app-headline {
-  user-select: none;
-  color: $secondary;
-  font-size: 25px;
-}
+// TODO:fix weird behaviour if remove style
 </style>
