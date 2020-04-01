@@ -2,13 +2,13 @@
   <div>
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <div v-if="resettedPassword">
-      <p class="mb-5">Check your email for a new password</p>
+      <h3 class="mb-5">Check your email for a new password</h3>
       <the-go-back />
     </div>
-    <v-card v-else width="400" raised outlined color="cyan lighten-5" class="mx-auto mt-5">
+    <v-card v-else width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
         <v-card-title class="pb-10">
-          <h3>Reset Password</h3>
+          <h3 class="app-headline">Reset Password</h3>
         </v-card-title>
         <v-card-text>
           <v-text-field
@@ -23,11 +23,14 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-row>
-            <v-col align="right">
-              <v-btn color="success" type="submit" :disabled="!valid">Submit</v-btn>
-            </v-col>
-          </v-row>
+          <v-btn
+            ripple
+            class="my-2 py-2 submit-btn"
+            color="secondary"
+            width="100%"
+            type="submit"
+            :disabled="!valid"
+          >Submit</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>

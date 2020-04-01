@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1 class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
     <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
@@ -21,15 +21,18 @@
       <v-btn
         class="my-2 py-2 submit-btn"
         color="secondary"
+        ripple
         width="100%"
         type="submit"
-        :to="{name: 'signIn'}"
-      >Sign In</v-btn>
+        :to="{name: user ? 'games' : 'signIn'}"
+      >{{ user ? 'Games' : 'Sign In' }}</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
     items: [
@@ -61,6 +64,16 @@ export default {
         icon: "chart-bar"
       }
     ]
-  })
+  }),
+  computed: {
+    ...mapGetters("user", ["user"])
+  }
 };
 </script>
+
+
+<style scoped lang="scss">
+.home {
+  padding-top: 20px;
+}
+</style>

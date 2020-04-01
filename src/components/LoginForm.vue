@@ -46,6 +46,7 @@
             class="my-2 py-2 submit-btn"
             color="secondary"
             width="100%"
+            ripple
             type="submit"
             :disabled="!valid"
           >Submit</v-btn>
