@@ -22,13 +22,13 @@
         show-expand
         class="app-table elevation-1"
       >
-        <template v-slot:expanded-item="{ item, headers }">
+        <template #expanded-item="{ item, headers }">
           <td :colspan="headers.length">
             <div class="turn" v-if="item.turn">First turn: {{ item.turn }}</div>
             <div v-if="item.comment">Comment: {{ item.comment }}</div>
           </td>
         </template>
-        <template v-slot:item.action="{ item }">
+        <template #item.action="{ item }">
           <round-edit-dialog :item="item" />
         </template>
       </v-data-table>
