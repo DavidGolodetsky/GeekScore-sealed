@@ -67,6 +67,9 @@ a {
   .v-data-footer__pagination {
     margin: 0 20px !important;
   }
+  .v-input--radio-group--column .v-input--radio-group__input > .v-label {
+    margin-bottom: 8px;
+  }
 }
 
 .header-title {
@@ -86,15 +89,18 @@ a {
 .slide-enter,
 .slide-leave-to {
   opacity: 0;
+  will-change: opacity;
 }
 
 .fade-down-enter-active,
 .fade-down-leave-active {
   transition: 1s ease;
+  will-change: transition;
 }
 .fade-down-enter,
 .fade-down-leave-to {
   opacity: 0;
+  will-change: transform, opacity;
   transform: translateY(-30px);
 }
 

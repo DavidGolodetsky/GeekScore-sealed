@@ -172,6 +172,7 @@ export default {
   .app-card {
     transition: 0.3s;
     &:hover {
+      will-change: box-shadow;
       transition: 0.3s;
       box-shadow: 7px 9px 20px -6px rgba(0, 0, 0, 0.75);
     }

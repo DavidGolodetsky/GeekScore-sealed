@@ -12,9 +12,9 @@
       <v-icon dark>mdi-{{ activator }}</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" max-width="600">
-      <v-card>
+      <v-card class="the-dialog">
         <v-card-title>
-          <h3>{{ header }}</h3>
+          <h3 class="app-headline">{{ header }}</h3>
           <v-spacer></v-spacer>
           <v-btn small aria-label="Close modal" fab text @click="close">
             <v-icon dark>mdi-close</v-icon>
@@ -26,10 +26,10 @@
               <slot />
             </v-container>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="footer">
             <v-spacer />
-            <v-btn color="secondary darken-1" rounded text @click="close">Cancel</v-btn>
-            <v-btn color="secondary darken-1" rounded text type="submit" :disabled="!valid">Submit</v-btn>
+            <v-btn color="secondary darken-1" class="mr-2" outlined @click="close">Cancel</v-btn>
+            <v-btn color="secondary darken-1" outlined type="submit" :disabled="!valid">Submit</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -85,3 +85,17 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.the-dialog {
+  ::v-deep .v-card__text {
+    padding-top: 0;
+  }
+  ::v-deep .v-card__title {
+    padding-bottom: 0;
+  }
+  .footer {
+    padding: 18px;
+  }
+}
+</style>
