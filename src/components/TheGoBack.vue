@@ -1,23 +1,20 @@
 <script>
-import { mapGetters } from "vuex";
 import { VIcon } from "vuetify/lib";
 
 export default {
-  computed: {
-    ...mapGetters(["backTitle"])
+  functional: true,
+  props: {
+    title: String
   },
-  methods: {
-    goBack() {
-      return this.$router.go(-1);
-    }
-  },
-  render(h) {
+  render(h, ctx) {
+    const title = ctx.props.title;
+    const media = ctx.parent.$vuetify.breakpoint.xsOnly;
     return h(
       "div",
       {
         class: "d-flex align-center go-back",
         on: {
-          click: this.goBack
+          click: () => this.$router.go(-1)
         }
       },
       [
@@ -35,16 +32,13 @@ export default {
           },
           "mdi-arrow-left"
         ),
-        this.backTitle
+        title
           ? h(
               "span",
               {
-                class: [
-                  "header-title",
-                  { truncate: this.$vuetify.breakpoint.xsOnly }
-                ]
+                class: ["header-title", { truncate: media }]
               },
-              this.backTitle
+              title
             )
           : ""
       ]
