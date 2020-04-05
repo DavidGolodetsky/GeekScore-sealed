@@ -1,16 +1,6 @@
-<template>
-  <div @click="goBack" class="d-flex align-center go-back">
-    <v-icon class="mr-2" color="secondary" dark>mdi-arrow-left</v-icon>
-    <span
-      v-if="backTitle"
-      class="header-title"
-      :class="{'truncate': $vuetify.breakpoint.xsOnly}"
-    >{{ backTitle }}</span>
-  </div>
-</template>
-
 <script>
 import { mapGetters } from "vuex";
+import { VIcon } from "vuetify/lib";
 
 export default {
   computed: {
@@ -20,6 +10,45 @@ export default {
     goBack() {
       return this.$router.go(-1);
     }
+  },
+  render(h) {
+    return h(
+      "div",
+      {
+        class: "d-flex align-center go-back",
+        on: {
+          click: this.goBack
+        }
+      },
+      [
+        h(
+          VIcon,
+          {
+            attrs: {
+              name: "v-icon"
+            },
+            class: "mr-2",
+            props: {
+              color: "secondary",
+              dark: true
+            }
+          },
+          "mdi-arrow-left"
+        ),
+        this.backTitle
+          ? h(
+              "span",
+              {
+                class: [
+                  "header-title",
+                  { truncate: this.$vuetify.breakpoint.xsOnly }
+                ]
+              },
+              this.backTitle
+            )
+          : ""
+      ]
+    );
   }
 };
 </script>
