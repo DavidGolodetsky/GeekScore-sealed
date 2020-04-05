@@ -9,21 +9,19 @@ export default {
   render(h, ctx) {
     const title = ctx.props.title;
     const media = ctx.parent.$vuetify.breakpoint.xsOnly;
+    const router = ctx.parent.$router;
     return h(
       "div",
       {
         class: "d-flex align-center go-back",
         on: {
-          click: () => this.$router.go(-1)
+          click: () => router.go(-1)
         }
       },
       [
         h(
           VIcon,
           {
-            attrs: {
-              name: "v-icon"
-            },
             class: "mr-2",
             props: {
               color: "secondary",
