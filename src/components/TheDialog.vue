@@ -90,12 +90,16 @@ export default {
 .the-dialog {
   ::v-deep .v-card__text {
     padding-top: 0;
+    padding-bottom: 5px;
   }
   ::v-deep .v-card__title {
     padding-bottom: 0;
   }
   .footer {
-    padding: 18px;
+    padding: 0 18px 18px 18px;
+  }
+  ::v-deep .comment .v-text-field__details {
+    display: none;
   }
 }
 </style>
