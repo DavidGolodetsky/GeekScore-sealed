@@ -60,7 +60,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { fbStart } from "@/fb";
+import { fbStart } from "@/db";
 
 export default {
   props: {
