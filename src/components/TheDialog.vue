@@ -11,7 +11,7 @@
     >
       <v-icon dark>mdi-{{ activator }}</v-icon>
     </v-btn>
-    <v-dialog v-model="dialog" max-width="600">
+    <v-dialog v-model="dialog" v-if="renderDialog" max-width="600">
       <v-card class="the-dialog">
         <v-card-title>
           <h3 class="app-headline">{{ header }}</h3>
@@ -63,8 +63,18 @@ export default {
   data() {
     return {
       dialog: false,
-      valid: true
+      valid: true,
+      renderDialog: false
     };
+  },
+  watch: {
+    dialog() {
+      if (this.dialog) {
+        this.renderDialog = true;
+      } else {
+        setTimeout((this.renderDialog = false), 1000);
+      }
+    }
   },
   methods: {
     validateForm() {
