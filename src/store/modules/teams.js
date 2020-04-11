@@ -1,4 +1,4 @@
-import fb from "@/fb";
+import db from "@/db";
 import Vue from "vue";
 
 export default {
@@ -59,7 +59,7 @@ export default {
                 rounds: {},
                 favorite: false
             }
-            fb.database().ref('users').child(user).child('games')
+            db.database().ref('users').child(user).child('games')
                 .child(payload.gameId)
                 .child('teams')
                 .push(team)
@@ -78,7 +78,7 @@ export default {
             const user = rootState.user.user.id
             // eslint-disable-next-line no-unused-vars
             const getTeam = ({ gameId, ...rest }) => rest
-            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update(getTeam(payload))
+            db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update(getTeam(payload))
                 .then(() => {
                     commit("UPDATE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })
@@ -93,9 +93,9 @@ export default {
             const user = rootState.user.user.id
             const ext = payload.ext
             let imageUrl
-            const imagePath = fb.storage().ref('users').child(user).child('teams').child(`${payload.id}${ext}`)
-            if (fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`)) {
-                fb.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).delete()
+            const imagePath = db.storage().ref('users').child(user).child('teams').child(`${payload.id}${ext}`)
+            if (db.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`)) {
+                db.storage().ref('users').child(user).child('teams').child(`${payload.teamId}${ext}`).delete()
             }
             imagePath.put(payload.image)
                 .then(() => {
@@ -103,7 +103,7 @@ export default {
                 })
                 .then((url) => {
                     imageUrl = url
-                    return fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update({ imageUrl })
+                    return db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).update({ imageUrl })
                 })
                 .then(() => {
                     commit("UPDATE_TEAM", { ...payload, ext, imageUrl })
@@ -117,10 +117,10 @@ export default {
         deleteTeam({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            if (fb.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`)) {
-                fb.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`).delete()
+            if (db.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`)) {
+                db.storage().ref('users').child(user).child('teams').child(`${payload.id}${payload.ext}`).delete()
             }
-            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).remove()
+            db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.id).remove()
                 .then(() => {
                     commit("DELETE_TEAM", payload)
                     commit('SET_LOADING', false, { root: true })
@@ -134,7 +134,7 @@ export default {
         createRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games')
+            db.database().ref('users').child(user).child('games')
                 .child(payload.gameId)
                 .child('teams')
                 .child(payload.teamId)
@@ -153,7 +153,7 @@ export default {
         deleteRound({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
+            db.database().ref('users').child(user).child('games').child(payload.gameId).child('teams').child(payload.teamId).child('rounds').child(payload.roundId).remove()
                 .then(() => {
                     commit("DELETE_ROUND", payload)
                     commit('SET_LOADING', false, { root: true })

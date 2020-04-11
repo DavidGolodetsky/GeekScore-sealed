@@ -1,5 +1,5 @@
 
-import fb from "@/fb";
+import db from "@/db";
 
 export default {
     namespaced: true,
@@ -27,7 +27,7 @@ export default {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             if (user) {
-                fb.database().ref('users').child(user).child('games').once('value')
+                db.database().ref('users').child(user).child('games').once('value')
                     .then((data) => {
                         const games = []
                         const obj = data.val()
@@ -61,7 +61,7 @@ export default {
                 favorite: false
             }
             game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=1b405b29-57f5-4b59-9ec2-01308dce1d6d'
-            fb.database().ref('users').child(user).child('games').push(game)
+            db.database().ref('users').child(user).child('games').push(game)
                 .then((data) => {
                     commit("CREATE_GAME", { ...game, id: data.key })
                     commit('SET_LOADING', false, { root: true })
@@ -76,7 +76,7 @@ export default {
             const user = rootState.user.user.id
             // eslint-disable-next-line no-unused-vars
             const getGame = ({ id, ...rest }) => rest
-            fb.database().ref('users').child(user).child('games').child(payload.id).update(getGame(payload))
+            db.database().ref('users').child(user).child('games').child(payload.id).update(getGame(payload))
                 .then(() => {
                     commit("UPDATE_GAME", payload)
                     commit('SET_LOADING', false, { root: true })
@@ -89,7 +89,7 @@ export default {
         deleteGame({ commit, rootState }, payload) {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
-            fb.database().ref('users').child(user).child('games').child(payload.id).remove()
+            db.database().ref('users').child(user).child('games').child(payload.id).remove()
                 .then(() => {
                     commit("DELETE_GAME", payload.id)
                     commit('SET_LOADING', false, { root: true })
