@@ -65,7 +65,10 @@ a {
     color: $primary;
   }
   .v-data-footer__pagination {
-    margin: 0 20px !important;
+    margin: 0;
+    @media #{$tablet} {
+      margin: 0 20px;
+    }
   }
   .v-input--radio-group--column .v-input--radio-group__input > .v-label {
     margin-bottom: 8px;
