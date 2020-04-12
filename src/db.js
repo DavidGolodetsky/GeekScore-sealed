@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firestore';
 import 'firebase/storage';
 import * as firebaseui from 'firebaseui'
 import store from '@/store';
@@ -17,7 +17,9 @@ const firebaseConfig = {
     appId: "1:748797302864:web:1f23f4bb7d8b8698461955"
 };
 
-firebase.initializeApp(firebaseConfig);
+firebase
+    .initializeApp(firebaseConfig)
+    .firestore()
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch('user/autoSignIn', user)
