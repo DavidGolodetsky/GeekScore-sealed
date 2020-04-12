@@ -17,10 +17,10 @@ const firebaseConfig = {
     appId: "1:748797302864:web:1f23f4bb7d8b8698461955"
 };
 
-firebase
+const db = firebase
     .initializeApp(firebaseConfig)
     .firestore()
-firebase.auth().onAuthStateChanged((user) => {
+const auth = firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch('user/autoSignIn', user)
         router.push("/games");
@@ -43,10 +43,10 @@ const uiConfig = {
 
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-export const fbStart = () => {
+const fbStart = () => {
     ui.start('#firebaseui-auth-container', uiConfig);
 }
 
 
 
-export default firebase;
+export { db, auth, fbStart }

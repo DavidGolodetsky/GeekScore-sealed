@@ -1,5 +1,5 @@
 
-import db from "@/db";
+import { db } from "@/db";
 
 export default {
     namespaced: true,
@@ -27,8 +27,10 @@ export default {
             commit('SET_LOADING', true, { root: true })
             const user = rootState.user.user.id
             if (user) {
-                db.database().ref('users').child(user).child('games').once('value')
+                db.doc(`users/${user}/`).collection('games').get()
+                    // db.database().ref('users').child(user).child('games').once('value')
                     .then((data) => {
+                        console.log(data)
                         const games = []
                         const obj = data.val()
                         for (let key in obj) {
@@ -61,8 +63,10 @@ export default {
                 favorite: false
             }
             game.imageUrl = 'https://firebasestorage.googleapis.com/v0/b/geekstat-v.appspot.com/o/common%2Fgame.jpg?alt=media&token=1b405b29-57f5-4b59-9ec2-01308dce1d6d'
-            db.database().ref('users').child(user).child('games').push(game)
+            db.doc(`users/${user}/`).collection('games').doc('game').set(game)
+                // db.database().ref('users').child(user).child('games').push(game)
                 .then((data) => {
+                    console.log(data)
                     commit("CREATE_GAME", { ...game, id: data.key })
                     commit('SET_LOADING', false, { root: true })
                 })

@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import { auth } from 'firebase/app';
 
 
 export default {
@@ -17,13 +17,13 @@ export default {
     },
     actions: {
         logout({ commit }) {
-            firebase.auth().signOut()
+            auth().signOut()
             commit('SET_USER', null)
         },
         signUpUser({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             commit('CLEAR_ERROR', null, { root: true })
-            firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+            auth().createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(
                     user => {
                         commit('SET_LOADING', false, { root: true })
@@ -45,7 +45,7 @@ export default {
         signInUser({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
             commit('CLEAR_ERROR', null, { root: true })
-            firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+            auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(
                     user => {
                         commit('SET_LOADING', false, { root: true })
@@ -71,7 +71,7 @@ export default {
         },
         resetPassword({ commit }, payload) {
             commit('SET_LOADING', true, { root: true })
-            firebase.auth().sendPasswordResetEmail(payload)
+            auth().sendPasswordResetEmail(payload)
                 .then(() => {
                     commit('RESET_PASSWORD');
                     commit('SET_LOADING', false, { root: true })
