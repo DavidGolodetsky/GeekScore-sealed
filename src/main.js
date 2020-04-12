@@ -5,12 +5,11 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import VueOffline from 'vue-offline';
-import { rtdbPlugin } from 'vuefire';
 import '@/globalComponents';
 
 Vue.config.productionTip = false
 
-Vue.use(rtdbPlugin, VueOffline, {
+Vue.use(VueOffline, {
   mixin: false,
   storage: false
 })
