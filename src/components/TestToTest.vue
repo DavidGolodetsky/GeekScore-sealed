@@ -12,6 +12,8 @@
 </template>
 
 <script>
+// import db from "@/db";
+
 export default {
   data: () => ({
     items: ["o"],
@@ -25,5 +27,12 @@ export default {
       this.$emit("submitted", { name: this.name });
     }
   }
+  // async created() {
+  //   try {
+  //     this.items = await db.database().ref("users");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 };
 </script>
