@@ -36,9 +36,10 @@
                       <v-btn
                         v-for="(action, i) in getActions(item)"
                         :key="i"
-                        :href="action.link"
+                        :to="action.link"
                         class="px-0 mx-1"
                         target="_blank"
+                        :download="action.download"
                         rel="noopener noreferrer"
                         small
                         :aria-label="item.name"
@@ -129,7 +130,8 @@ export default {
         actions.push({
           link: item.rulesURL,
           name: "Rules",
-          icon: "book-open-variant"
+          icon: "book-open-variant",
+          download: true
         });
       }
       if (item.melodiceURL) {
