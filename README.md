@@ -1,6 +1,6 @@
-# geek
-
-## Project setup
+# Geek Score
+ 
+## 1. Project setup with Vue CLI
 ```
 npm install
 ```
@@ -29,6 +29,14 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-# docker build --target setup-stage -t vue-app .
-# docker run -it -p 8080:8080 -v ${PWD}/src:/app/src vue-app nom run serve
-# docker run -it vue-app nom run test:unit
+## 2. Project setup with Docker
+
+### Build the docker image
+```
+docker-compose up -d --build
+```
+### Build up container
+```
+docker-compose up
+```
+### App will run on http://localhost:8081/
