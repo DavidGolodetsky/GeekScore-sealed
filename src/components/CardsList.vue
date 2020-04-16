@@ -36,7 +36,7 @@
                       <v-btn
                         v-for="(action, i) in getActions(item)"
                         :key="i"
-                        :to="action.link"
+                        :href="action.link"
                         class="px-0 mx-1"
                         target="_blank"
                         :download="action.download"
