@@ -37,6 +37,13 @@ export default {
       this.clearError();
     }
   },
+  watch: {
+    user(value) {
+      if (value) {
+        this.$router.push("/games");
+      }
+    }
+  },
   computed: {
     ...mapGetters("user", ["user"]),
     ...mapGetters(["error"])
@@ -44,12 +51,8 @@ export default {
   created() {
     this.clearBackTitle();
   },
-  watch: {
-    user(value) {
-      if (value) {
-        this.$router.push("/games");
-      }
-    }
+  beforeDestroy() {
+    this.onDismiss();
   }
 };
 </script>

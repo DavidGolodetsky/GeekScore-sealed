@@ -3,7 +3,7 @@
     <the-alert v-if="error" type="error" @dismissed="onDismiss" key="singin" :text="error.message" />
     <div v-if="resettedPassword">
       <h3 class="mb-5">Check your email for a new password</h3>
-      <the-go-back />
+      <the-go-back title="Back to Sign in" />
     </div>
     <v-card v-else width="400" raised outlined dark color="primary" class="mx-auto my-4 px-4 pt-4">
       <v-form v-model="valid" lazy-validation ref="form" @submit.prevent="onSubmit">
@@ -60,6 +60,18 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapGetters(["error"]),
+    ...mapGetters("user", ["resettedPassword"]),
+    comparePasswords() {
+      return this.password !== this.confirmPassword
+        ? "Passwords don't match"
+        : true;
+    }
+  },
+  beforeDestroy() {
+    this.onDismiss();
+  },
   methods: {
     ...mapActions(["clearError"]),
     ...mapActions("user", ["resetPassword"]),
@@ -76,15 +88,6 @@ export default {
       if (this.validateForm()) {
         this.resetPassword(this.email);
       }
-    }
-  },
-  computed: {
-    ...mapGetters(["error"]),
-    ...mapGetters("user", ["resettedPassword"]),
-    comparePasswords() {
-      return this.password !== this.confirmPassword
-        ? "Passwords don't match"
-        : true;
     }
   }
 };
