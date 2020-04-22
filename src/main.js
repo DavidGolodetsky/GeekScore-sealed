@@ -11,7 +11,7 @@ import '@/globalComponents';
 Vue.config.productionTip = false
 
 Vue.use(VueGtag, {
-  config: { id: "UA-164288436-2" }
+  config: { id: "UA-164228749-1" }
 }, VueOffline, {
   mixin: false,
   storage: false
