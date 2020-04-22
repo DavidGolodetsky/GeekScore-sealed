@@ -5,11 +5,14 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import VueOffline from 'vue-offline';
+import VueGtag from "vue-gtag";
 import '@/globalComponents';
 
 Vue.config.productionTip = false
 
-Vue.use(VueOffline, {
+Vue.use(VueGtag, {
+  config: { id: "UA-164288436-2" }
+}, VueOffline, {
   mixin: false,
   storage: false
 })
