@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page" v-cloak>
+  <div class="home-page">
     <h1 class="app-headline text-center mb-6">Welcome to Geek Score!</h1>
     <v-timeline class="mb-10" dark align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
