@@ -41,7 +41,7 @@ export default {
       this.updateGame(data);
     },
     shouldLoadGames() {
-      this.games.length ? "" : this.loadGames();
+      this.games ? "" : this.loadGames();
     }
   }
 };
