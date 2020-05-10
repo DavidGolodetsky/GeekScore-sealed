@@ -38,6 +38,9 @@ module.exports = {
       }]
     }
   },
+  chainWebpack: config => {
+    config.plugins.delete('prefetch');
+  },
   configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
       return {
