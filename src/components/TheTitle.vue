@@ -69,3 +69,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+// TODO:fix weird behaviour if remove style
+</style>
