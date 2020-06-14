@@ -1,13 +1,5 @@
 import TestToTest from "@/components/TestToTest"
-import { mount } from '@vue/test-utils'
-// import flushPromises from 'flush-promises'
-// import db from "@/db";
-
-
-// jest.mock(db)
-// beforeEach(() => {
-//     jest.clearAllMocks()
-// })
+import { mount, shallowMount } from '@vue/test-utils'
 
 describe('TestToTest', () => {
 
@@ -49,6 +41,38 @@ describe('TestToTest', () => {
         expect(wrapper.find('li').element.textContent).toBe('hi')
     })
 
+    // Snapshot testing
+
+    it('Snapshot test', async () => {
+        const wrapper = mount(TestToTest)
+        wrapper.setData({
+            items: ['hi']
+        })
+        expect(wrapper).toMatchSnapshot()
+    })
+
+
+    it('Snapshot test', async () => {
+        const wrapper = mount(TestToTest, {
+            propsData: {
+                value: 'blabla'
+            }
+        })
+        expect(wrapper).toMatchSnapshot()
+    })
+
+
+    // Watcher test
+
+    it("emits input event when itemsSetted changes", () => {
+        const wrapper = shallowMount(TestToTest);
+
+        wrapper.vm.$options.watch.internalValue.call(wrapper.vm, 15);
+
+        expect(wrapper.emitted("itemsSetted")[0][0]).toBe(15);
+    });
+
+
     // Event tests
 
 
@@ -59,39 +83,28 @@ describe('TestToTest', () => {
         expect(wrapper.find('ul').isVisible()).toBe(false)
     })
 
-    // Emit test
+    // Spy tests
 
-    // TODO:finalize this
-
-    it('If form submitted - emit event', () => {
+    it('Spy if destroyed', async () => {
+        jest.useFakeTimers()
+        const sbeforeDestroySpy = jest.spyOn(TestToTest, 'beforeDestroy')
         const wrapper = mount(TestToTest)
-        const input = wrapper.find('[data-testid="name"]')
-
-        input.setValue('David')
-        wrapper.trigger('submit')
-
-        // const formSubmittedCalls = wrapper.emitted('formSubmitted')
-        // expect(formSubmittedCalls).toHaveLength(1)
-
-        const expectedPayload = { name: "David" }
-        expect(wrapper.emitted('submitted')[0][0]).toMatchObject(expectedPayload)
-
+        wrapper.vm.counter = 9
+        jest.advanceTimersByTime(1000)
+        expect(sbeforeDestroySpy).toHaveBeenCalled()
     })
 
 
-    // Mock API calls
+    // Lifecycles test 
 
+    it('Test mounted logic', async () => {
+        const wrapper = mount(TestToTest)
+        expect(wrapper.vm.counter).toBe(0)
+        jest.advanceTimersByTime(1000)
+        expect(wrapper.vm.counter).toBe(1)
+        jest.advanceTimersByTime(1000)
+        expect(wrapper.vm.counter).toBe(2)
+    })
 
-    // it('If API called - display list with items', async () => {
-    //     const call = db.database().ref("users")
-
-    //     call.mockResolvedValueOnce()
-    //     const wrapper = mount(TestToTest)
-
-    //     await wrapper.vm.$nextTick()
-
-    //     expect(call).toHaveBeenCalledTimes(1)
-    //     expect(wrapper.find('ul').isVisible()).toBe(true)
-    // })
 
 })

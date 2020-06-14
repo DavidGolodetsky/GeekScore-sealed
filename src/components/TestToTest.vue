@@ -12,27 +12,52 @@
 </template>
 
 <script>
-// import db from "@/db";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  data: () => ({
-    items: ["o"],
-    name: ""
-  }),
+  props: {
+    value: {
+      type: String
+    }
+  },
+  data() {
+    return {
+      items: ["o"],
+      name: "",
+      counter: 0,
+      interval: null
+    };
+  },
+  watch: {
+    internalValue(items) {
+      this.$emit("itemsSetted", items);
+    }
+  },
+  computed: {
+    ...mapGetters(["backTitle"])
+  },
+  mounted() {
+    this.interval = setInterval(() => {
+      this.counter++;
+      if (this.counter == 10) this.$destroy();
+    }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+  destroyed() {
+    this.$el.remove();
+  },
   methods: {
     removeList() {
       this.items = [];
+    },
+    setFlag() {
+      this.falg = true;
     },
     onSubmit() {
       this.$emit("submitted", { name: this.name });
     }
   }
-  // async created() {
-  //   try {
-  //     this.items = await db.database().ref("users");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 };
 </script>
