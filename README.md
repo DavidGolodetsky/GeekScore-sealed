@@ -40,3 +40,7 @@ docker-compose up -d --build
 docker-compose up
 ```
 ### App will run on http://localhost:8081/
+
+
+## For contributors:
+If you want to contribute to the project please consider doing this in the [new version](https://github.com/DavidGolodetsky/GeekScore-2) of the app.
