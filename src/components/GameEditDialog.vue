@@ -16,7 +16,7 @@
     <v-text-field
       clearable
       :rules="linkRules"
-      label="Board geek game URL"
+      label="BoardGameGeek URL"
       prepend-icon="mdi-cards"
       v-model="bggURL"
     ></v-text-field>
@@ -42,7 +42,12 @@
       v-model="imageUrl"
     ></v-text-field>
     <v-img v-if="imageUrl" :src="imageUrl" height="200" contain></v-img>
-    <v-switch v-model="isDelete" label="Delete game" color="error" hide-details></v-switch>
+    <v-switch
+      v-model="isDelete"
+      label="Delete game"
+      color="error"
+      hide-details
+    ></v-switch>
   </the-dialog>
 </template>
 
@@ -53,8 +58,8 @@ export default {
   props: {
     game: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -65,15 +70,15 @@ export default {
       isDelete: false,
       imageUrl: this.game.imageUrl,
       imageFile: null,
-      fieldRules: [v => (!!v && v.length <= 60) || "Field is too long"],
+      fieldRules: [(v) => (!!v && v.length <= 60) || "Field is too long"],
       linkRules: [
-        v => {
+        (v) => {
           if (v) {
             const link = v.match(/(https?:\/\/[^\s]+)/g);
             return !!link || "Please provide a correct link";
           } else return true;
-        }
-      ]
+        },
+      ],
     };
   },
   methods: {
@@ -85,14 +90,14 @@ export default {
         id: this.game.id,
         bggURL: this.bggURL,
         melodiceURL: this.melodiceURL,
-        rulesURL: this.rulesURL
+        rulesURL: this.rulesURL,
       };
       if (this.isDelete) {
         this.deleteGame(game);
         return;
       }
       this.updateGame(game);
-    }
-  }
+    },
+  },
 };
 </script>
